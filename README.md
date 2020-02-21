@@ -1,13 +1,13 @@
 # Pré requisitos
 
 - Servidor php (XAMPP)
-- Data base (xampp já traz o mysql ou instalar um drive separado)
-- Navicat
- -Vs code e plugins
-- Composer
+- Drive DB (XAMPP já traz o Mysql)
+- SGBD (Navicat)
+- Editor de código (Vs code)
+- Composer 
 - Node ( para ter acesso ao npm )
 
------------------------------------------
+---
 # Instalação
 
 ## Fazer o clone do projeto
@@ -37,9 +37,13 @@ ou
 -Iniciar a aplicação
 -`npm run dev`
 
------------
+---
 # Outros comandos
 
 - Build modo desenvolvedor `npm run dev`
 - Build modo Produção `npm run prod`
 - Build modo desenvolvedor com atualização automatica (recomendado para desenvolvimento) `npm run watch`
+
+---
+
+# Commites apenas no galho dev !
