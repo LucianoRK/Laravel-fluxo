@@ -23,18 +23,18 @@ ou
 - gerar a chave do projeto
 `php artisan key:generate`
 
-- Criar uma base de dados em seu banco
+- Criar uma base de dados na sua conexão LOCALHOST
 
 - Executar as migrate para criar as tabelas no banco ( o .env tem que estar configurado ! )
 `php artisan migrate`
 
--Instalar as dependências js no projeto
+- Instalar as dependências js no projeto
 `npm install`
 
 - Build da aplicação
 `npm run dev`
 
--Iniciar a aplicação
+- Iniciar a aplicação
 -`npm run dev`
 
 ---
