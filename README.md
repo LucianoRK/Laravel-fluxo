@@ -34,8 +34,8 @@ ou
 - Build da aplicação
 `npm run dev`
 
-- Iniciar a aplicação
--`npm run dev`
+- Iniciar a aplicação Laravel
+-`php artisan serve`
 
 ---
 # Outros comandos
