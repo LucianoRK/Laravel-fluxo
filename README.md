@@ -82,9 +82,7 @@ especialidade
 
 ---
 
-## Fluxograma tabelas
-
-- /storage/app/fluxogramas/tabelas
+## <a href="https://encurtador.com.br/hnEZ1"> ## Fluxograma tabelas </a>
 
 ---
 
