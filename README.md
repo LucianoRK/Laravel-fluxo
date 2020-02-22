@@ -84,7 +84,7 @@ especialidade
 
 ## Fluxograma tabelas
 
-<![alt](./storage/app/projeto/diagrama-tabelas.png)>
+- /storage/app/fluxogramas/tabelas
 
 ---
 
