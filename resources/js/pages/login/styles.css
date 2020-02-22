@@ -1,0 +1,15 @@
+.vertical-center {
+    min-height: 100%;  
+    min-height: 90vh; 
+    display: flex;
+    align-items: center;
+}
+
+.horizontal-center {
+    margin: 0 auto;
+    width: 80%;
+}
+
+#logologin {
+    padding-bottom: 30px;
+}
