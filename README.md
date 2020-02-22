@@ -8,9 +8,9 @@
 - Node ( para ter acesso ao npm )
 
 ---
-# Instalação
+## Instalação
 
-## Fazer o clone do projeto
+Fazer o clone do projeto
 - Clonar usando o sourcetree
 ou
 `git clone https://github.com/LucianoRK/projeto.git`
@@ -38,11 +38,53 @@ ou
 -`php artisan serve`
 
 ---
-# Outros comandos
+## Outros comandos
 
 - Build modo desenvolvedor `npm run dev`
 - Build modo Produção `npm run prod`
 - Build modo desenvolvedor com atualização automatica (recomendado para desenvolvimento) `npm run watch`
+
+---
+
+## Tabelas
+
+mm_permissao_usuario
+
+col acesso_regra - Adiciona ou retira permissão ( true / false )
+
+usuarios_especialidade
+
+especialidades
+1 - Clinico geral
+2 - Ortodontia
+3 - Implantodontia
+4 - Odonto Pediatria
+5 - Orofacial
+
+
+tratamentos
+
+status
+1 - avaliado
+2 - pendente de efetivação
+3 - efetivado
+4 - nao efetivado
+5 - concluido
+6 - cancelado
+
+
+especialidade
+1 - Clinico geral
+2 - Ortodontia
+3 - Implantodontia
+4 - Odonto Pediatria
+5 - Orofacial
+
+---
+
+## Fluxograma tabelas
+
+<![alt](./storage/app/projeto/diagrama-tabelas.png)>
 
 ---
 
