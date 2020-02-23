@@ -35,7 +35,10 @@ ou
 `npm run dev`
 
 - Iniciar a aplicação Laravel
--`php artisan serve`
+`php artisan serve`
+
+- Manter a aplicação
+`npm run watch`
 
 ---
 ## Outros comandos
