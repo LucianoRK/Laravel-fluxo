@@ -16,7 +16,7 @@ class CreateLogRotasTable extends Migration
         Schema::create('log_rotas', function (Blueprint $table) {
             $table->bigIncrements('id_log_rota');
             $table->integer('fk_usuario');
-            $table->string('rota');
+            $table->string('rota', 100);
             $table->json('dados');
             $table->timestamps();
         });
