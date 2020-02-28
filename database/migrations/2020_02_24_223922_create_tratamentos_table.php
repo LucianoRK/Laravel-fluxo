@@ -14,7 +14,19 @@ class CreateTratamentosTable extends Migration
     public function up()
     {
         Schema::create('tratamentos', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_tratamento');
+            $table->integer('fk_empresa');
+            $table->integer('fk_usuario_dentista')->nullable();
+            $table->integer('fk_cliente')->nullable();
+            $table->integer('fk_dependente')->nullable();
+            $table->integer('fk_especialidade')->nullable();
+            $table->smallInteger('status');
+            $table->dateTime('data_efetivacao')->nullable();
+            $table->dateTime('data_conclusao')->nullable();
+            $table->dateTime('data_cancelamento')->nullable();
+            $table->bigInteger('valor_contratado');
+            $table->bigInteger('valor_atual');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

@@ -14,7 +14,14 @@ class CreateCaixasTable extends Migration
     public function up()
     {
         Schema::create('caixas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_caixa');
+            $table->integer('fk_emoresa');
+            $table->smallInteger('tipo');
+            $table->bigInteger('valor');
+            $table->string('descricao')->nullable();
+            $table->date('data_vencimento')->nullable();
+            $table->dateTime('data_pagamento')->nullable();
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

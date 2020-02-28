@@ -14,7 +14,9 @@ class CreateChamadoCategoriasTable extends Migration
     public function up()
     {
         Schema::create('chamado_categorias', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_chamado_categoria');
+            $table->string('nome', 100);
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }
