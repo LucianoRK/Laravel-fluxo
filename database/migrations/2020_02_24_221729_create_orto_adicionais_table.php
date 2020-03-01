@@ -14,7 +14,11 @@ class CreateOrtoAdicionaisTable extends Migration
     public function up()
     {
         Schema::create('orto_adicionais', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_orto_adicional');
+            $table->integer('fk_tratamento');
+            $table->string('descricao', 100)->nullable();
+            $table->bigInteger('valor');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

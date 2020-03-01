@@ -14,7 +14,10 @@ class CreateChamadoTermosTable extends Migration
     public function up()
     {
         Schema::create('chamado_termos', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_chamado_termo');
+            $table->integer('fk_chamado');
+            $table->string('documento')->nullable();
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }
