@@ -14,7 +14,8 @@ class CreateAnamneseClinicosTable extends Migration
     public function up()
     {
         Schema::create('anamnese_clinicos', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_anamnese_clinico');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

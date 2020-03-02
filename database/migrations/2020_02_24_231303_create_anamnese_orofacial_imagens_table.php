@@ -14,7 +14,8 @@ class CreateAnamneseOrofacialImagensTable extends Migration
     public function up()
     {
         Schema::create('anamnese_orofacial_imagens', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_anamnese_orofacial_imagem');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

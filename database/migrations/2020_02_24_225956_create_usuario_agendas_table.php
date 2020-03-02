@@ -14,7 +14,11 @@ class CreateUsuarioAgendasTable extends Migration
     public function up()
     {
         Schema::create('usuario_agendas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_usuario_agenda');
+            $table->integer('fk_usuario');
+            $table->date('data');
+            $table->time('hora_intervalo_inicio')->nullable();
+            $table->time('hora_intervalo_fim')->nullable();
             $table->timestamps();
         });
     }

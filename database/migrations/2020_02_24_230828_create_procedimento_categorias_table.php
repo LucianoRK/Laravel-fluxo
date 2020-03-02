@@ -14,7 +14,9 @@ class CreateProcedimentoCategoriasTable extends Migration
     public function up()
     {
         Schema::create('procedimento_categorias', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_procedimento_categoria');
+            $table->string('nome');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

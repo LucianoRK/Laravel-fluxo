@@ -14,7 +14,9 @@ class CreatePermissaoMmUsuariosTable extends Migration
     public function up()
     {
         Schema::create('permissao_mm_usuarios', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('fk_usuario');
+            $table->integer('fk_permissao');
+            $table->boolean('acesso_regra');
             $table->timestamps();
         });
     }

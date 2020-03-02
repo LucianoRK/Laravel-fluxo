@@ -14,7 +14,11 @@ class CreateFeriadosTable extends Migration
     public function up()
     {
         Schema::create('feriados', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_feriado');
+            $table->integer('fk_empresa');
+            $table->date('data');
+            $table->string('descricao');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

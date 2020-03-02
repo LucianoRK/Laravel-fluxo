@@ -14,7 +14,8 @@ class CreateUsuarioMmEmpresasTable extends Migration
     public function up()
     {
         Schema::create('usuario_mm_empresas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('fk_usuario');
+            $table->integer('fk_empresa');
             $table->timestamps();
         });
     }
