@@ -12,7 +12,7 @@
                 </ul>
                 <ul class="navbar-nav nav-center site-logo">
                     <li>
-                        <a href="/raiz">
+                        <a href="/">
                             <div class="logo_mobile">
                                 <svg id="logo_mobile" width="30" height="30" viewBox="0 0 54.03 56.55">
                                     <defs>
@@ -48,7 +48,7 @@
                 <ul class="site-logo">
                     <li>
                         <!-- START LOGO -->
-                        <a href="/raiz">
+                        <a href="/">
                             <div class="logo">
                                 <svg id="logo" width="25" height="25" viewBox="0 0 54.03 56.55">
                                     <defs>

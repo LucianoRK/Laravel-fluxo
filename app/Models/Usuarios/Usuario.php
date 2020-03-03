@@ -1,18 +1,26 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Usuarios;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\Usuario as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
-   /**
+    use Notifiable;
+
+    public function getAuthPassword()
+    {
+        return $this->senha;
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nome', 'login', 'senha',
+        'login', 'senha',
     ];
 
     /**
@@ -21,7 +29,7 @@ class Usuario extends Model
      * @var array
      */
     protected $hidden = [
-        
+        'senha', 'remember_token',
     ];
 
     /**
@@ -30,6 +38,6 @@ class Usuario extends Model
      * @var array
      */
     protected $casts = [
-        
+        'email_verified_at' => 'datetime',
     ];
 }

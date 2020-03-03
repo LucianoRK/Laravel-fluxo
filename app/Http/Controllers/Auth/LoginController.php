@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +38,27 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function index()
+    {
+        return view('auth.login');
+    }
+
+    public function logar(Request $request)
+    {
+       $dados = ['login'=>$request->login, 'password'=>$request->senha];
+       
+       if (Auth::attempt($dados)) {
+            return redirect()->intended('/');
+       } else {
+           dd($dados);
+       }
+    }
+
+    public function sair() 
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

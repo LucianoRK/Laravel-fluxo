@@ -46,22 +46,25 @@
 		<div class="sign-in-form">
 			<div class="card">
 				<div class="card-body">
-					<form>
+
+                    <form action="/logar" method="POST">
+                        {{ csrf_field() }}
+                    
 						<a href="" class="brand text-center d-block m-b-20">
 							<img src="{{asset('assets/img/qt-logo@2x.png')}}" alt="QuantumPro Logo" />
 						</a>
 						<h5 class="sign-in-heading text-center m-b-20"> Entre com sua conta </h5>
 						<div class="form-group">
 							<label for="inputText" class="sr-only"> Login </label>
-							<input type="text" id="inputText" class="form-control" name="login" value="login" placeholder="Login de acesso" required="">
+							<input type="text" id="inputText" class="form-control" name='login' placeholder="Login de acesso" required="">
 						</div>
 
 						<div class="form-group">
 							<label for="inputPassword" class="sr-only"> Senha </label>
-							<input type="password" id="inputPassword" class="form-control" name="senha" value="senha" placeholder="Senha" required="">
+							<input type="password" id="inputPassword" class="form-control" name='senha' placeholder="Senha" required="">
 						</div>
+                        <button type="submit" class="btn btn-primary btn-rounded btn-floating btn-lg btn-block" id="logar"> Entrar </button>
 					</form>
-					<button class="btn btn-primary btn-rounded btn-floating btn-lg btn-block" id="logar"> Entrar </button>
 				</div>
 			</div>
 		</div>
@@ -85,15 +88,3 @@
 </body>
 
 </html>
-
-<script>
-	function logar() {
-		$('#logar').on('click', function() {
-            window.location.href = "dashboard"; 
-		});
-	}
-
-	$(document).ready(function() {
-		logar();
-	});
-</script>
