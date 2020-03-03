@@ -12,7 +12,7 @@ class Especialidade extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'nome'
     ];
 
     /**

@@ -25,8 +25,8 @@ ou
 
 - Criar uma base de dados na sua conexão LOCALHOST
 
-- Executar as migrate para criar as tabelas no banco ( o .env tem que estar configurado ! )
-`php artisan migrate`
+- Executar as migrate para criar as tabelas no banco ( o .env tem que estar configurado ! ), --seed para colocar uma pre configuração
+`php artisan migrate --seed`
 
 - Instalar as dependências js no projeto
 `npm install`
