@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,13 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('usuarios')->insert([
-            'nome' => 'Administrador',
-            'cpf' => '38589697029',
-            'login' => 'admin',
-            'senha' => Hash::make('@AdminX1690'),
-            'qtd_acesso' => '10',
-            'ativo' => '1',
-        ]);
+        $this->call(EspecialidadesSeeder::class);
+        $this->call(TiposUsuarioSeeder::class);
+        $this->call(UsuariosSeeder::class);
     }
 }
