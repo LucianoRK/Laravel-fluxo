@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Enderecos\Endereco_usuario;
+use App\Models\Enderecos\Endereco_usuario;
 use Illuminate\Http\Request;
 
 class EnderecoUsuarioController extends Controller
@@ -41,7 +41,7 @@ class EnderecoUsuarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Enderecos\Endereco_usuario  $endereco_usuario
+     * @param  \App\Models\Enderecos\Endereco_usuario  $endereco_usuario
      * @return \Illuminate\Http\Response
      */
     public function show(Endereco_usuario $endereco_usuario)
@@ -52,7 +52,7 @@ class EnderecoUsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Enderecos\Endereco_usuario  $endereco_usuario
+     * @param  \App\Models\Enderecos\Endereco_usuario  $endereco_usuario
      * @return \Illuminate\Http\Response
      */
     public function edit(Endereco_usuario $endereco_usuario)
@@ -64,7 +64,7 @@ class EnderecoUsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Enderecos\Endereco_usuario  $endereco_usuario
+     * @param  \App\Models\Enderecos\Endereco_usuario  $endereco_usuario
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Endereco_usuario $endereco_usuario)
@@ -75,7 +75,7 @@ class EnderecoUsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Enderecos\Endereco_usuario  $endereco_usuario
+     * @param  \App\Models\Enderecos\Endereco_usuario  $endereco_usuario
      * @return \Illuminate\Http\Response
      */
     public function destroy(Endereco_usuario $endereco_usuario)

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Clientes\Dependente;
+use App\Models\Clientes\Dependente;
 use Illuminate\Http\Request;
 
 class DependenteController extends Controller
@@ -41,7 +41,7 @@ class DependenteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Clientes\Dependente  $dependente
+     * @param  \App\Models\Clientes\Dependente  $dependente
      * @return \Illuminate\Http\Response
      */
     public function show(Dependente $dependente)
@@ -52,7 +52,7 @@ class DependenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Clientes\Dependente  $dependente
+     * @param  \App\Models\Clientes\Dependente  $dependente
      * @return \Illuminate\Http\Response
      */
     public function edit(Dependente $dependente)
@@ -64,7 +64,7 @@ class DependenteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Clientes\Dependente  $dependente
+     * @param  \App\Models\Clientes\Dependente  $dependente
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Dependente $dependente)
@@ -75,7 +75,7 @@ class DependenteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Clientes\Dependente  $dependente
+     * @param  \App\Models\Clientes\Dependente  $dependente
      * @return \Illuminate\Http\Response
      */
     public function destroy(Dependente $dependente)

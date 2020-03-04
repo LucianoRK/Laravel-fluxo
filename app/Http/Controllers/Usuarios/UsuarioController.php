@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Usuarios\Usuario;
+use App\Models\Usuarios\Usuario;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -41,7 +41,7 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Usuarios\Usuario  $usuario
+     * @param  \App\Models\Usuarios\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
     public function show(Usuario $usuario)
@@ -52,7 +52,7 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Usuarios\Usuario  $usuario
+     * @param  \App\Models\Usuarios\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
     public function edit(Usuario $usuario)
@@ -64,7 +64,7 @@ class UsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Usuarios\Usuario  $usuario
+     * @param  \App\Models\Usuarios\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Usuario $usuario)
@@ -75,7 +75,7 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Usuarios\Usuario  $usuario
+     * @param  \App\Models\Usuarios\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
     public function destroy(Usuario $usuario)

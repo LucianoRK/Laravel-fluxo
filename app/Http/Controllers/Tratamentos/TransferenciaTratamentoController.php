@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Tratamentos\Transferencia_tratamento;
+use App\Models\Tratamentos\Transferencia_tratamento;
 use Illuminate\Http\Request;
 
 class TransferenciaTratamentoController extends Controller
@@ -41,7 +41,7 @@ class TransferenciaTratamentoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Tratamentos\Transferencia_tratamento  $transferencia_tratamento
+     * @param  \App\Models\Tratamentos\Transferencia_tratamento  $transferencia_tratamento
      * @return \Illuminate\Http\Response
      */
     public function show(Transferencia_tratamento $transferencia_tratamento)
@@ -52,7 +52,7 @@ class TransferenciaTratamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Tratamentos\Transferencia_tratamento  $transferencia_tratamento
+     * @param  \App\Models\Tratamentos\Transferencia_tratamento  $transferencia_tratamento
      * @return \Illuminate\Http\Response
      */
     public function edit(Transferencia_tratamento $transferencia_tratamento)
@@ -64,7 +64,7 @@ class TransferenciaTratamentoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Tratamentos\Transferencia_tratamento  $transferencia_tratamento
+     * @param  \App\Models\Tratamentos\Transferencia_tratamento  $transferencia_tratamento
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Transferencia_tratamento $transferencia_tratamento)
@@ -75,7 +75,7 @@ class TransferenciaTratamentoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Tratamentos\Transferencia_tratamento  $transferencia_tratamento
+     * @param  \App\Models\Tratamentos\Transferencia_tratamento  $transferencia_tratamento
      * @return \Illuminate\Http\Response
      */
     public function destroy(Transferencia_tratamento $transferencia_tratamento)

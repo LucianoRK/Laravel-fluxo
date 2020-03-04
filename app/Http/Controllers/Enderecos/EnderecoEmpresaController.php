@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Enderecos\Endereco_empresa;
+use App\Models\Enderecos\Endereco_empresa;
 use Illuminate\Http\Request;
 
 class EnderecoEmpresaController extends Controller
@@ -41,7 +41,7 @@ class EnderecoEmpresaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Enderecos\Endereco_empresa  $endereco_empresa
+     * @param  \App\Models\Enderecos\Endereco_empresa  $endereco_empresa
      * @return \Illuminate\Http\Response
      */
     public function show(Endereco_empresa $endereco_empresa)
@@ -52,7 +52,7 @@ class EnderecoEmpresaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Enderecos\Endereco_empresa  $endereco_empresa
+     * @param  \App\Models\Enderecos\Endereco_empresa  $endereco_empresa
      * @return \Illuminate\Http\Response
      */
     public function edit(Endereco_empresa $endereco_empresa)
@@ -64,7 +64,7 @@ class EnderecoEmpresaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Enderecos\Endereco_empresa  $endereco_empresa
+     * @param  \App\Models\Enderecos\Endereco_empresa  $endereco_empresa
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Endereco_empresa $endereco_empresa)
@@ -75,7 +75,7 @@ class EnderecoEmpresaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Enderecos\Endereco_empresa  $endereco_empresa
+     * @param  \App\Models\Enderecos\Endereco_empresa  $endereco_empresa
      * @return \Illuminate\Http\Response
      */
     public function destroy(Endereco_empresa $endereco_empresa)

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Financeiros\Parcela;
+use App\Models\Financeiros\Parcela;
 use Illuminate\Http\Request;
 
 class ParcelaController extends Controller
@@ -41,7 +41,7 @@ class ParcelaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Financeiros\Parcela  $parcela
+     * @param  \App\Models\Financeiros\Parcela  $parcela
      * @return \Illuminate\Http\Response
      */
     public function show(Parcela $parcela)
@@ -52,7 +52,7 @@ class ParcelaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Financeiros\Parcela  $parcela
+     * @param  \App\Models\Financeiros\Parcela  $parcela
      * @return \Illuminate\Http\Response
      */
     public function edit(Parcela $parcela)
@@ -64,7 +64,7 @@ class ParcelaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Financeiros\Parcela  $parcela
+     * @param  \App\Models\Financeiros\Parcela  $parcela
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Parcela $parcela)
@@ -75,7 +75,7 @@ class ParcelaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Financeiros\Parcela  $parcela
+     * @param  \App\Models\Financeiros\Parcela  $parcela
      * @return \Illuminate\Http\Response
      */
     public function destroy(Parcela $parcela)

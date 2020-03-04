@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Bonificacoes\Bonificacao_historico;
+use App\Models\Bonificacoes\Bonificacao_historico;
 use Illuminate\Http\Request;
 
 class BonificacaoHistoricoController extends Controller
@@ -41,7 +41,7 @@ class BonificacaoHistoricoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Bonificacoes\Bonificacao_historico  $bonificacao_historico
+     * @param  \App\Models\Bonificacoes\Bonificacao_historico  $bonificacao_historico
      * @return \Illuminate\Http\Response
      */
     public function show(Bonificacao_historico $bonificacao_historico)
@@ -52,7 +52,7 @@ class BonificacaoHistoricoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Bonificacoes\Bonificacao_historico  $bonificacao_historico
+     * @param  \App\Models\Bonificacoes\Bonificacao_historico  $bonificacao_historico
      * @return \Illuminate\Http\Response
      */
     public function edit(Bonificacao_historico $bonificacao_historico)
@@ -64,7 +64,7 @@ class BonificacaoHistoricoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Bonificacoes\Bonificacao_historico  $bonificacao_historico
+     * @param  \App\Models\Bonificacoes\Bonificacao_historico  $bonificacao_historico
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Bonificacao_historico $bonificacao_historico)
@@ -75,7 +75,7 @@ class BonificacaoHistoricoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Bonificacoes\Bonificacao_historico  $bonificacao_historico
+     * @param  \App\Models\Bonificacoes\Bonificacao_historico  $bonificacao_historico
      * @return \Illuminate\Http\Response
      */
     public function destroy(Bonificacao_historico $bonificacao_historico)

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Procedimentos\Procedimento;
+use App\Models\Procedimentos\Procedimento;
 use Illuminate\Http\Request;
 
 class ProcedimentoController extends Controller
@@ -41,7 +41,7 @@ class ProcedimentoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Procedimentos\Procedimento  $procedimento
+     * @param  \App\Models\Procedimentos\Procedimento  $procedimento
      * @return \Illuminate\Http\Response
      */
     public function show(Procedimento $procedimento)
@@ -52,7 +52,7 @@ class ProcedimentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Procedimentos\Procedimento  $procedimento
+     * @param  \App\Models\Procedimentos\Procedimento  $procedimento
      * @return \Illuminate\Http\Response
      */
     public function edit(Procedimento $procedimento)
@@ -64,7 +64,7 @@ class ProcedimentoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Procedimentos\Procedimento  $procedimento
+     * @param  \App\Models\Procedimentos\Procedimento  $procedimento
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Procedimento $procedimento)
@@ -75,7 +75,7 @@ class ProcedimentoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Procedimentos\Procedimento  $procedimento
+     * @param  \App\Models\Procedimentos\Procedimento  $procedimento
      * @return \Illuminate\Http\Response
      */
     public function destroy(Procedimento $procedimento)

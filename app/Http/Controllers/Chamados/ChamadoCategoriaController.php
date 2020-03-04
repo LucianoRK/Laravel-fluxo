@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Chamados\Chamado_categoria;
+use App\Models\Chamados\Chamado_categoria;
 use Illuminate\Http\Request;
 
 class ChamadoCategoriaController extends Controller
@@ -41,7 +41,7 @@ class ChamadoCategoriaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Chamados\Chamado_categoria  $chamado_categoria
+     * @param  \App\Models\Chamados\Chamado_categoria  $chamado_categoria
      * @return \Illuminate\Http\Response
      */
     public function show(Chamado_categoria $chamado_categoria)
@@ -52,7 +52,7 @@ class ChamadoCategoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Chamados\Chamado_categoria  $chamado_categoria
+     * @param  \App\Models\Chamados\Chamado_categoria  $chamado_categoria
      * @return \Illuminate\Http\Response
      */
     public function edit(Chamado_categoria $chamado_categoria)
@@ -64,7 +64,7 @@ class ChamadoCategoriaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Chamados\Chamado_categoria  $chamado_categoria
+     * @param  \App\Models\Chamados\Chamado_categoria  $chamado_categoria
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Chamado_categoria $chamado_categoria)
@@ -75,7 +75,7 @@ class ChamadoCategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Chamados\Chamado_categoria  $chamado_categoria
+     * @param  \App\Models\Chamados\Chamado_categoria  $chamado_categoria
      * @return \Illuminate\Http\Response
      */
     public function destroy(Chamado_categoria $chamado_categoria)

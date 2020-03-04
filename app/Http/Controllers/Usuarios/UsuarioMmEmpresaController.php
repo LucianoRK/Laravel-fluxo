@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Usuarios\Usuario_mm_empresa;
+use App\Models\Usuarios\Usuario_mm_empresa;
 use Illuminate\Http\Request;
 
 class UsuarioMmEmpresaController extends Controller
@@ -41,7 +41,7 @@ class UsuarioMmEmpresaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Usuarios\Usuario_mm_empresa  $usuario_mm_empresa
+     * @param  \App\Models\Usuarios\Usuario_mm_empresa  $usuario_mm_empresa
      * @return \Illuminate\Http\Response
      */
     public function show(Usuario_mm_empresa $usuario_mm_empresa)
@@ -52,7 +52,7 @@ class UsuarioMmEmpresaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Usuarios\Usuario_mm_empresa  $usuario_mm_empresa
+     * @param  \App\Models\Usuarios\Usuario_mm_empresa  $usuario_mm_empresa
      * @return \Illuminate\Http\Response
      */
     public function edit(Usuario_mm_empresa $usuario_mm_empresa)
@@ -64,7 +64,7 @@ class UsuarioMmEmpresaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Usuarios\Usuario_mm_empresa  $usuario_mm_empresa
+     * @param  \App\Models\Usuarios\Usuario_mm_empresa  $usuario_mm_empresa
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Usuario_mm_empresa $usuario_mm_empresa)
@@ -75,7 +75,7 @@ class UsuarioMmEmpresaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Usuarios\Usuario_mm_empresa  $usuario_mm_empresa
+     * @param  \App\Models\Usuarios\Usuario_mm_empresa  $usuario_mm_empresa
      * @return \Illuminate\Http\Response
      */
     public function destroy(Usuario_mm_empresa $usuario_mm_empresa)

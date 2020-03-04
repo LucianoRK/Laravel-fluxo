@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Models\Financeiros;
+namespace App\Models\Financeiros;
 
 use Illuminate\Database\Eloquent\Model;
 

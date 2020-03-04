@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Procedimentos\Procedimento_tratamento;
+use App\Models\Procedimentos\Procedimento_tratamento;
 use Illuminate\Http\Request;
 
 class ProcedimentoTratamentoController extends Controller
@@ -41,7 +41,7 @@ class ProcedimentoTratamentoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Procedimentos\Procedimento_tratamento  $procedimento_tratamento
+     * @param  \App\Models\Procedimentos\Procedimento_tratamento  $procedimento_tratamento
      * @return \Illuminate\Http\Response
      */
     public function show(Procedimento_tratamento $procedimento_tratamento)
@@ -52,7 +52,7 @@ class ProcedimentoTratamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Procedimentos\Procedimento_tratamento  $procedimento_tratamento
+     * @param  \App\Models\Procedimentos\Procedimento_tratamento  $procedimento_tratamento
      * @return \Illuminate\Http\Response
      */
     public function edit(Procedimento_tratamento $procedimento_tratamento)
@@ -64,7 +64,7 @@ class ProcedimentoTratamentoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Procedimentos\Procedimento_tratamento  $procedimento_tratamento
+     * @param  \App\Models\Procedimentos\Procedimento_tratamento  $procedimento_tratamento
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Procedimento_tratamento $procedimento_tratamento)
@@ -75,7 +75,7 @@ class ProcedimentoTratamentoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Procedimentos\Procedimento_tratamento  $procedimento_tratamento
+     * @param  \App\Models\Procedimentos\Procedimento_tratamento  $procedimento_tratamento
      * @return \Illuminate\Http\Response
      */
     public function destroy(Procedimento_tratamento $procedimento_tratamento)

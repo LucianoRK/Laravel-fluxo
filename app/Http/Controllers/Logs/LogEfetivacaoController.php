@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Logs\log_efetivacao;
+use App\Models\Logs\log_efetivacao;
 use Illuminate\Http\Request;
 
 class LogEfetivacaoController extends Controller
@@ -41,7 +41,7 @@ class LogEfetivacaoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Logs\log_efetivacao  $log_efetivacao
+     * @param  \App\Models\Logs\log_efetivacao  $log_efetivacao
      * @return \Illuminate\Http\Response
      */
     public function show(log_efetivacao $log_efetivacao)
@@ -52,7 +52,7 @@ class LogEfetivacaoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Logs\log_efetivacao  $log_efetivacao
+     * @param  \App\Models\Logs\log_efetivacao  $log_efetivacao
      * @return \Illuminate\Http\Response
      */
     public function edit(log_efetivacao $log_efetivacao)
@@ -64,7 +64,7 @@ class LogEfetivacaoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Logs\log_efetivacao  $log_efetivacao
+     * @param  \App\Models\Logs\log_efetivacao  $log_efetivacao
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, log_efetivacao $log_efetivacao)
@@ -75,7 +75,7 @@ class LogEfetivacaoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Logs\log_efetivacao  $log_efetivacao
+     * @param  \App\Models\Logs\log_efetivacao  $log_efetivacao
      * @return \Illuminate\Http\Response
      */
     public function destroy(log_efetivacao $log_efetivacao)

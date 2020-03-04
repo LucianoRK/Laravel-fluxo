@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Financeiros\Parcela_forma_pag;
+use App\Models\Financeiros\Parcela_forma_pag;
 use Illuminate\Http\Request;
 
 class ParcelaFormaPagController extends Controller
@@ -41,7 +41,7 @@ class ParcelaFormaPagController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Financeiros\Parcela_forma_pag  $parcela_forma_pag
+     * @param  \App\Models\Financeiros\Parcela_forma_pag  $parcela_forma_pag
      * @return \Illuminate\Http\Response
      */
     public function show(Parcela_forma_pag $parcela_forma_pag)
@@ -52,7 +52,7 @@ class ParcelaFormaPagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Financeiros\Parcela_forma_pag  $parcela_forma_pag
+     * @param  \App\Models\Financeiros\Parcela_forma_pag  $parcela_forma_pag
      * @return \Illuminate\Http\Response
      */
     public function edit(Parcela_forma_pag $parcela_forma_pag)
@@ -64,7 +64,7 @@ class ParcelaFormaPagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Financeiros\Parcela_forma_pag  $parcela_forma_pag
+     * @param  \App\Models\Financeiros\Parcela_forma_pag  $parcela_forma_pag
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Parcela_forma_pag $parcela_forma_pag)
@@ -75,7 +75,7 @@ class ParcelaFormaPagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Financeiros\Parcela_forma_pag  $parcela_forma_pag
+     * @param  \App\Models\Financeiros\Parcela_forma_pag  $parcela_forma_pag
      * @return \Illuminate\Http\Response
      */
     public function destroy(Parcela_forma_pag $parcela_forma_pag)

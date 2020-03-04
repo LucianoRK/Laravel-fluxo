@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Procedimentos\Protetico_pedido;
+use App\Models\Procedimentos\Protetico_pedido;
 use Illuminate\Http\Request;
 
 class ProteticoPedidoController extends Controller
@@ -41,7 +41,7 @@ class ProteticoPedidoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Procedimentos\Protetico_pedido  $protetico_pedido
+     * @param  \App\Models\Procedimentos\Protetico_pedido  $protetico_pedido
      * @return \Illuminate\Http\Response
      */
     public function show(Protetico_pedido $protetico_pedido)
@@ -52,7 +52,7 @@ class ProteticoPedidoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Procedimentos\Protetico_pedido  $protetico_pedido
+     * @param  \App\Models\Procedimentos\Protetico_pedido  $protetico_pedido
      * @return \Illuminate\Http\Response
      */
     public function edit(Protetico_pedido $protetico_pedido)
@@ -64,7 +64,7 @@ class ProteticoPedidoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Procedimentos\Protetico_pedido  $protetico_pedido
+     * @param  \App\Models\Procedimentos\Protetico_pedido  $protetico_pedido
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Protetico_pedido $protetico_pedido)
@@ -75,7 +75,7 @@ class ProteticoPedidoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Procedimentos\Protetico_pedido  $protetico_pedido
+     * @param  \App\Models\Procedimentos\Protetico_pedido  $protetico_pedido
      * @return \Illuminate\Http\Response
      */
     public function destroy(Protetico_pedido $protetico_pedido)

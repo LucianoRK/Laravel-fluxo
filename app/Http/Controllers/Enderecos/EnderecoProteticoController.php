@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Enderecos\Endereco_protetico;
+use App\Models\Enderecos\Endereco_protetico;
 use Illuminate\Http\Request;
 
 class EnderecoProteticoController extends Controller
@@ -41,7 +41,7 @@ class EnderecoProteticoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Enderecos\Endereco_protetico  $endereco_protetico
+     * @param  \App\Models\Enderecos\Endereco_protetico  $endereco_protetico
      * @return \Illuminate\Http\Response
      */
     public function show(Endereco_protetico $endereco_protetico)
@@ -52,7 +52,7 @@ class EnderecoProteticoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Enderecos\Endereco_protetico  $endereco_protetico
+     * @param  \App\Models\Enderecos\Endereco_protetico  $endereco_protetico
      * @return \Illuminate\Http\Response
      */
     public function edit(Endereco_protetico $endereco_protetico)
@@ -64,7 +64,7 @@ class EnderecoProteticoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Enderecos\Endereco_protetico  $endereco_protetico
+     * @param  \App\Models\Enderecos\Endereco_protetico  $endereco_protetico
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Endereco_protetico $endereco_protetico)
@@ -75,7 +75,7 @@ class EnderecoProteticoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Enderecos\Endereco_protetico  $endereco_protetico
+     * @param  \App\Models\Enderecos\Endereco_protetico  $endereco_protetico
      * @return \Illuminate\Http\Response
      */
     public function destroy(Endereco_protetico $endereco_protetico)

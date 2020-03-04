@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Anamneses\Anamnese_orofacial;
+use App\Models\Anamneses\Anamnese_orofacial;
 use Illuminate\Http\Request;
 
 class AnamneseOrofacialController extends Controller
@@ -41,7 +41,7 @@ class AnamneseOrofacialController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_orofacial  $anamnese_orofacial
+     * @param  \App\Models\Anamneses\Anamnese_orofacial  $anamnese_orofacial
      * @return \Illuminate\Http\Response
      */
     public function show(Anamnese_orofacial $anamnese_orofacial)
@@ -52,7 +52,7 @@ class AnamneseOrofacialController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_orofacial  $anamnese_orofacial
+     * @param  \App\Models\Anamneses\Anamnese_orofacial  $anamnese_orofacial
      * @return \Illuminate\Http\Response
      */
     public function edit(Anamnese_orofacial $anamnese_orofacial)
@@ -64,7 +64,7 @@ class AnamneseOrofacialController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Anamneses\Anamnese_orofacial  $anamnese_orofacial
+     * @param  \App\Models\Anamneses\Anamnese_orofacial  $anamnese_orofacial
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Anamnese_orofacial $anamnese_orofacial)
@@ -75,7 +75,7 @@ class AnamneseOrofacialController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_orofacial  $anamnese_orofacial
+     * @param  \App\Models\Anamneses\Anamnese_orofacial  $anamnese_orofacial
      * @return \Illuminate\Http\Response
      */
     public function destroy(Anamnese_orofacial $anamnese_orofacial)

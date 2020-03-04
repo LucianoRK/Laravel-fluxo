@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Chamados\Chamado_historico;
+use App\Models\Chamados\Chamado_historico;
 use Illuminate\Http\Request;
 
 class ChamadoHistoricoController extends Controller
@@ -41,7 +41,7 @@ class ChamadoHistoricoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Chamados\Chamado_historico  $chamado_historico
+     * @param  \App\Models\Chamados\Chamado_historico  $chamado_historico
      * @return \Illuminate\Http\Response
      */
     public function show(Chamado_historico $chamado_historico)
@@ -52,7 +52,7 @@ class ChamadoHistoricoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Chamados\Chamado_historico  $chamado_historico
+     * @param  \App\Models\Chamados\Chamado_historico  $chamado_historico
      * @return \Illuminate\Http\Response
      */
     public function edit(Chamado_historico $chamado_historico)
@@ -64,7 +64,7 @@ class ChamadoHistoricoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Chamados\Chamado_historico  $chamado_historico
+     * @param  \App\Models\Chamados\Chamado_historico  $chamado_historico
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Chamado_historico $chamado_historico)
@@ -75,7 +75,7 @@ class ChamadoHistoricoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Chamados\Chamado_historico  $chamado_historico
+     * @param  \App\Models\Chamados\Chamado_historico  $chamado_historico
      * @return \Illuminate\Http\Response
      */
     public function destroy(Chamado_historico $chamado_historico)

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Logs\log_renegociacao;
+use App\Models\Logs\log_renegociacao;
 use Illuminate\Http\Request;
 
 class LogRenegociacaoController extends Controller
@@ -41,7 +41,7 @@ class LogRenegociacaoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Logs\log_renegociacao  $log_renegociacao
+     * @param  \App\Models\Logs\log_renegociacao  $log_renegociacao
      * @return \Illuminate\Http\Response
      */
     public function show(log_renegociacao $log_renegociacao)
@@ -52,7 +52,7 @@ class LogRenegociacaoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Logs\log_renegociacao  $log_renegociacao
+     * @param  \App\Models\Logs\log_renegociacao  $log_renegociacao
      * @return \Illuminate\Http\Response
      */
     public function edit(log_renegociacao $log_renegociacao)
@@ -64,7 +64,7 @@ class LogRenegociacaoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Logs\log_renegociacao  $log_renegociacao
+     * @param  \App\Models\Logs\log_renegociacao  $log_renegociacao
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, log_renegociacao $log_renegociacao)
@@ -75,7 +75,7 @@ class LogRenegociacaoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Logs\log_renegociacao  $log_renegociacao
+     * @param  \App\Models\Logs\log_renegociacao  $log_renegociacao
      * @return \Illuminate\Http\Response
      */
     public function destroy(log_renegociacao $log_renegociacao)

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Financeiros\Renegociacao;
+use App\Models\Financeiros\Renegociacao;
 use Illuminate\Http\Request;
 
 class RenegociacaoController extends Controller
@@ -41,7 +41,7 @@ class RenegociacaoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Financeiros\Renegociacao  $renegociacao
+     * @param  \App\Models\Financeiros\Renegociacao  $renegociacao
      * @return \Illuminate\Http\Response
      */
     public function show(Renegociacao $renegociacao)
@@ -52,7 +52,7 @@ class RenegociacaoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Financeiros\Renegociacao  $renegociacao
+     * @param  \App\Models\Financeiros\Renegociacao  $renegociacao
      * @return \Illuminate\Http\Response
      */
     public function edit(Renegociacao $renegociacao)
@@ -64,7 +64,7 @@ class RenegociacaoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Financeiros\Renegociacao  $renegociacao
+     * @param  \App\Models\Financeiros\Renegociacao  $renegociacao
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Renegociacao $renegociacao)
@@ -75,7 +75,7 @@ class RenegociacaoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Financeiros\Renegociacao  $renegociacao
+     * @param  \App\Models\Financeiros\Renegociacao  $renegociacao
      * @return \Illuminate\Http\Response
      */
     public function destroy(Renegociacao $renegociacao)

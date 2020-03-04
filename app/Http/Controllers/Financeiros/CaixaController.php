@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Financeiros\Caixa;
+use App\Models\Financeiros\Caixa;
 use Illuminate\Http\Request;
 
 class CaixaController extends Controller
@@ -41,7 +41,7 @@ class CaixaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Financeiros\Caixa  $caixa
+     * @param  \App\Models\Financeiros\Caixa  $caixa
      * @return \Illuminate\Http\Response
      */
     public function show(Caixa $caixa)
@@ -52,7 +52,7 @@ class CaixaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Financeiros\Caixa  $caixa
+     * @param  \App\Models\Financeiros\Caixa  $caixa
      * @return \Illuminate\Http\Response
      */
     public function edit(Caixa $caixa)
@@ -64,7 +64,7 @@ class CaixaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Financeiros\Caixa  $caixa
+     * @param  \App\Models\Financeiros\Caixa  $caixa
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Caixa $caixa)
@@ -75,7 +75,7 @@ class CaixaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Financeiros\Caixa  $caixa
+     * @param  \App\Models\Financeiros\Caixa  $caixa
      * @return \Illuminate\Http\Response
      */
     public function destroy(Caixa $caixa)

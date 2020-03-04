@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Anamneses\Anamnese_orto;
+use App\Models\Anamneses\Anamnese_orto;
 use Illuminate\Http\Request;
 
 class AnamneseOrtoController extends Controller
@@ -41,7 +41,7 @@ class AnamneseOrtoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_orto  $anamnese_orto
+     * @param  \App\Models\Anamneses\Anamnese_orto  $anamnese_orto
      * @return \Illuminate\Http\Response
      */
     public function show(Anamnese_orto $anamnese_orto)
@@ -52,7 +52,7 @@ class AnamneseOrtoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_orto  $anamnese_orto
+     * @param  \App\Models\Anamneses\Anamnese_orto  $anamnese_orto
      * @return \Illuminate\Http\Response
      */
     public function edit(Anamnese_orto $anamnese_orto)
@@ -64,7 +64,7 @@ class AnamneseOrtoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Anamneses\Anamnese_orto  $anamnese_orto
+     * @param  \App\Models\Anamneses\Anamnese_orto  $anamnese_orto
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Anamnese_orto $anamnese_orto)
@@ -75,7 +75,7 @@ class AnamneseOrtoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_orto  $anamnese_orto
+     * @param  \App\Models\Anamneses\Anamnese_orto  $anamnese_orto
      * @return \Illuminate\Http\Response
      */
     public function destroy(Anamnese_orto $anamnese_orto)

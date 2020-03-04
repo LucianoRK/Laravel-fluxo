@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Models\Anamneses;
+namespace App\Models\Anamneses;
 
 use Illuminate\Database\Eloquent\Model;
 

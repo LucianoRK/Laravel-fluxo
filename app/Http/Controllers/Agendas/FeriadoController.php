@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Agendas\Feriado;
+use App\Models\Agendas\Feriado;
 use Illuminate\Http\Request;
 
 class FeriadoController extends Controller
@@ -41,7 +41,7 @@ class FeriadoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Agendas\Feriado  $feriado
+     * @param  \App\Models\Agendas\Feriado  $feriado
      * @return \Illuminate\Http\Response
      */
     public function show(Feriado $feriado)
@@ -52,7 +52,7 @@ class FeriadoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Agendas\Feriado  $feriado
+     * @param  \App\Models\Agendas\Feriado  $feriado
      * @return \Illuminate\Http\Response
      */
     public function edit(Feriado $feriado)
@@ -64,7 +64,7 @@ class FeriadoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Agendas\Feriado  $feriado
+     * @param  \App\Models\Agendas\Feriado  $feriado
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Feriado $feriado)
@@ -75,7 +75,7 @@ class FeriadoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Agendas\Feriado  $feriado
+     * @param  \App\Models\Agendas\Feriado  $feriado
      * @return \Illuminate\Http\Response
      */
     public function destroy(Feriado $feriado)

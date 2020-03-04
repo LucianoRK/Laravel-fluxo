@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Tratamentos\Orto_historico;
+use App\Models\Tratamentos\Orto_historico;
 use Illuminate\Http\Request;
 
 class OrtoHistoricoController extends Controller
@@ -41,7 +41,7 @@ class OrtoHistoricoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Tratamentos\Orto_historico  $orto_historico
+     * @param  \App\Models\Tratamentos\Orto_historico  $orto_historico
      * @return \Illuminate\Http\Response
      */
     public function show(Orto_historico $orto_historico)
@@ -52,7 +52,7 @@ class OrtoHistoricoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Tratamentos\Orto_historico  $orto_historico
+     * @param  \App\Models\Tratamentos\Orto_historico  $orto_historico
      * @return \Illuminate\Http\Response
      */
     public function edit(Orto_historico $orto_historico)
@@ -64,7 +64,7 @@ class OrtoHistoricoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Tratamentos\Orto_historico  $orto_historico
+     * @param  \App\Models\Tratamentos\Orto_historico  $orto_historico
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Orto_historico $orto_historico)
@@ -75,7 +75,7 @@ class OrtoHistoricoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Tratamentos\Orto_historico  $orto_historico
+     * @param  \App\Models\Tratamentos\Orto_historico  $orto_historico
      * @return \Illuminate\Http\Response
      */
     public function destroy(Orto_historico $orto_historico)

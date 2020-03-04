@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Anamneses\Anamnese;
+use App\Models\Anamneses\Anamnese;
 use Illuminate\Http\Request;
 
 class AnamneseController extends Controller
@@ -41,7 +41,7 @@ class AnamneseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese  $anamnese
+     * @param  \App\Models\Anamneses\Anamnese  $anamnese
      * @return \Illuminate\Http\Response
      */
     public function show(Anamnese $anamnese)
@@ -52,7 +52,7 @@ class AnamneseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese  $anamnese
+     * @param  \App\Models\Anamneses\Anamnese  $anamnese
      * @return \Illuminate\Http\Response
      */
     public function edit(Anamnese $anamnese)
@@ -64,7 +64,7 @@ class AnamneseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Anamneses\Anamnese  $anamnese
+     * @param  \App\Models\Anamneses\Anamnese  $anamnese
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Anamnese $anamnese)
@@ -75,7 +75,7 @@ class AnamneseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese  $anamnese
+     * @param  \App\Models\Anamneses\Anamnese  $anamnese
      * @return \Illuminate\Http\Response
      */
     public function destroy(Anamnese $anamnese)

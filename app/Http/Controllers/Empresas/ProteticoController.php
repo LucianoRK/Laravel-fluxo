@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Empresas\Protetico;
+use App\Models\Empresas\Protetico;
 use Illuminate\Http\Request;
 
 class ProteticoController extends Controller
@@ -41,7 +41,7 @@ class ProteticoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Empresas\Protetico  $protetico
+     * @param  \App\Models\Empresas\Protetico  $protetico
      * @return \Illuminate\Http\Response
      */
     public function show(Protetico $protetico)
@@ -52,7 +52,7 @@ class ProteticoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Empresas\Protetico  $protetico
+     * @param  \App\Models\Empresas\Protetico  $protetico
      * @return \Illuminate\Http\Response
      */
     public function edit(Protetico $protetico)
@@ -64,7 +64,7 @@ class ProteticoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Empresas\Protetico  $protetico
+     * @param  \App\Models\Empresas\Protetico  $protetico
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Protetico $protetico)
@@ -75,7 +75,7 @@ class ProteticoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Empresas\Protetico  $protetico
+     * @param  \App\Models\Empresas\Protetico  $protetico
      * @return \Illuminate\Http\Response
      */
     public function destroy(Protetico $protetico)

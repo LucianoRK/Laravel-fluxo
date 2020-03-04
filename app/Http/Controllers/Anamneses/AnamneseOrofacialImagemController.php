@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Anamneses\Anamnese_orofacial_imagem;
+use App\Models\Anamneses\Anamnese_orofacial_imagem;
 use Illuminate\Http\Request;
 
 class AnamneseOrofacialImagemController extends Controller
@@ -41,7 +41,7 @@ class AnamneseOrofacialImagemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_orofacial_imagem  $anamnese_orofacial_imagem
+     * @param  \App\Models\Anamneses\Anamnese_orofacial_imagem  $anamnese_orofacial_imagem
      * @return \Illuminate\Http\Response
      */
     public function show(Anamnese_orofacial_imagem $anamnese_orofacial_imagem)
@@ -52,7 +52,7 @@ class AnamneseOrofacialImagemController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_orofacial_imagem  $anamnese_orofacial_imagem
+     * @param  \App\Models\Anamneses\Anamnese_orofacial_imagem  $anamnese_orofacial_imagem
      * @return \Illuminate\Http\Response
      */
     public function edit(Anamnese_orofacial_imagem $anamnese_orofacial_imagem)
@@ -64,7 +64,7 @@ class AnamneseOrofacialImagemController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Anamneses\Anamnese_orofacial_imagem  $anamnese_orofacial_imagem
+     * @param  \App\Models\Anamneses\Anamnese_orofacial_imagem  $anamnese_orofacial_imagem
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Anamnese_orofacial_imagem $anamnese_orofacial_imagem)
@@ -75,7 +75,7 @@ class AnamneseOrofacialImagemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_orofacial_imagem  $anamnese_orofacial_imagem
+     * @param  \App\Models\Anamneses\Anamnese_orofacial_imagem  $anamnese_orofacial_imagem
      * @return \Illuminate\Http\Response
      */
     public function destroy(Anamnese_orofacial_imagem $anamnese_orofacial_imagem)

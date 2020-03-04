@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Anamneses\Anamnese_clinico;
+use App\Models\Anamneses\Anamnese_clinico;
 use Illuminate\Http\Request;
 
 class AnamneseClinicoController extends Controller
@@ -41,7 +41,7 @@ class AnamneseClinicoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_clinico  $anamnese_clinico
+     * @param  \App\Models\Anamneses\Anamnese_clinico  $anamnese_clinico
      * @return \Illuminate\Http\Response
      */
     public function show(Anamnese_clinico $anamnese_clinico)
@@ -52,7 +52,7 @@ class AnamneseClinicoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_clinico  $anamnese_clinico
+     * @param  \App\Models\Anamneses\Anamnese_clinico  $anamnese_clinico
      * @return \Illuminate\Http\Response
      */
     public function edit(Anamnese_clinico $anamnese_clinico)
@@ -64,7 +64,7 @@ class AnamneseClinicoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Anamneses\Anamnese_clinico  $anamnese_clinico
+     * @param  \App\Models\Anamneses\Anamnese_clinico  $anamnese_clinico
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Anamnese_clinico $anamnese_clinico)
@@ -75,7 +75,7 @@ class AnamneseClinicoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Anamneses\Anamnese_clinico  $anamnese_clinico
+     * @param  \App\Models\Anamneses\Anamnese_clinico  $anamnese_clinico
      * @return \Illuminate\Http\Response
      */
     public function destroy(Anamnese_clinico $anamnese_clinico)

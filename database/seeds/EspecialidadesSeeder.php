@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Models\Tratamentos\Especialidade;
+use App\Models\Tratamentos\Especialidade;
 use Illuminate\Database\Seeder;
 
 

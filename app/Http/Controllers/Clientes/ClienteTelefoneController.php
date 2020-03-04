@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Clientes\Cliente_telefone;
+use App\Models\Clientes\Cliente_telefone;
 use Illuminate\Http\Request;
 
 class ClienteTelefoneController extends Controller
@@ -41,7 +41,7 @@ class ClienteTelefoneController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Clientes\Cliente_telefone  $cliente_telefone
+     * @param  \App\Models\Clientes\Cliente_telefone  $cliente_telefone
      * @return \Illuminate\Http\Response
      */
     public function show(Cliente_telefone $cliente_telefone)
@@ -52,7 +52,7 @@ class ClienteTelefoneController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Clientes\Cliente_telefone  $cliente_telefone
+     * @param  \App\Models\Clientes\Cliente_telefone  $cliente_telefone
      * @return \Illuminate\Http\Response
      */
     public function edit(Cliente_telefone $cliente_telefone)
@@ -64,7 +64,7 @@ class ClienteTelefoneController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Clientes\Cliente_telefone  $cliente_telefone
+     * @param  \App\Models\Clientes\Cliente_telefone  $cliente_telefone
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Cliente_telefone $cliente_telefone)
@@ -75,7 +75,7 @@ class ClienteTelefoneController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Clientes\Cliente_telefone  $cliente_telefone
+     * @param  \App\Models\Clientes\Cliente_telefone  $cliente_telefone
      * @return \Illuminate\Http\Response
      */
     public function destroy(Cliente_telefone $cliente_telefone)

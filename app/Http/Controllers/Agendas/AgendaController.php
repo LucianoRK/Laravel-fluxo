@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Agendas\Agenda;
+use App\Models\Agendas\Agenda;
 use Illuminate\Http\Request;
 
 class AgendaController extends Controller
@@ -41,7 +41,7 @@ class AgendaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Agendas\Agenda  $agenda
+     * @param  \App\Models\Agendas\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
     public function show(Agenda $agenda)
@@ -52,7 +52,7 @@ class AgendaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Agendas\Agenda  $agenda
+     * @param  \App\Models\Agendas\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
     public function edit(Agenda $agenda)
@@ -64,7 +64,7 @@ class AgendaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Agendas\Agenda  $agenda
+     * @param  \App\Models\Agendas\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Agenda $agenda)
@@ -75,7 +75,7 @@ class AgendaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Agendas\Agenda  $agenda
+     * @param  \App\Models\Agendas\Agenda  $agenda
      * @return \Illuminate\Http\Response
      */
     public function destroy(Agenda $agenda)

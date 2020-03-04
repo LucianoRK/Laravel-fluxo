@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Chamados\Chamado;
+use App\Models\Chamados\Chamado;
 use Illuminate\Http\Request;
 
 class ChamadoController extends Controller
@@ -41,7 +41,7 @@ class ChamadoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Chamados\Chamado  $chamado
+     * @param  \App\Models\Chamados\Chamado  $chamado
      * @return \Illuminate\Http\Response
      */
     public function show(Chamado $chamado)
@@ -52,7 +52,7 @@ class ChamadoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Chamados\Chamado  $chamado
+     * @param  \App\Models\Chamados\Chamado  $chamado
      * @return \Illuminate\Http\Response
      */
     public function edit(Chamado $chamado)
@@ -64,7 +64,7 @@ class ChamadoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Chamados\Chamado  $chamado
+     * @param  \App\Models\Chamados\Chamado  $chamado
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Chamado $chamado)
@@ -75,7 +75,7 @@ class ChamadoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Chamados\Chamado  $chamado
+     * @param  \App\Models\Chamados\Chamado  $chamado
      * @return \Illuminate\Http\Response
      */
     public function destroy(Chamado $chamado)

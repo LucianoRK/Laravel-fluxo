@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Usuarios\Usuario_agenda;
+use App\Models\Usuarios\Usuario_agenda;
 use Illuminate\Http\Request;
 
 class UsuarioAgendaController extends Controller
@@ -41,7 +41,7 @@ class UsuarioAgendaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Usuarios\Usuario_agenda  $usuario_agenda
+     * @param  \App\Models\Usuarios\Usuario_agenda  $usuario_agenda
      * @return \Illuminate\Http\Response
      */
     public function show(Usuario_agenda $usuario_agenda)
@@ -52,7 +52,7 @@ class UsuarioAgendaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Usuarios\Usuario_agenda  $usuario_agenda
+     * @param  \App\Models\Usuarios\Usuario_agenda  $usuario_agenda
      * @return \Illuminate\Http\Response
      */
     public function edit(Usuario_agenda $usuario_agenda)
@@ -64,7 +64,7 @@ class UsuarioAgendaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Usuarios\Usuario_agenda  $usuario_agenda
+     * @param  \App\Models\Usuarios\Usuario_agenda  $usuario_agenda
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Usuario_agenda $usuario_agenda)

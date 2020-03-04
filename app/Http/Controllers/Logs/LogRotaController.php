@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Logs\log_rota;
+use App\Models\Logs\log_rota;
 use Illuminate\Http\Request;
 
 class LogRotaController extends Controller
@@ -41,7 +41,7 @@ class LogRotaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Logs\log_rota  $log_rota
+     * @param  \App\Models\Logs\log_rota  $log_rota
      * @return \Illuminate\Http\Response
      */
     public function show(log_rota $log_rota)
@@ -52,7 +52,7 @@ class LogRotaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Logs\log_rota  $log_rota
+     * @param  \App\Models\Logs\log_rota  $log_rota
      * @return \Illuminate\Http\Response
      */
     public function edit(log_rota $log_rota)
@@ -64,7 +64,7 @@ class LogRotaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Logs\log_rota  $log_rota
+     * @param  \App\Models\Logs\log_rota  $log_rota
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, log_rota $log_rota)
@@ -75,7 +75,7 @@ class LogRotaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Logs\log_rota  $log_rota
+     * @param  \App\Models\Logs\log_rota  $log_rota
      * @return \Illuminate\Http\Response
      */
     public function destroy(log_rota $log_rota)

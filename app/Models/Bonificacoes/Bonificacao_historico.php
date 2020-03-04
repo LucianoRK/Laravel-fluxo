@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Models\Bonificacoes;
+namespace App\Models\Bonificacoes;
 
 use Illuminate\Database\Eloquent\Model;
 

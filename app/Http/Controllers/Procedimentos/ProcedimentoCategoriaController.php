@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Procedimentos\Procedimento_categoria;
+use App\Models\Procedimentos\Procedimento_categoria;
 use Illuminate\Http\Request;
 
 class ProcedimentoCategoriaController extends Controller
@@ -41,7 +41,7 @@ class ProcedimentoCategoriaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Procedimentos\Procedimento_categoria  $procedimento_categoria
+     * @param  \App\Models\Procedimentos\Procedimento_categoria  $procedimento_categoria
      * @return \Illuminate\Http\Response
      */
     public function show(Procedimento_categoria $procedimento_categoria)
@@ -52,7 +52,7 @@ class ProcedimentoCategoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Procedimentos\Procedimento_categoria  $procedimento_categoria
+     * @param  \App\Models\Procedimentos\Procedimento_categoria  $procedimento_categoria
      * @return \Illuminate\Http\Response
      */
     public function edit(Procedimento_categoria $procedimento_categoria)
@@ -64,7 +64,7 @@ class ProcedimentoCategoriaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Procedimentos\Procedimento_categoria  $procedimento_categoria
+     * @param  \App\Models\Procedimentos\Procedimento_categoria  $procedimento_categoria
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Procedimento_categoria $procedimento_categoria)
@@ -75,7 +75,7 @@ class ProcedimentoCategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Procedimentos\Procedimento_categoria  $procedimento_categoria
+     * @param  \App\Models\Procedimentos\Procedimento_categoria  $procedimento_categoria
      * @return \Illuminate\Http\Response
      */
     public function destroy(Procedimento_categoria $procedimento_categoria)

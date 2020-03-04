@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Tratamentos\Especialidade;
+use App\Models\Tratamentos\Especialidade;
 use Illuminate\Http\Request;
 
 class EspecialidadeController extends Controller
@@ -41,7 +41,7 @@ class EspecialidadeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Tratamentos\Especialidade  $especialidade
+     * @param  \App\Models\Tratamentos\Especialidade  $especialidade
      * @return \Illuminate\Http\Response
      */
     public function show(Especialidade $especialidade)
@@ -52,7 +52,7 @@ class EspecialidadeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Tratamentos\Especialidade  $especialidade
+     * @param  \App\Models\Tratamentos\Especialidade  $especialidade
      * @return \Illuminate\Http\Response
      */
     public function edit(Especialidade $especialidade)
@@ -64,7 +64,7 @@ class EspecialidadeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Tratamentos\Especialidade  $especialidade
+     * @param  \App\Models\Tratamentos\Especialidade  $especialidade
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Especialidade $especialidade)
@@ -75,7 +75,7 @@ class EspecialidadeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Tratamentos\Especialidade  $especialidade
+     * @param  \App\Models\Tratamentos\Especialidade  $especialidade
      * @return \Illuminate\Http\Response
      */
     public function destroy(Especialidade $especialidade)

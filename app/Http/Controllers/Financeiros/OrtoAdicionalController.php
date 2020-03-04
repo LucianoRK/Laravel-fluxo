@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Financeiros\Orto_adicional;
+use App\Models\Financeiros\Orto_adicional;
 use Illuminate\Http\Request;
 
 class OrtoAdicionalController extends Controller
@@ -41,7 +41,7 @@ class OrtoAdicionalController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Http\Models\Financeiros\Orto_adicional  $orto_adicional
+     * @param  \App\Models\Financeiros\Orto_adicional  $orto_adicional
      * @return \Illuminate\Http\Response
      */
     public function show(Orto_adicional $orto_adicional)
@@ -52,7 +52,7 @@ class OrtoAdicionalController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Http\Models\Financeiros\Orto_adicional  $orto_adicional
+     * @param  \App\Models\Financeiros\Orto_adicional  $orto_adicional
      * @return \Illuminate\Http\Response
      */
     public function edit(Orto_adicional $orto_adicional)
@@ -64,7 +64,7 @@ class OrtoAdicionalController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Http\Models\Financeiros\Orto_adicional  $orto_adicional
+     * @param  \App\Models\Financeiros\Orto_adicional  $orto_adicional
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Orto_adicional $orto_adicional)
@@ -75,7 +75,7 @@ class OrtoAdicionalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Models\Financeiros\Orto_adicional  $orto_adicional
+     * @param  \App\Models\Financeiros\Orto_adicional  $orto_adicional
      * @return \Illuminate\Http\Response
      */
     public function destroy(Orto_adicional $orto_adicional)
