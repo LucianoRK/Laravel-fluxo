@@ -38,7 +38,8 @@
 	<link rel="stylesheet" href="{{asset('assets/css/layouts/vertical/themes/theme-a.css')}}">
 
 	<!-- ======================= reCAPTCHA  ===========================-->
-	<script src="https://www.google.com/recaptcha/api.js')}}" async defer></script>
+    {!! htmlScriptTagJsApi([ 'action' => 'homepage' ]) !!}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
