@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -45,14 +46,14 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function logar(Request $request)
+    public function logar(LoginRequest $request)
     {
        $dados = ['login'=>$request->login, 'password'=>$request->senha];
        
        if (Auth::attempt($dados)) {
             return redirect()->intended('/');
        } else {
-           dd($dados);
+            return redirect()->back()->with('msg', 'Usuário ou senha incorreto!');
        }
     }
 

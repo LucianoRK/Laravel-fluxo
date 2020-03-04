@@ -3,7 +3,7 @@
 
 /* LOGIN */ {
     Route::get('/login', 'Auth\LoginController@index')->name('login');
-    Route::post('/logar', 'Auth\LoginController@logar');
+    Route::post('/logar', 'Auth\LoginController@logar')->name('logar');
 }
 
 /* AUTENTICADO */
