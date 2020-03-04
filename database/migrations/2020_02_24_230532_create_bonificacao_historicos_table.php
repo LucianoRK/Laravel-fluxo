@@ -14,7 +14,7 @@ class CreateBonificacaoHistoricosTable extends Migration
     public function up()
     {
         Schema::create('bonificacao_historicos', function (Blueprint $table) {
-            $table->bigIncrements('id_bonificacao_historico');
+            $table->bigIncrements('id');
             $table->integer('fk_bonificacao');
             $table->integer('fk_parcela');
             $table->integer('valor_entrada');

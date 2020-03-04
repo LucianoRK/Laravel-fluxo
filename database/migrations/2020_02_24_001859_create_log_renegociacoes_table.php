@@ -14,7 +14,7 @@ class CreateLogRenegociacoesTable extends Migration
     public function up()
     {
         Schema::create('log_renegociacoes', function (Blueprint $table) {
-            $table->bigIncrements('id_log_renegociacao');
+            $table->bigIncrements('id');
             $table->integer('fk_usuario');
             $table->integer('fk_tratamento');
             $table->integer('fk_renegociacao');

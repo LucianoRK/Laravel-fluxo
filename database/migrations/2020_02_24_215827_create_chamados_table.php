@@ -14,7 +14,7 @@ class CreateChamadosTable extends Migration
     public function up()
     {
         Schema::create('chamados', function (Blueprint $table) {
-            $table->bigIncrements('id_chamado');
+            $table->bigIncrements('id');
             $table->integer('fk_empresa');
             $table->integer('fk_cliente');
             $table->integer('fk_tratamento');

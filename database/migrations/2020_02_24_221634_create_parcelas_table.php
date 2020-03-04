@@ -14,7 +14,7 @@ class CreateParcelasTable extends Migration
     public function up()
     {
         Schema::create('parcelas', function (Blueprint $table) {
-            $table->bigIncrements('id_parcela');
+            $table->bigIncrements('id');
             $table->integer('fk_empresa');
             $table->integer('fk_tratamento');
             $table->integer('fk_cliente');

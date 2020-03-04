@@ -14,7 +14,7 @@ class CreateCaixasTable extends Migration
     public function up()
     {
         Schema::create('caixas', function (Blueprint $table) {
-            $table->bigIncrements('id_caixa');
+            $table->bigIncrements('id');
             $table->integer('fk_emoresa');
             $table->smallInteger('tipo');
             $table->bigInteger('valor');

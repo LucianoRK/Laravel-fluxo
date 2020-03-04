@@ -14,7 +14,7 @@ class CreateCidadesTable extends Migration
     public function up()
     {
         Schema::create('cidades', function (Blueprint $table) {
-            $table->bigIncrements('id_cidade');
+            $table->bigIncrements('id');
             $table->integer('fk_estado');
             $table->string('nome', 50);
             $table->boolean('ativo')->default(true);

@@ -14,7 +14,7 @@ class CreateLogParcelaRecebidasTable extends Migration
     public function up()
     {
         Schema::create('log_parcela_recebidas', function (Blueprint $table) {
-            $table->bigIncrements('id_log_parcela_recebida');
+            $table->bigIncrements('id');
             $table->integer('fk_usuario');
             $table->integer('fk_tratamento');
             $table->integer('fk_parcela');

@@ -14,19 +14,19 @@ class TiposUsuarioSeeder extends Seeder
     {
         $tipos = [
             [
-                'id_tipo_usuario' => '1',
+                'id' => '1',
                 'nome' => 'Master'
             ],
             [
-                'id_tipo_usuario' => '2',
+                'id' => '2',
                 'nome' => 'Administrador'
             ],
             [
-                'id_tipo_usuario' => '3',
+                'id' => '3',
                 'nome' => 'Dentista'
             ],
             [
-                'id_tipo_usuario' => '4',
+                'id' => '4',
                 'nome' => 'Colaborador'
             ]
         ];

@@ -14,7 +14,7 @@ class CreateBonificacaoTable extends Migration
     public function up()
     {
         Schema::create('bonificacao', function (Blueprint $table) {
-            $table->bigIncrements('id_bonificacao');
+            $table->bigIncrements('id');
             $table->integer('fk_indicador');
             $table->integer('fk_cliente');
             $table->integer('fk_tratamento');

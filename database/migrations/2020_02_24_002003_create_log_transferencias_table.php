@@ -14,7 +14,7 @@ class CreateLogTransferenciasTable extends Migration
     public function up()
     {
         Schema::create('log_transferencias', function (Blueprint $table) {
-            $table->bigIncrements('id_log_transferencia');
+            $table->bigIncrements('id');
             $table->integer('fk_usuario');
             $table->integer('fk_transferencia');
             $table->integer('fk_parcela');

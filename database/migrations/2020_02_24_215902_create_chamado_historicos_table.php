@@ -14,7 +14,7 @@ class CreateChamadoHistoricosTable extends Migration
     public function up()
     {
         Schema::create('chamado_historicos', function (Blueprint $table) {
-            $table->bigIncrements('id_chamado_historico');
+            $table->bigIncrements('id');
             $table->integer('fk_chamado');
             $table->integer('fk_usuario');
             $table->string('descricao');

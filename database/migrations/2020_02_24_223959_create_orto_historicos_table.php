@@ -14,7 +14,7 @@ class CreateOrtoHistoricosTable extends Migration
     public function up()
     {
         Schema::create('orto_historicos', function (Blueprint $table) {
-            $table->bigIncrements('id_orto_historico');
+            $table->bigIncrements('id');
             $table->integer('fk_tratamento');
             $table->integer('fk_usuario_dentista');
             $table->string('descricao')->nullable();

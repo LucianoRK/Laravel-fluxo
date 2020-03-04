@@ -14,7 +14,7 @@ class CreateClienteTelefonesTable extends Migration
     public function up()
     {
         Schema::create('cliente_telefones', function (Blueprint $table) {
-            $table->bigIncrements('id_cliente_telefone');
+            $table->bigIncrements('id');
             $table->integer('fk_cliente');
             $table->string('numero', 100);
             $table->boolean('ativo')->default(true);

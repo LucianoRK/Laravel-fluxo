@@ -14,7 +14,7 @@ class CreateEnderecoUsuariosTable extends Migration
     public function up()
     {
         Schema::create('endereco_usuarios', function (Blueprint $table) {
-            $table->bigIncrements('id_endereco_usuario');
+            $table->bigIncrements('id');
             $table->integer('fk_usuario');
             $table->integer('fk_cidade');
             $table->string('cep', 15)->nullable();

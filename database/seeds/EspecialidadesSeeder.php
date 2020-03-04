@@ -16,23 +16,23 @@ class EspecialidadesSeeder extends Seeder
     {
         $especialidades = [
             [
-                'id_especialidade' => '1',
+                'id' => '1',
                 'nome' => 'Clinico geral'
             ],
             [
-                'id_especialidade' => '2',
+                'id' => '2',
                 'nome' => 'Ortodontia'
             ],
             [
-                'id_especialidade' => '3',
+                'id' => '3',
                 'nome' => 'Implantodontia'
             ],
             [
-                'id_especialidade' => '4',
+                'id' => '4',
                 'nome' => 'Odonto Pediatria'
             ],
             [
-                'id_especialidade' => '5',
+                'id' => '5',
                 'nome' => 'Orofacial'
             ]
         ];

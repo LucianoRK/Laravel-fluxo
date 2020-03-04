@@ -14,7 +14,7 @@ class CreateLogEfetivacoesTable extends Migration
     public function up()
     {
         Schema::create('log_efetivacoes', function (Blueprint $table) {
-            $table->bigIncrements('id_log_efetivacao');
+            $table->bigIncrements('id');
             $table->integer('fk_usuario');
             $table->integer('fk_tratamento');
             $table->timestamps();

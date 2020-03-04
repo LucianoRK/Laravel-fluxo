@@ -14,7 +14,7 @@ class CreateLogRotasTable extends Migration
     public function up()
     {
         Schema::create('log_rotas', function (Blueprint $table) {
-            $table->bigIncrements('id_log_rota');
+            $table->bigIncrements('id');
             $table->integer('fk_usuario');
             $table->string('rota', 100);
             $table->json('dados');

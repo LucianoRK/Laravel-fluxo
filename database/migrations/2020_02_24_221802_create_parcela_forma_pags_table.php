@@ -14,7 +14,7 @@ class CreateParcelaFormaPagsTable extends Migration
     public function up()
     {
         Schema::create('parcela_forma_pags', function (Blueprint $table) {
-            $table->bigIncrements('id_parcela_forma_pag');
+            $table->bigIncrements('id');
             $table->integer('fk_pagamento');
             $table->smallInteger('forma_pag')->nullable();
             $table->bigInteger('valor_pago');

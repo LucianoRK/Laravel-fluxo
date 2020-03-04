@@ -14,7 +14,7 @@ class CreateAnamnesePediatriasTable extends Migration
     public function up()
     {
         Schema::create('anamnese_pediatrias', function (Blueprint $table) {
-            $table->bigIncrements('id_anamnese_pediatria');
+            $table->bigIncrements('id');
             $table->boolean('ativo')->default(true);
             $table->timestamps();
         });

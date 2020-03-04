@@ -14,7 +14,7 @@ class CreateTransferenciaTratamentosTable extends Migration
     public function up()
     {
         Schema::create('transferencia_tratamentos', function (Blueprint $table) {
-            $table->bigIncrements('id_transferencia_tratamento');
+            $table->bigIncrements('id');
             $table->integer('fk_empresa');
             $table->integer('fk_tratamento');
             $table->integer('fk_usuario_dentista_origem');

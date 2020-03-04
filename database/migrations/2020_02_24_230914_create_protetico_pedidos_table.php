@@ -14,7 +14,7 @@ class CreateProteticoPedidosTable extends Migration
     public function up()
     {
         Schema::create('protetico_pedidos', function (Blueprint $table) {
-            $table->bigIncrements('id_protetico_pedido');
+            $table->bigIncrements('id');
             /*Precisamos repensar a regra !*/
             $table->timestamps();
         });

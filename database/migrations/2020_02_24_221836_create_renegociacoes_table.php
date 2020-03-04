@@ -14,7 +14,7 @@ class CreateRenegociacoesTable extends Migration
     public function up()
     {
         Schema::create('renegociacoes', function (Blueprint $table) {
-            $table->bigIncrements('id_renegociacao');
+            $table->bigIncrements('id');
             $table->integer('fk_tratamento');
             $table->json('regra_renegociada')->nullable();
             $table->boolean('ativo')->default(true);
