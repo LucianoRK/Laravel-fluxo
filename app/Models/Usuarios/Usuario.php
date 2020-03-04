@@ -2,7 +2,7 @@
 
 namespace App\Models\Usuarios;
 
-use Illuminate\Foundation\Auth\Usuario as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class Usuario extends Authenticatable
