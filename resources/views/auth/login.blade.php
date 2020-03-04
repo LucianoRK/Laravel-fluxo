@@ -50,12 +50,9 @@
                     <form action="{{ route('logar') }}" method="POST">
                         {{ csrf_field() }}
                     
-
 						<a href="" class="brand text-center d-block m-b-20">
 							<img src="{{asset('assets/img/qt-logo@2x.png')}}" alt="QuantumPro Logo" />
                         </a>
-                        
-                       
 
 						<div class="form-group {{ $errors->has('login') ? 'has-error' : '' }}">
 							<label for="inputText" class="sr-only"> Login </label>

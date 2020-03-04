@@ -29,7 +29,7 @@ class EspecialidadesSeeder extends Seeder
             ],
             [
                 'id' => '4',
-                'nome' => 'Odonto Pediatria'
+                'nome' => 'Odontopediatria'
             ],
             [
                 'id' => '5',
