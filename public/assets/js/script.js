@@ -15,12 +15,5 @@ function urlAtual() {
 }
 
 function urlAbsoluta() {
-    return "http://localhost/raiz";
+    return "http://127.0.0.1:8000";
 }
-
-function selectOne() {
-    $(".selectUm").select2();
-}
-
-
-
