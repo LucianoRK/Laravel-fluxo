@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>@yield('title')</title>
+    <title>{{config('app.name')}} - @yield('title')</title>
 
     <!-- ================== GOOGLE FONTS ==================-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet">

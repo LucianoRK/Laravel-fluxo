@@ -4,6 +4,7 @@ namespace App\Models\Usuarios;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class Usuario extends Authenticatable
 {
@@ -40,4 +41,14 @@ class Usuario extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getAllUsuario()
+    {
+        $data = DB::table('usuarios')
+            ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
+            ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
+            ->get();
+
+        return $data;
+    }
 }

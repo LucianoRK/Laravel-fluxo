@@ -15,9 +15,6 @@
 <!-- ================== PAGE LEVEL COMPONENT SCRIPTS ==================-->
 <script src="{{asset('assets/js/components/sweetalert2.js')}}"></script>
 
-<!-- ================== PAGE LEVEL APP SCRIPTS ==================-->
-<script src="{{asset('assets/js/components/select2-init.js')}}"></script>
-
 <!-- ================== MASK ==================-->
 <script src="{{asset('assets/vendor/jquery-mask/jquery.mask.min.js')}}"></script>
 <script src="{{asset('assets/js/components/jquery-mask-init.js')}}"></script>

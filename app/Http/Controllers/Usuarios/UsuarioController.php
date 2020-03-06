@@ -14,7 +14,10 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $user = new Usuario();
+        $usuarios = $user->getAllusuario();
+
+        return view('usuarios.index', compact('usuarios'));
     }
 
     /**

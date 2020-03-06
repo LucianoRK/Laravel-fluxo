@@ -1,5 +1,4 @@
 <?php
-//Auth::routes();
 
 /* LOGIN */ {
     Route::get('/login', 'Auth\LoginController@index')->name('login');
@@ -9,13 +8,19 @@
 /* AUTENTICADO */
 Route::group(['middleware' => ['auth']], function () {
     
-    Route::get('/sair', function () {
-        Auth::logout();
-        return redirect()->route('login');
-    });
+    /* SAIR DO SISTEMA */ {
+        Route::get('/sair', function () {
+            Auth::logout();
+            return redirect()->route('login');
+        });
+    }
 
     /* HOME */ {
         Route::get('/home', 'HomeController@index')->name('home');
         Route::get('/', 'HomeController@index')->name('home');
     }
+
+    /* USUARIOS */ {
+        Route::get('/', 'UsuarioController@index')->name('usuarios');
+    } 
 });
