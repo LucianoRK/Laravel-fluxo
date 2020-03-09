@@ -23,4 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
     /* USUARIOS */ {
         Route::get('/', 'UsuarioController@index')->name('usuarios');
     } 
+
+    /* USUARIOS */ {
+        Route::resource('agenda', 'AgendaController');
+    } 
 });

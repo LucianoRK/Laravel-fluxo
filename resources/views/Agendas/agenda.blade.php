@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
+
+@section('title', 'Agenda')
+
+
 @section('content')
-<div class="container">
-   
-</div>
+    
 @endsection

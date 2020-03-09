@@ -14,7 +14,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        //
+        return View('Agendas.agenda');
     }
 
     /**
