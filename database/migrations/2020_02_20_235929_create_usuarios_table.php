@@ -15,6 +15,8 @@ class CreateUsuariosTable extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('fk_empresa');
+            $table->integer('fk_tipo_usuario');
             $table->string('nome', 50);
             $table->string('cpf', 11);
             $table->date('data_nascimento')->nullable();
@@ -23,7 +25,6 @@ class CreateUsuariosTable extends Migration
             $table->string('senha', 100);
             $table->smallInteger('qtd_acesso');
             $table->boolean('ativo')->default(true);
-            $table->rememberToken();
             $table->timestamps();
         });
     }

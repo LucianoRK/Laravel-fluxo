@@ -17,6 +17,8 @@ class UsuariosSeeder extends Seeder
             [
                 'nome' => 'Administrador',
                 'cpf' => '38589697029',
+                'fk_empresa' => '0',
+                'fk_tipo_usuario' => '1',
                 'login' => 'admin',
                 'senha' => Hash::make('admin'),
                 'qtd_acesso' => '10',
