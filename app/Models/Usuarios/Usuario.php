@@ -4,6 +4,7 @@ namespace App\Models\Usuarios;
 
 use App\Models\Empresas\Empresa;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +48,7 @@ class Usuario extends Authenticatable
     public function getAllUsuarioAtivo($fk_empresa)
     {
         $data = DB::table('usuarios')
-            ->where([ ['ativo', '=', '1'], ['fk_empresa', '=', "$fk_empresa"], ])
+            ->where([ ['ativo', '=', '1'], ['fk_empresa', '=', $fk_empresa], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
             ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
             ->orderBy('usuarios.nome')
@@ -59,11 +60,29 @@ class Usuario extends Authenticatable
     public function getAllUsuarioInativo($fk_empresa)
     {
         $data = DB::table('usuarios')
-            ->where([ ['ativo', '=', '0'], ['fk_empresa', '=', "$fk_empresa"], ])
+            ->where([ ['ativo', '=', '0'], ['fk_empresa', '=', $fk_empresa], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
             ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
             ->orderBy('usuarios.nome')
             ->get();
+
+        return $data;
+    }
+
+    public function desativarUsuario($usuario, $fk_empresa)
+    { 
+        $data = DB::table('usuarios')
+            ->where([ ['id', '=', $usuario], ['fk_empresa', '=', $fk_empresa], ])
+            ->update(['ativo' => false]);
+
+        return $data;
+    }
+
+    public function ativarUsuario($usuario, $fk_empresa)
+    { 
+        $data = DB::table('usuarios')
+            ->where([ ['id', '=', $usuario], ['fk_empresa', '=', $fk_empresa], ])
+            ->update(['ativo' => true]);
 
         return $data;
     }

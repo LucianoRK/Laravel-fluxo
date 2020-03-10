@@ -40,12 +40,13 @@
                                         <td>
                                             {{ $usuario->tipo_usuario }}
                                         </td>
-                                        <td class="text-center">
-                                            <button class="btn btn-info btn-rounded btn-sm" title="Editar">
-                                                <i class="la la-edit text-white font-size-22"></i>
+                                        <td class="text-center" id_user="{{ $usuario->id }}">
+                                            <button class="btn btn-info btn-sm editar" title="Editar"> 
+                                                <i class="la la-edit text-white font-size-22"></i> 
                                             </button>
-                                            <button class="btn btn-danger btn-rounded btn-sm" title="Desativar">
-                                                <i class="la la-trash text-white font-size-22"></i>
+
+                                            <button class="btn btn-danger btn-sm desativar" title="Desativar"> 
+                                                <i class="la la-trash text-white font-size-22"></i> 
                                             </button>
                                         </td>
                                     </tr>
@@ -91,9 +92,9 @@
                                         <td>
                                             {{ $usuario->tipo_usuario }}
                                         </td>
-                                        <td class="text-center">
-                                            <button class="btn btn-success btn-rounded btn-sm" title="Reativar">
-                                                <i class="la la-check text-white font-size-22"></i>
+                                        <td class="text-center" id_user="{{ $usuario->id }}">
+                                            <button class="btn btn-success btn-sm ativar" title="Ativar"> 
+                                                <i class="la la-check-square text-white font-size-22"></i>
                                             </button>
                                         </td>
                                     </tr>
@@ -106,4 +107,126 @@
         </div>
     </div>
 </div>
+
+<script>
+    function desativarUsuario() {
+        $('.desativar').on('click', function() {
+            let id_user = $(this).parent().attr('id_user');
+            desativaBotao(this);
+            
+            swal({
+                title: 'Desativar usuário?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: "usuarios/"+id_user,
+                        type: 'delete',
+                        dataType: "JSON",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: id_user
+                        },
+                        success: function (data){
+                            if (data) {
+                                swal({
+                                    position: '',
+                                    type: 'success',
+                                    title: 'Sucesso!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            } else {
+                                swal({
+                                    position: '',
+                                    type: 'error',
+                                    title: 'Erro!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+
+                            setTimeout( function() {
+                                window.location.reload()
+                            }, 1250 );
+                        }
+                    });
+                }
+                ativarBotao(this);
+            })
+        });
+    }
+
+    function ativarUsuario() {
+        $('.ativar').on('click', function() {
+            let id_user = $(this).parent().attr('id_user');
+            desativaBotao(this);
+            
+            swal({
+                title: 'Ativar usuário?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: "usuarios/ativar/"+id_user,
+                        type: 'put',
+                        dataType: "JSON",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: id_user
+                        },
+                        success: function (data){
+                            if (data) {
+                                swal({
+                                    position: '',
+                                    type: 'success',
+                                    title: 'Sucesso!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            } else {
+                                swal({
+                                    position: '',
+                                    type: 'error',
+                                    title: 'Erro!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+
+                            setTimeout( function() {
+                                window.location.reload()
+                            }, 1250 );
+                        }
+                    });
+                }
+                ativarBotao(this);
+            })
+        });
+    }
+
+    $(document).ready(function() {
+        desativarUsuario();
+        ativarUsuario();
+    });
+</script>
+
 @endsection

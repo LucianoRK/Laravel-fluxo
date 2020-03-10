@@ -21,10 +21,11 @@ Route::group(['middleware' => ['auth']], function () {
     }
 
     /* USUARIOS */ {
-        Route::get('/usuarios', 'UsuarioController@index')->name('usuarios');
+        Route::resource('usuarios', 'UsuarioController');
+        Route::put('usuarios/ativar/{id}', 'UsuarioController@ativar');
     } 
 
-    /* USUARIOS */ {
+    /* AGENDA */ {
         Route::resource('agenda', 'AgendaController');
     } 
 });
