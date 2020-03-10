@@ -2,8 +2,10 @@
 
 namespace App\Models\Usuarios;
 
+use App\Models\Empresas\Empresa;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Usuario extends Authenticatable
@@ -21,7 +23,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'login', 'senha',
+        'id', 'fk_empresa', 'fk_tipo_usuario', 'nome', 'cpf', 'data_nascimento', 'email', 'login', 'senha', 'ativo',
     ];
 
     /**
@@ -42,11 +44,25 @@ class Usuario extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getAllUsuario()
+    public function getAllUsuarioAtivo($fk_empresa)
     {
         $data = DB::table('usuarios')
+            ->where([ ['ativo', '=', '1'], ['fk_empresa', '=', "$fk_empresa"], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
             ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
+            ->orderBy('usuarios.nome')
+            ->get();
+
+        return $data;
+    }
+
+    public function getAllUsuarioInativo($fk_empresa)
+    {
+        $data = DB::table('usuarios')
+            ->where([ ['ativo', '=', '0'], ['fk_empresa', '=', "$fk_empresa"], ])
+            ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
+            ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
+            ->orderBy('usuarios.nome')
             ->get();
 
         return $data;

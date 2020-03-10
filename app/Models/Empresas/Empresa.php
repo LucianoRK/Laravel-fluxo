@@ -3,6 +3,7 @@
 namespace App\Models\Empresas;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Empresa extends Model
 {
@@ -12,7 +13,7 @@ class Empresa extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'id', 'nome', 'telefone', 'cnpj', 'data_ativacao', 'bloqueada', 'data_bloqueio', 'ativo',
     ];
 
     /**
@@ -32,4 +33,11 @@ class Empresa extends Model
     protected $casts = [
         
     ];
+
+    public function getNomeEmpresa($fk_empresa)
+    {
+        $data = DB::table('empresas')->find($fk_empresa);
+
+        return $data;
+    }
 }

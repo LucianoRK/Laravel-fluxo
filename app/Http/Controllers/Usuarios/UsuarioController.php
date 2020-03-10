@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empresas\Empresa;
 use App\Models\Usuarios\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
@@ -14,10 +16,16 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $user = new Usuario();
-        $usuarios = $user->getAllusuario();
+        $fk_empresa = Auth::user()->fk_empresa;
 
-        return view('usuarios.index', compact('usuarios'));
+        $user                 = new Usuario();
+        $usuarios['ativos']   = $user->getAllusuarioAtivo($fk_empresa);
+        $usuarios['inativos'] = $user->getAllusuarioInativo($fk_empresa);
+
+        $empresa = new Empresa();
+        $empresa = $empresa->getNomeEmpresa($fk_empresa);
+
+        return view('usuarios.index', compact('usuarios', 'empresa'));
     }
 
     /**

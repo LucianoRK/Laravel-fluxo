@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
     }
 
     /* USUARIOS */ {
-        Route::get('/', 'UsuarioController@index')->name('usuarios');
+        Route::get('/usuarios', 'UsuarioController@index')->name('usuarios');
     } 
 
     /* USUARIOS */ {
