@@ -14,7 +14,8 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        return View('Agendas.agenda');
+        $horarios = $this->horariosAgenda();
+        return View('Agendas.agenda',compact('horarios'));
     }
 
     /**
@@ -81,5 +82,21 @@ class AgendaController extends Controller
     public function destroy(Agenda $agenda)
     {
         //
+    }
+
+    public function horariosAgenda(){
+        $hora_inicial = 8;
+        $hora_final = 23;
+        $intervalo_min = 15;
+        $horarios = [];
+
+        for ($hora = $hora_inicial; $hora < $hora_final; $hora++) { 
+            for ($min = 0; $min < 4; $min++) { 
+                $formato = '%02d:%02d';
+                array_push($horarios, sprintf($formato, $hora, $min * $intervalo_min));
+            }
+        }
+    
+        return $horarios;
     }
 }
