@@ -8,6 +8,7 @@
 
 <!-- ================ PAGE LEVEL VENDOR SCRIPTS ==================-->
 <script src="{{asset('assets/vendor/sweetalert2/dist/sweetalert2.min.js')}}"></script>
+<script src="{{asset('assets/vendor/select2/select2.min.js')}}"> </script>
 
 <!-- ================== GLOBAL APP SCRIPTS ==================-->
 <script src="{{asset('assets/js/global/app.js')}}"></script>

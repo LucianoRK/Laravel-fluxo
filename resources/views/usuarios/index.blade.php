@@ -11,6 +11,9 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <h5 class="card-header text-success">
+                        <div class="text-right">
+                            <a class="btn btn-primary" href="usuarios/create">Novo Usuário</a>
+                        </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <span class="align-middle">USUÁRIOS ATIVOS - [ {{ $empresa->nome }} ]</span>

@@ -3,6 +3,7 @@
 namespace App\Models\Usuarios;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Tipo_usuario extends Model
 {
@@ -12,7 +13,7 @@ class Tipo_usuario extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'id', 'nome', 'ativo'
     ];
 
     /**
@@ -32,4 +33,15 @@ class Tipo_usuario extends Model
     protected $casts = [
         
     ];
+
+    public function getAllTiposUsuarios()
+    {
+        $data = DB::table('tipo_usuarios')
+            ->where([ ['ativo', '=', true], ])
+            ->select('*')
+            ->orderBy('nome')
+            ->get();
+
+        return $data;
+    }
 }

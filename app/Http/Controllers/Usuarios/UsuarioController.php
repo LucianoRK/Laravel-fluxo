@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empresas\Empresa;
+use App\Models\Usuarios\Tipo_usuario;
 use App\Models\Usuarios\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,12 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        $empresa        = new Empresa();
+        $tipo_usuario   = new Tipo_usuario();
+        $empresas       = $empresa->getAllEmpresasUsuario(Auth::user()->id);
+        $tipos_usuarios = $tipo_usuario->getAllTiposUsuarios();
+
+        return view('usuarios.formNovoUsuario', compact('empresas', 'tipos_usuarios'));
     }
 
     /**

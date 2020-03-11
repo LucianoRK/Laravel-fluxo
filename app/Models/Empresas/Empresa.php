@@ -40,4 +40,16 @@ class Empresa extends Model
 
         return $data;
     }
+
+    public function getAllEmpresasUsuario($id_usuario)
+    {
+        $data = DB::table('usuario_mm_empresas')
+            ->where([ ['fk_usuario', '=', $id_usuario], ['empresas.ativo', '=', true], ])
+            ->join('empresas', 'empresas.id', '=', 'usuario_mm_empresas.fk_empresa')
+            ->select('empresas.nome', 'empresas.id')
+            ->orderBy('empresas.nome')
+            ->get();
+
+        return $data;
+    }
 }
