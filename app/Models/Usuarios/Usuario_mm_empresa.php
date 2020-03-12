@@ -12,7 +12,7 @@ class Usuario_mm_empresa extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'fk_usuario', 'fk_empresa',
     ];
 
     /**

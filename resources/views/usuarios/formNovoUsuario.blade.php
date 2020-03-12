@@ -7,15 +7,6 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true" class="la la-close"></span>
-                    </button>
-                </div>
-            @endif
-     
             <h5 class="card-header">Novo Usuário</h5>
             <form action="{{ route('usuarios.store') }}" method="POST">
                 <div class="card-body">
@@ -120,6 +111,7 @@
                             <label class="control-label text-right col-md-3">Estado</label>
                             <div class="col-md-6">
                                 <select id="estado" name="estado" value="{{ old('estado') }}" class="form-control">
+                                    <option value="" disabled selected="" disabled="" > Selecione um estado </option>
                                     @if ($estados)
                                         @foreach($estados as $estado)
                                             <option value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
@@ -133,7 +125,10 @@
                         </div>
 
                         <div class="form-group row" id="comboCidades" {{ $errors->has('cidade') ? 'has-error' : '' }}>
-
+                            <label class="control-label text-right col-md-3">Cidades</label>
+                            <div class="col-md-6">
+                                <input disabled value="Selecione um estado antes" type="text" class="form-control">
+                            </div>
                         </div>
 
                         <div class="form-group row {{ $errors->has('rua') ? 'has-error' : '' }}">
@@ -149,9 +144,19 @@
                         <div class="form-group row {{ $errors->has('numero_casa') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">Número</label>
                             <div class="col-md-6">
-                                <input name="numero_casa" value="{{ old('numero') }}" type="text" class="form-control">
+                                <input name="numero_casa" value="{{ old('numero_casa') }}" type="text" class="form-control">
                                 @if ($errors->has('numero_casa')) 
                                     <h6> <span class="help-block"> {{ $errors->first('numero_casa') }} </span> </h6>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row {{ $errors->has('complemento') ? 'has-error' : '' }}">
+                            <label class="control-label text-right col-md-3">Complemento</label>
+                            <div class="col-md-6">
+                                <input name="complemento" value="{{ old('complemento') }}" type="text" class="form-control">
+                                @if ($errors->has('complemento')) 
+                                    <h6> <span class="help-block"> {{ $errors->first('complemento') }} </span> </h6>
                                 @endif
                             </div>
                         </div>
@@ -221,7 +226,6 @@
     }
 
     $(document).ready(function() { 
-        myMasks();
         comboCidades();
     });
 </script>

@@ -12,7 +12,7 @@ class Endereco_usuario extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'id', 'fk_usuario', 'fk_cidade', 'cep', 'rua', 'numero', 'complemento', 'ativo'
     ];
 
     /**

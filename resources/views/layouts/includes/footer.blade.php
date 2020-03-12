@@ -19,3 +19,9 @@
 <!-- ================== MASK ==================-->
 <script src="{{asset('assets/vendor/jquery-mask/jquery.mask.min.js')}}"></script>
 <script src="{{asset('assets/js/components/jquery-mask-init.js')}}"></script>
+
+<script>    
+    $(document).ready(function() { 
+        myMasks();
+    });
+</script>

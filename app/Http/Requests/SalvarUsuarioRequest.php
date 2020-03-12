@@ -31,11 +31,12 @@ class SalvarUsuarioRequest extends FormRequest
             'nome' => 'required',
             'cpf' => ['required', 'string', new CpfRule],
             'email' => 'required|email',
-            'celular' => 'min: 16| max:16',
+            'celular' => 'required|min:16|max:16',
             'data_nascimento' => 'required',
-            'login' => 'required| min: 6',
+            'login' => 'required|min: 6',
             'senha' => ['required', 'string', new PasswordRule],
             'repita_senha' => ['required', 'string', new PasswordRule, 'same:senha'],
+            'numero_casa' => 'max:10',
         ];
     }
 
@@ -44,6 +45,9 @@ class SalvarUsuarioRequest extends FormRequest
         return [
             'fk_empresa.required' => 'O campo empresa é obrigatório.',
             'fk_tipo_usuario.required' => 'O campo tipo de usuário é obrigatório.',
+            'celular.min' => 'Celular digitado inválido',
+            'celular.max' => 'Celular digitado inválido',
+            'numero_casa.max' => 'O campo número deve conter no máximo 10 carácter',
         ];
     }
 }
