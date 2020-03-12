@@ -12,16 +12,16 @@
         <div class="row mb-2">
             <div class="input-group col-8">
                 <span class="input-group-text text-white bg-primary" id="horario"><strong>{{$horario}}</strong></span>
-                <button type="button" class="form-control btn btn-white btn-block agenda_visivel text-left"></button>
+                <button type="button" class="form-control btn-white btn-block agenda_visivel text-left"></button>
                 <input type="text" class="form-control agenda_editavel agenda_nome bg-white" placeholder="Nome" aria-describedby="horario">
                 <input type="text" class="form-control agenda_editavel agenda_telefone bg-white" placeholder="Telefone">
-                <button class="btn btn-success agenda_btn_salvar "><i class="la la-check text-white"></i></button>
-                <button class="btn btn-danger agenda_btn_cancelar"><i class="la la-close text-white"></i></button>
+                <button class="btn-success agenda_btn_salvar "><i class="la la-check text-white"></i></button>
+                <button class="btn-danger agenda_btn_cancelar"><i class="la la-close text-white"></i></button>
             </div>
-            <div class="col-4 form">
-                <button class="btn btn-info">EDITAR</button>
-                <button class="btn btn-danger">DELETAR</button>
-                <button class="btn btn-success">CADASTRAR</button>
+            <div class="col-4">
+                <button class="btn-info">Editar</button>
+                <button class="btn-danger">Deletar</button>
+                <button class="btn-success">Cadastrar</button>
             </div>
         </div>
     @endforeach
