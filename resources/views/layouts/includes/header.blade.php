@@ -42,4 +42,5 @@
     <!-- ================== GLOBAL APP SCRIPTS ==================-->
     <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
+    <script src="{{asset('assets/js/myMasks.js')}}"></script>
 </head>

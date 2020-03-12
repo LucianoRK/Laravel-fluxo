@@ -1,6 +1,11 @@
 <?php
 
-/* LOGIN */ {
+/* LOGIN */
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+{
     Route::get('/login', 'Auth\LoginController@index')->name('login');
     Route::post('/logar', 'Auth\LoginController@logar')->name('logar');
 }
@@ -22,10 +27,14 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* USUARIOS */ {
         Route::resource('usuarios', 'UsuarioController');
-        Route::put('usuarios/ativar/{id}', 'UsuarioController@ativar');
+        Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
     } 
 
     /* AGENDA */ {
         Route::resource('agenda', 'AgendaController');
     } 
+
+    /* ENDEREÇO */ {
+        Route::post('/endereco/comboCidades', 'CidadeController@index')->name('comboCidades');;
+    }
 });

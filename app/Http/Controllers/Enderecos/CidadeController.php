@@ -12,9 +12,12 @@ class CidadeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $cidade = new Cidade();
+        $cidades = $cidade->getAllCidadeEstado($request->estado);
+        
+        return view('enderecos.comboCidades', compact('cidades'));
     }
 
     /**

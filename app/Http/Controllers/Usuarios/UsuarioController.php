@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SalvarUsuarioRequest;
 use App\Models\Empresas\Empresa;
+use App\Models\Enderecos\Estado;
 use App\Models\Usuarios\Tipo_usuario;
 use App\Models\Usuarios\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -19,6 +22,7 @@ class UsuarioController extends Controller
     {
         $user                   = new Usuario();
         $empresa                = new Empresa();
+        
         $usuarios['ativos']     = $user->getAllusuarioAtivo(Auth::user()->fk_empresa);
         $usuarios['inativos']   = $user->getAllusuarioInativo(Auth::user()->fk_empresa);
         $empresa                = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
@@ -35,10 +39,13 @@ class UsuarioController extends Controller
     {
         $empresa        = new Empresa();
         $tipo_usuario   = new Tipo_usuario();
+        $estado         = new Estado();
+
         $empresas       = $empresa->getAllEmpresasUsuario(Auth::user()->id);
         $tipos_usuarios = $tipo_usuario->getAllTiposUsuarios();
+        $estados        = $estado->getAllEstados();
 
-        return view('usuarios.formNovoUsuario', compact('empresas', 'tipos_usuarios'));
+        return view('usuarios.formNovoUsuario', compact('empresas', 'tipos_usuarios', 'estados'));
     }
 
     /**
@@ -47,9 +54,23 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SalvarUsuarioRequest $request)
     {
-        //
+        //dd($request);
+
+        $usuario = new Usuario();
+        $usuario->fk_empresa = $request->fk_empresa;
+        $usuario->fk_tipo_usuario = $request->fk_tipo_usuario;
+        $usuario->nome = $request->nome;
+        $usuario->cpf = preg_replace('/[^0-9]/is', '', $request->cpf);
+        $usuario->data_nascimento = $request->data_nascimento;
+        $usuario->email = $request->email;
+        $usuario->celular = $request->celular;
+        $usuario->login = $request->login;
+        $usuario->senha = Hash::make($request->senha);
+        $usuario->save();
+
+        return redirect()->intended('/usuarios/create')->with('success', 'Usuário criado com sucesso.');
     }
 
     /**

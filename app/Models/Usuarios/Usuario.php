@@ -24,7 +24,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id', 'fk_empresa', 'fk_tipo_usuario', 'nome', 'cpf', 'data_nascimento', 'email', 'login', 'senha', 'ativo',
+        'id', 'fk_empresa', 'fk_tipo_usuario', 'nome', 'cpf', 'data_nascimento', 'email', 'celular','login', 'senha', 'ativo',
     ];
 
     /**
@@ -48,7 +48,7 @@ class Usuario extends Authenticatable
     public function getAllUsuarioAtivo($fk_empresa)
     {
         $data = DB::table('usuarios')
-            ->where([ ['ativo', '=', '1'], ['fk_empresa', '=', $fk_empresa], ])
+            ->where([ ['usuarios.ativo', '=', '1'], ['fk_empresa', '=', $fk_empresa], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
             ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
             ->orderBy('usuarios.nome')
@@ -60,7 +60,7 @@ class Usuario extends Authenticatable
     public function getAllUsuarioInativo($fk_empresa)
     {
         $data = DB::table('usuarios')
-            ->where([ ['ativo', '=', '0'], ['fk_empresa', '=', $fk_empresa], ])
+            ->where([ ['usuarios.ativo', '=', '0'], ['fk_empresa', '=', $fk_empresa], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
             ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
             ->orderBy('usuarios.nome')

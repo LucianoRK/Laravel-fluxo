@@ -3,6 +3,7 @@
 namespace App\Models\Enderecos;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Cidade extends Model
 {
@@ -12,7 +13,7 @@ class Cidade extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'id', 'fk_estado', 'nome', 'ativo'
     ];
 
     /**
@@ -32,4 +33,15 @@ class Cidade extends Model
     protected $casts = [
         
     ];
+
+    public function getAllCidadeEstado($fk_estado)
+    {
+        $data = DB::table('cidades')
+            ->where([ ['fk_estado', '=', $fk_estado] ])
+            ->select('cidades.*')
+            ->orderBy('cidades.nome')
+            ->get();
+
+        return $data;
+    }
 }

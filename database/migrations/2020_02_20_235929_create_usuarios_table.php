@@ -21,6 +21,7 @@ class CreateUsuariosTable extends Migration
             $table->string('cpf', 11);
             $table->date('data_nascimento')->nullable();
             $table->string('email', 50)->nullable();
+            $table->string('celular', 20)->nullable();
             $table->string('login', 30);
             $table->string('senha', 100);
             $table->smallInteger('qtd_acesso');

@@ -3,6 +3,7 @@
 namespace App\Models\Enderecos;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Estado extends Model
 {
@@ -12,7 +13,7 @@ class Estado extends Model
      * @var array
      */
     protected $fillable = [
-        
+       'id', 'nome', 'uf', 'ativo', 
     ];
 
     /**
@@ -32,4 +33,15 @@ class Estado extends Model
     protected $casts = [
         
     ];
+
+    public function getAllEstados()
+    {
+        $data = DB::table('estados')
+            ->where([ ['ativo', '=', true] ])
+            ->select('estados.*')
+            ->orderBy('estados.nome')
+            ->get();
+
+        return $data;
+    }
 }
