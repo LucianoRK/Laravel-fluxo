@@ -26,6 +26,7 @@
 
     <!-- ======================= PAGE LEVEL VENDOR STYLES ========================-->
     <link rel="stylesheet" href="{{asset('assets/vendor/select2/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.css')}}">
 
     <!-- ======================= GLOBAL COMMON STYLES ============================-->
     <link rel="stylesheet" href="{{asset('assets/css/common/main.bundle.css')}}">

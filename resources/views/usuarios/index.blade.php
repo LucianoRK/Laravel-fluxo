@@ -21,7 +21,7 @@
                         </div>
                     </h5>
 
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped table_ativos">
                         <thead class="text-center">
                             <tr>
                                 <th class="text-success">#</th>
@@ -62,28 +62,28 @@
         </div>
 
         <!-- USUARIOS INATIVOS -->
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <h5 class="card-header text-danger">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <span class="align-middle">USUÁRIOS INATIVOS - [ {{ $empresa->nome }} ]</span>
+        @if ( count($usuarios['inativos']) > 0) 
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <h5 class="card-header text-danger">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <span class="align-middle">USUÁRIOS INATIVOS - [ {{ $empresa->nome }} ]</span>
+                                </div>
                             </div>
-                        </div>
-                    </h5>
+                        </h5>
 
-                    <table id="bs4-table" class="table table-striped table-bordered">
-                        <thead class="text-center">
-                            <tr>
-                                <th class="text-danger">#</th>
-                                <th class="text-danger">NOME</th>
-                                <th class="text-danger">TIPO</th>
-                                <th class="text-danger">OPÇÕES</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if ($usuarios['inativos']) 
+                        <table id="bs4-table" class="table table-striped table-bordered table_inativos">
+                            <thead class="text-center">
+                                <tr>
+                                    <th class="text-danger">#</th>
+                                    <th class="text-danger">NOME</th>
+                                    <th class="text-danger">TIPO</th>
+                                    <th class="text-danger">OPÇÕES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 @foreach ($usuarios['inativos'] as $usuario)
                                     <tr>
                                         <td class="text-center">
@@ -102,12 +102,12 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endif 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif 
     </div>
 </div>
 
@@ -229,6 +229,8 @@
     $(document).ready(function() {
         desativarUsuario();
         ativarUsuario();
+        dataTable('table_ativos');
+        dataTable('table_inativos');
     });
 </script>
 

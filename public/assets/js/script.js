@@ -18,6 +18,14 @@ function urlAbsoluta() {
     return "http://127.0.0.1:8000";
 }
 
-function selectOne() {
-    $(".selectUm").select2();
+function selectComPesquisar() {
+    $(".selectPesquisar").select2();
+}
+
+function dataTable(nome, paginacao = false, pesquisa = false) {
+    $('.'+nome).DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese.json"
+        }
+    });
 }
