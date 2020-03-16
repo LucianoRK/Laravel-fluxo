@@ -30,6 +30,7 @@
 
     <!-- ======================= GLOBAL COMMON STYLES ============================-->
     <link rel="stylesheet" href="{{asset('assets/css/common/main.bundle.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-daterangepicker/daterangepicker.css')}}">
 
     <!-- ======================= LAYOUT TYPE ===========================-->
     <link rel="stylesheet" href="{{asset('assets/css/layouts/vertical/core/main.css')}}">

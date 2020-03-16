@@ -8,6 +8,9 @@
             width: 60px;
         }
     </style>
+   
+   <button class="btn btn-primary date-picker-input"> Ainda estou mexendo....</button>
+    
     @foreach ($horarios as $horario)
         <div class="row mb-2">
             <div class="input-group col-8">
@@ -75,6 +78,12 @@
 
         $(document).ready(function(){
             agendarAvaliacao();
+            
+            $('.date-picker-input').datepicker({
+			    format: 'mm-dd-yyyy',
+			    autoclose: true,
+			    orientation: "bottom",
+		    });
         });
     </script>
 @endsection
