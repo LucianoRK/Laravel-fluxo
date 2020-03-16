@@ -106,7 +106,15 @@ class UsuarioController extends Controller
      */
     public function edit(Usuario $usuario)
     {
-        //
+        $estado         = new Estado();
+        $usuarios       = new Usuario();
+        $enderecos      = new Endereco_usuario();
+
+        $estados        = $estado->getAllEstados();
+        $usuario        = $usuarios->getDadosUsuario($usuario->id, Auth::user()->fk_empresa);
+        $endereco       = $enderecos->getEnderecoUsuario($usuario->id);
+
+        return view('usuarios.formNovoUsuario', compact('estados', 'usuario', 'endereco'));
     }
 
     /**

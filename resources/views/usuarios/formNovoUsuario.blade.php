@@ -15,15 +15,19 @@
                         <div class="form-group row {{ $errors->has('fk_empresa') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">*Empresa</label>
                             <div class="col-md-6">
-                                <select name="fk_empresa" value="{{ old('fk_empresa') }}" class="form-control">
-                                    @if ($empresas)
-                                        @foreach($empresas as $empresa)
-                                            <option value="{{ $empresa->id }}"> {{ $empresa->nome }} </option>
-                                        @endforeach
+                                @if(!isset($usuario->fk_empresa))
+                                    <select name="fk_empresa" value="{{ old('fk_empresa') }}" class="form-control">
+                                        @if ($empresas)
+                                            @foreach($empresas as $empresa)
+                                                <option value="{{ $empresa->id }}"> {{ $empresa->nome }} </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @if ($errors->has('fk_empresa')) 
+                                        <h6> <span class="help-block"> {{ $errors->first('fk_empresa') }} </span> </h6>
                                     @endif
-                                </select>
-                                @if ($errors->has('fk_empresa')) 
-                                    <h6> <span class="help-block"> {{ $errors->first('fk_empresa') }} </span> </h6>
+                                @else
+                                    <strong> {{$usuario->nome_empresa}} </strong>
                                 @endif
                             </div>
                         </div>
@@ -31,15 +35,19 @@
                         <div class="form-group row {{ $errors->has('fk_tipo_usuario') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">*Tipo de Usuario</label>
                             <div class="col-md-6">
-                                <select name="fk_tipo_usuario" value="{{ old('fk_tipo_usuario') }}" class="form-control">
-                                    @if ($tipos_usuarios)
-                                        @foreach($tipos_usuarios as $tipo_usuario)
-                                            <option value="{{ $tipo_usuario->id }}"> {{ $tipo_usuario->nome }} </option>
-                                        @endforeach
+                                @if(!isset($usuario->nome_tipo_usuario))
+                                    <select name="fk_tipo_usuario" value="{{ old('fk_tipo_usuario') }}" class="form-control">
+                                        @if ($tipos_usuarios)
+                                            @foreach($tipos_usuarios as $tipo_usuario)
+                                                <option value="{{ $tipo_usuario->id }}"> {{ $tipo_usuario->nome }} </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @if ($errors->has('fk_tipo_usuario')) 
+                                        <h6> <span class="help-block"> {{ $errors->first('fk_tipo_usuario') }} </span> </h6>
                                     @endif
-                                </select>
-                                @if ($errors->has('fk_tipo_usuario')) 
-                                    <h6> <span class="help-block"> {{ $errors->first('fk_tipo_usuario') }} </span> </h6>
+                                @else
+                                    <strong> {{$usuario->nome_tipo_usuario}} </strong>
                                 @endif
                             </div>
                         </div>
@@ -48,7 +56,7 @@
                         <div class="form-group row {{ $errors->has('nome') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">*Nome Completo</label>
                             <div class="col-md-6">
-                                <input name="nome" value="{{ old('nome') }}" type="text" class="form-control">
+                                <input name="nome" value="{{$usuario->nome ?? old('nome') }}" type="text" class="form-control">
                                 @if ($errors->has('nome')) 
                                     <h6> <span class="help-block"> {{ $errors->first('nome') }} </span> </h6>
                                 @endif
@@ -58,7 +66,7 @@
                         <div class="form-group row {{ $errors->has('data_nascimento') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">*Data de Nascimento</label>
                             <div class="col-md-6">
-                                <input name="data_nascimento" value="{{ old('data_nascimento') }}" type="date" class="form-control" placeholder="dd/mm/yyyy">
+                                <input name="data_nascimento" value="{{$usuario->data_nascimento ?? old('data_nascimento') }}" type="date" class="form-control" placeholder="dd/mm/yyyy">
                                 @if ($errors->has('data_nascimento')) 
                                     <h6> <span class="help-block"> {{ $errors->first('data_nascimento') }} </span> </h6>
                                 @endif
@@ -68,7 +76,7 @@
                         <div class="form-group row {{ $errors->has('cpf') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">*CPF</label>
                             <div class="col-md-6">
-                                <input name="cpf" value="{{ old('cpf') }}" type="text" class="form-control cpfMask" placeholder="000.000.000-00">
+                                <input name="cpf" value="{{$usuario->cpf ?? old('cpf') }}" type="text" class="form-control cpfMask" placeholder="000.000.000-00">
                                 @if ($errors->has('cpf')) 
                                     <h6> <span class="help-block"> {{ $errors->first('cpf') }} </span> </h6>
                                 @endif
@@ -78,7 +86,7 @@
                         <div class="form-group row {{ $errors->has('email') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">*Email</label>
                             <div class="col-md-6">
-                                <input name="email" value="{{ old('email') }}" type="text" class="form-control" placeholder="ficticio@gmail.com">
+                                <input name="email" value="{{$usuario->email ?? old('email') }}" type="text" class="form-control" placeholder="ficticio@gmail.com">
                                 @if ($errors->has('email')) 
                                     <h6> <span class="help-block"> {{ $errors->first('email') }} </span> </h6>
                                 @endif
@@ -88,7 +96,7 @@
                         <div class="form-group row {{ $errors->has('celular') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">*Celular</label>
                             <div class="col-md-6">
-                                <input name="celular" value="{{ old('celular') }}" type="text" class="form-control celularMask" placeholder="(00) 0 0000-0000">
+                                <input name="celular" value="{{$usuario->celular ?? old('celular') }}" type="text" class="form-control celularMask" placeholder="(00) 0 0000-0000">
                                 @if ($errors->has('celular')) 
                                     <h6> <span class="help-block"> {{ $errors->first('celular') }} </span> </h6>
                                 @endif
@@ -100,7 +108,7 @@
                         <div class="form-group row {{ $errors->has('cep') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">CEP</label>
                             <div class="col-md-6">
-                                <input name="cep" value="{{ old('cep') }}" type="text" class="form-control cepMask" placeholder="00000-00">
+                                <input name="cep" value="{{$endereco->cep ?? old('cep') }}" type="text" class="form-control cepMask" placeholder="00000-00">
                                 @if ($errors->has('cep')) 
                                     <h6> <span class="help-block"> {{ $errors->first('cep') }} </span> </h6>
                                 @endif
@@ -114,7 +122,11 @@
                                     <option value="" disabled selected="" disabled="" > Selecione um estado </option>
                                     @if ($estados)
                                         @foreach($estados as $estado)
-                                            <option value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
+                                            @if(isset($endereco->fk_estado) && $endereco->fk_estado == $estado->id)
+                                                <option selected value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
+                                            @else
+                                                <option value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
+                                            @endif
                                         @endforeach
                                     @endif
                                 </select>
@@ -134,7 +146,7 @@
                         <div class="form-group row {{ $errors->has('rua') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">Logradouro</label>
                             <div class="col-md-6">
-                                <input name="rua" value="{{ old('rua') }}" type="text" class="form-control">
+                                <input name="rua" value="{{$endereco->rua ?? old('rua') }}" type="text" class="form-control">
                                 @if ($errors->has('rua')) 
                                     <h6> <span class="help-block"> {{ $errors->first('rua') }} </span> </h6>
                                 @endif
@@ -144,7 +156,7 @@
                         <div class="form-group row {{ $errors->has('numero_casa') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">Número</label>
                             <div class="col-md-6">
-                                <input name="numero_casa" value="{{ old('numero_casa') }}" type="text" class="form-control">
+                                <input name="numero_casa" value="{{$endereco->numero ?? old('numero_casa') }}" type="text" class="form-control">
                                 @if ($errors->has('numero_casa')) 
                                     <h6> <span class="help-block"> {{ $errors->first('numero_casa') }} </span> </h6>
                                 @endif
@@ -154,7 +166,7 @@
                         <div class="form-group row {{ $errors->has('complemento') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">Complemento</label>
                             <div class="col-md-6">
-                                <input name="complemento" value="{{ old('complemento') }}" type="text" class="form-control">
+                                <input name="complemento" value="{{$endereco->complemento ?? old('complemento') }}" type="text" class="form-control">
                                 @if ($errors->has('complemento')) 
                                     <h6> <span class="help-block"> {{ $errors->first('complemento') }} </span> </h6>
                                 @endif
@@ -166,9 +178,13 @@
                         <div class="form-group row {{ $errors->has('login') ? 'has-error' : '' }}">
                             <label class="control-label text-right col-md-3">*Login</label>
                             <div class="col-md-6">
-                                <input name="login" value="{{ old('login') }}" type="text" class="form-control" placeholder="O login deve conter no mínimo 6 caracteres">
-                                @if ($errors->has('login')) 
-                                    <h6> <span class="help-block"> {{ $errors->first('login') }} </span> </h6>
+                                @if(!isset($usuario->login))
+                                    <input name="login" value="{{ old('login') }}" type="text" class="form-control" placeholder="O login deve conter no mínimo 6 caracteres">
+                                    @if ($errors->has('login')) 
+                                        <h6> <span class="help-block"> {{ $errors->first('login') }} </span> </h6>
+                                    @endif
+                                @else
+                                    <strong> {{$usuario->login}} </strong>
                                 @endif
                             </div>
                         </div>
@@ -202,7 +218,7 @@
                                 <div class="row">
                                     <div class="offset-sm-3 col-md-5">
                                         <button type="submit" id="novo_usuario_gravar" class="btn btn-primary btn-rounded">Gravar</button>
-                                        <a href="/usuarios" class="btn btn-secondary clear-form btn-rounded btn-outline ">Cancelar</a>
+                                        <a href="{{ url("/usuarios") }}" class="btn btn-secondary clear-form btn-rounded btn-outline ">Cancelar</a>
                                     </div>
                                 </div>
                             </div>
@@ -227,6 +243,9 @@
 
     $(document).ready(function() { 
         comboCidades();
+        if ($("#estado")) {
+            $("#estado").trigger( "change" );
+        }
     });
 </script>
 @endsection

@@ -48,7 +48,7 @@ class Usuario extends Authenticatable
     public function getAllUsuarioAtivo($fk_empresa)
     {
         $data = DB::table('usuarios')
-            ->where([ ['usuarios.ativo', '=', '1'], ['fk_empresa', '=', $fk_empresa], ])
+            ->where([ ['usuarios.ativo', '=', true], ['fk_empresa', '=', $fk_empresa], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
             ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
             ->orderBy('usuarios.nome')
@@ -60,7 +60,7 @@ class Usuario extends Authenticatable
     public function getAllUsuarioInativo($fk_empresa)
     {
         $data = DB::table('usuarios')
-            ->where([ ['usuarios.ativo', '=', '0'], ['fk_empresa', '=', $fk_empresa], ])
+            ->where([ ['usuarios.ativo', '=', false], ['fk_empresa', '=', $fk_empresa], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
             ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
             ->orderBy('usuarios.nome')
@@ -83,6 +83,18 @@ class Usuario extends Authenticatable
         $data = DB::table('usuarios')
             ->where([ ['id', '=', $usuario], ['fk_empresa', '=', $fk_empresa], ])
             ->update(['ativo' => true]);
+
+        return $data;
+    }
+
+    public function getDadosUsuario($usuario, $fk_empresa)
+    {
+        $data = DB::table('usuarios')
+        ->where([ ['usuarios.id', '=', $usuario], ['usuarios.fk_empresa', '=', $fk_empresa], ['usuarios.ativo', '=', true], ])
+        ->join('empresas', 'empresas.id', '=', 'usuarios.fk_empresa')
+        ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
+        ->select('usuarios.*', 'empresas.nome AS nome_empresa', 'tipo_usuarios.nome AS nome_tipo_usuario')
+        ->first();
 
         return $data;
     }

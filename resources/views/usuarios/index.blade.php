@@ -44,9 +44,9 @@
                                             {{ $usuario->tipo_usuario }}
                                         </td>
                                         <td class="text-center" id_user="{{ $usuario->id }}">
-                                            <button class="btn btn-info btn-sm editar" title="Editar"> 
+                                        <a href="{{ url("usuarios/$usuario->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 
                                                 <i class="la la-edit text-white font-size-22"></i> 
-                                            </button>
+                                            </a>
 
                                             <button class="btn btn-danger btn-sm desativar" title="Desativar"> 
                                                 <i class="la la-trash text-white font-size-22"></i> 
@@ -146,21 +146,21 @@
                                     type: 'success',
                                     title: 'Sucesso!',
                                     showConfirmButton: false,
-                                    timer: 1500
+                                    timer: 1100
                                 })
+
+                                setTimeout( function() {
+                                    window.location.reload()
+                                }, 1100 );
                             } else {
                                 swal({
                                     position: '',
                                     type: 'error',
                                     title: 'Erro!',
                                     showConfirmButton: false,
-                                    timer: 1500
+                                    timer: 1100
                                 })
                             }
-
-                            setTimeout( function() {
-                                window.location.reload()
-                            }, 1250 );
                         }
                     });
                 }
@@ -203,21 +203,21 @@
                                     type: 'success',
                                     title: 'Sucesso!',
                                     showConfirmButton: false,
-                                    timer: 1500
+                                    timer: 1100
                                 })
+
+                                setTimeout( function() {
+                                    window.location.reload()
+                                }, 1100 );
                             } else {
                                 swal({
                                     position: '',
                                     type: 'error',
                                     title: 'Erro!',
                                     showConfirmButton: false,
-                                    timer: 1500
+                                    timer: 1100
                                 })
                             }
-
-                            setTimeout( function() {
-                                window.location.reload()
-                            }, 1250 );
                         }
                     });
                 }
