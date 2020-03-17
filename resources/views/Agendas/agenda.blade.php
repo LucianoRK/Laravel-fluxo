@@ -8,12 +8,14 @@
             width: 60px;
         }
     </style>
-   
-   <button class="btn btn-primary date-picker-input"> Ainda estou mexendo....</button>
-    
+    <div class="row mb-2">
+        <div class="col-md-8 text-center mb-2">
+            <input type="date" class="btn btn-primary data_agenda">
+        </div>
+    </div>
     @foreach ($horarios as $horario)
         <div class="row mb-2">
-            <div class="input-group col-8">
+            <div class="input-group col-md-8">
                 <span class="input-group-text text-white bg-primary" id="horario"><strong>{{$horario}}</strong></span>
                 <button type="button" class="form-control btn-white btn-block agenda_visivel text-left"></button>
                 <input type="text" class="form-control agenda_editavel agenda_nome bg-white" placeholder="Nome" aria-describedby="horario">
@@ -21,10 +23,10 @@
                 <button class="btn-success agenda_btn_salvar "><i class="la la-check text-white"></i></button>
                 <button class="btn-danger agenda_btn_cancelar"><i class="la la-close text-white"></i></button>
             </div>
-            <div class="col-4">
-                <button class="btn-info">Editar</button>
-                <button class="btn-danger">Deletar</button>
-                <button class="btn-success">Cadastrar</button>
+            <div class="col-md-4">
+                <button class="btn btn-info">Editar</button>
+                <button class="btn btn-danger">Deletar</button>
+                <button class="btn btn-success">Cadastrar</button>
             </div>
         </div>
     @endforeach
@@ -75,15 +77,15 @@
             $('.agenda_btn_salvar').hide();
             $('.agenda_btn_cancelar').hide();
         }
+        function data_agenda(){
+            $('.data_agenda').change(function(){
+                alert($(this).val());
+            });
+        }
 
         $(document).ready(function(){
+            data_agenda();
             agendarAvaliacao();
-            
-            $('.date-picker-input').datepicker({
-			    format: 'mm-dd-yyyy',
-			    autoclose: true,
-			    orientation: "bottom",
-		    });
         });
     </script>
 @endsection
