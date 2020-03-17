@@ -4,18 +4,24 @@
 
 @section('content')
     <style>
+        :root {
+            --largura_horario: 60px; /* Valor da largura do horario */
+        }
         #horario{
-            width: 60px;
+            width: var(--largura_horario);
         }
     </style>
-    <div class="row mb-2">
-        <div class="col-md-8 text-center mb-2">
-            <input type="date" class="btn btn-primary data_agenda">
+    <div class="row mb-3">
+        <div class="input-group col-md-8">
+            <input type="date" class="btn btn-primary" required>
+            <select class="form-control">
+                <option>teste</option>
+            </select>
         </div>
     </div>
     @foreach ($horarios as $horario)
         <div class="row mb-2">
-            <div class="input-group col-md-8">
+            <div class="input-group col-md-8 agenda_line">
                 <span class="input-group-text text-white bg-primary" id="horario"><strong>{{$horario}}</strong></span>
                 <button type="button" class="form-control btn-white btn-block agenda_visivel text-left"></button>
                 <input type="text" class="form-control agenda_editavel agenda_nome bg-white" placeholder="Nome" aria-describedby="horario">
@@ -79,6 +85,7 @@
         }
         function data_agenda(){
             $('.data_agenda').change(function(){
+                
                 alert($(this).val());
             });
         }
@@ -86,6 +93,7 @@
         $(document).ready(function(){
             data_agenda();
             agendarAvaliacao();
+            $('.data_agenda').val(Date());
         });
     </script>
 @endsection
