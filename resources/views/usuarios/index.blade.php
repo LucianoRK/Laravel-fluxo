@@ -35,10 +35,10 @@
                                 @foreach ($usuarios['ativos'] as $usuario)
                                     <tr>
                                         <td class="text-center">
-                                            {{ $usuario->id }}
+                                            {{ $count++}}
                                         </td>
                                         <td>
-                                            {{ $usuario->nome }}
+                                            [{{ $usuario->id }}] - {{ $usuario->nome }}
                                         </td>
                                         <td>
                                             {{ $usuario->tipo_usuario }}

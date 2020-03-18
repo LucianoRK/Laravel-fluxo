@@ -26,11 +26,14 @@ class UsuarioController extends Controller
         $user                   = new Usuario();
         $empresa                = new Empresa();
 
+        // Usado para contar as linhas da tabela
+        $count = 1;
+
         $usuarios['ativos']     = $user->getAllusuarioAtivo(Auth::user()->fk_empresa);
         $usuarios['inativos']   = $user->getAllusuarioInativo(Auth::user()->fk_empresa);
         $empresa                = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
 
-        return view('usuarios.index', compact('usuarios', 'empresa'));
+        return view('usuarios.index', compact('usuarios', 'empresa', 'count'));
     }
 
     /**
