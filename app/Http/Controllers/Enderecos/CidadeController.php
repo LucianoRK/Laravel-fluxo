@@ -14,10 +14,13 @@ class CidadeController extends Controller
      */
     public function index(Request $request)
     {
-        $cidade = new Cidade();
-        $cidades = $cidade->getAllCidadeEstado($request->estado);
+        $cidade      = new Cidade();
+        $cidades     = $cidade->getAllCidadeEstado($request->estado);
+
+        /* Usado ao editar usuario para carregar a cidade já selecionada */
+        $cidade_edit = $request->cidade_edit;
         
-        return view('enderecos.comboCidades', compact('cidades'));
+        return view('enderecos.comboCidades', compact('cidades', 'cidade_edit'));
     }
 
     /**

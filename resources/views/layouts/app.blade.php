@@ -129,6 +129,8 @@
             </nav>
             <!-- END TOP TOOLBAR WRAPPER -->
             @include('layouts.includes.msgSucesso')
+            @include('layouts.includes.msgErro')
+            
             <div class="content-wrapper">
                 <!-- MENU SIDEBAR WRAPPER -->
                 @include('layouts.includes.sidebar')   

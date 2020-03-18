@@ -98,4 +98,24 @@ class Usuario extends Authenticatable
 
         return $data;
     }
+
+    public function verificaLoginExiste($login)
+    {
+        $data = DB::table('usuarios')
+        ->where([ ['login', '=', $login], ])
+        ->select('id')
+        ->first();
+
+        return $data;
+    }
+
+    public function verificaUsuarioExiste($usuario, $fk_empresa)
+    {
+        $data = DB::table('usuarios')
+        ->where([ ['usuarios.id', '=', $usuario], ['usuarios.fk_empresa', '=', $fk_empresa], ['usuarios.ativo', '=', true], ])
+        ->select('id', 'senha')
+        ->first();
+
+        return $data; 
+    }
 }

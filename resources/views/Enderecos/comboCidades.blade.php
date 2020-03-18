@@ -3,7 +3,11 @@
     <select id="cidade" name="cidade" value="{{$endereco->fk_cidade ?? old('cidade') }}" class="form-control">
         @if ($cidades)
             @foreach($cidades as $cidade)
-                <option value="{{ $cidade->id }}"> {{ $cidade->nome }} </option>
+                @if (isset($cidade_edit) && $cidade_edit == $cidade->id)
+                    <option selected value="{{ $cidade->id }}"> {{ $cidade->nome }} </option>
+                @else
+                    <option value="{{ $cidade->id }}"> {{ $cidade->nome }} </option>
+                @endif
             @endforeach
         @endif
     </select>

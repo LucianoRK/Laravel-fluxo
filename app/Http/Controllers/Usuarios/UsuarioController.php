@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SalvarEdicaoUsuarioRequest;
 use App\Http\Requests\SalvarUsuarioRequest;
 use App\Models\Empresas\Empresa;
 use App\Models\Enderecos\Endereco_usuario;
@@ -47,7 +48,7 @@ class UsuarioController extends Controller
         $tipos_usuarios = $tipo_usuario->getAllTiposUsuarios();
         $estados        = $estado->getAllEstados();
 
-        return view('usuarios.formNovoUsuario', compact('empresas', 'tipos_usuarios', 'estados'));
+        return view('usuarios.novoUsuario', compact('empresas', 'tipos_usuarios', 'estados'));
     }
 
     /**
@@ -71,14 +72,14 @@ class UsuarioController extends Controller
         $usuario->save();
 
         $endereco                   = new Endereco_usuario();
-        $endereco->fk_usuario       = Auth::user()->id;
+        $endereco->fk_usuario       = $usuario->id;
         $endereco->fk_cidade        = $request->cidade;
         $endereco->cep              = $request->cep;
         $endereco->rua              = $request->rua;
         $endereco->numero           = $request->numero_casa;
         $endereco->complemento      = $request->complemento;
         $endereco->save();
-
+        
         $usuario_mm_empresa             = new Usuario_mm_empresa();
         $usuario_mm_empresa->fk_usuario = $usuario->id;
         $usuario_mm_empresa->fk_empresa = Auth::user()->fk_empresa;
@@ -114,7 +115,7 @@ class UsuarioController extends Controller
         $usuario        = $usuarios->getDadosUsuario($usuario->id, Auth::user()->fk_empresa);
         $endereco       = $enderecos->getEnderecoUsuario($usuario->id);
 
-        return view('usuarios.formNovoUsuario', compact('estados', 'usuario', 'endereco'));
+        return view('usuarios.editarUsuario', compact('estados', 'usuario', 'endereco'));
     }
 
     /**
@@ -124,9 +125,52 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuarios\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(SalvarEdicaoUsuarioRequest $request, $id)
     {
-        //
+        $usuario = new Usuario();
+        
+        // Verifica se existe o usuario e se é da empresa do usuario logado
+        $usuario_existe = $usuario->verificaUsuarioExiste($id, Auth::user()->fk_empresa);
+
+        if (!$usuario_existe) {
+            return redirect()->back()->with('warning', 'Usuário não encontrado');
+        }
+
+        // Verifica se foi solicitado alteração de senha
+        if (!$request->senha) {
+            $nova_senha = $usuario_existe->senha;
+        } else {
+            $nova_senha = $request->senha;
+        }
+
+        $usuario                    = Usuario::find($id);
+        $usuario->fk_empresa        = $request->fk_empresa;
+        $usuario->fk_tipo_usuario   = $request->fk_tipo_usuario;
+        $usuario->nome              = $request->nome;
+        $usuario->cpf               = preg_replace('/[^0-9]/is', '', $request->cpf);
+        $usuario->data_nascimento   = $request->data_nascimento;
+        $usuario->email             = $request->email;
+        $usuario->celular           = $request->celular;
+        $usuario->login             = $request->login;
+        $usuario->senha             = Hash::make($request->senha);
+        $usuario->save();
+
+        $endereco                   = Endereco_usuario::find();
+        $endereco->fk_usuario       = $usuario->id;
+        $endereco->fk_cidade        = $request->cidade;
+        $endereco->cep              = $request->cep;
+        $endereco->rua              = $request->rua;
+        $endereco->numero           = $request->numero_casa;
+        $endereco->complemento      = $request->complemento;
+        $endereco->save();
+        
+        $usuario_mm_empresa             = new Usuario_mm_empresa();
+        $usuario_mm_empresa->fk_usuario = $usuario->id;
+        $usuario_mm_empresa->fk_empresa = Auth::user()->fk_empresa;
+        $usuario_mm_empresa->save();
+
+        return redirect('/usuarios')->with('success', 'Sucesso!');
+ 
     }
 
     /**
