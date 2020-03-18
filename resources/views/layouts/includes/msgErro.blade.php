@@ -3,10 +3,10 @@
         $(document).ready(function() {
             swal({
                 position: '',
-                type: 'warning',
+                type: 'error',
                 title:  "{{ session('warning')}}",
                 showConfirmButton: false,
-                timer: 1800
+                timer: 1400
             })
         });
     </script>

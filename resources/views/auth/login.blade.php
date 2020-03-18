@@ -17,19 +17,27 @@
 	<link rel="stylesheet" href="{{asset('assets/css/common/main.bundle.css')}}">
 
 	<!-- ======================= THEME COLOR STYLES ===========================-->
-	<link rel="stylesheet" href="{{asset('assets/css/layouts/vertical/themes/theme-a.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/layouts/vertical/themes/theme-a.css')}}">
+
+    <!-- ================== GLOBAL APP SCRIPTS ==================-->
+    <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+    
+    <!-- ================ Sweetalert2 ==================-->
+    <script src="{{asset('assets/vendor/sweetalert2/dist/sweetalert2.min.js')}}"></script>
 
 	<!-- ======================= reCAPTCHA  ===========================-->
-    {!! htmlScriptTagJsApi([ 'action' => 'homepage' ]) !!}
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    {!! htmlScriptTagJsApi([ 'action' => 'home' ]) !!}
 </head>
 
 <body>
+    @include('layouts.includes.msgErro')
 	<div class="container">
 		<div class="sign-in-form">
 			<div class="card">
 				<div class="card-body">
                     <form action="{{ route('logar') }}" method="POST">
+                        @method('POST')
                         {{ csrf_field() }}
                     
 						<a href="" class="brand text-center d-block m-b-20">
@@ -57,11 +65,6 @@
 					</form>
                 </div>
             </div>
-            @if (session('msg'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session('msg') }}
-                </div>
-            @endif
 		</div>
 	</div>
 

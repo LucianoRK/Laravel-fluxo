@@ -6,7 +6,7 @@
                 type: 'success',
                 title:  "{{ session('success')}}",
                 showConfirmButton: false,
-                timer: 1800
+                timer: 1400
             })
         });
     </script>

@@ -53,7 +53,7 @@ class LoginController extends Controller
        if (Auth::attempt($dados)) {
             return redirect()->intended('/');
        } else {
-            return redirect()->back()->with('msg', 'Usuário ou senha incorreto!');
+            return redirect()->back()->with('warning', 'Usuário ou senha incorreto!');
        }
     }
 

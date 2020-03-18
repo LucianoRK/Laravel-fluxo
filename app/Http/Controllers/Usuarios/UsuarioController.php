@@ -127,10 +127,11 @@ class UsuarioController extends Controller
      */
     public function update(SalvarEdicaoUsuarioRequest $request, $id)
     {
-        $usuario = new Usuario();
+        $user           = new Usuario();
+        $endereco_user  = new Endereco_usuario();
         
         // Verifica se existe o usuario e se é da empresa do usuario logado
-        $usuario_existe = $usuario->verificaUsuarioExiste($id, Auth::user()->fk_empresa);
+        $usuario_existe = $user->verificaUsuarioExiste($id, Auth::user()->fk_empresa);
 
         if (!$usuario_existe) {
             return redirect()->back()->with('warning', 'Usuário não encontrado');
@@ -140,37 +141,25 @@ class UsuarioController extends Controller
         if (!$request->senha) {
             $nova_senha = $usuario_existe->senha;
         } else {
-            $nova_senha = $request->senha;
+            $nova_senha = Hash::make($request->senha);
         }
 
-        $usuario                    = Usuario::find($id);
-        $usuario->fk_empresa        = $request->fk_empresa;
-        $usuario->fk_tipo_usuario   = $request->fk_tipo_usuario;
-        $usuario->nome              = $request->nome;
-        $usuario->cpf               = preg_replace('/[^0-9]/is', '', $request->cpf);
-        $usuario->data_nascimento   = $request->data_nascimento;
-        $usuario->email             = $request->email;
-        $usuario->celular           = $request->celular;
-        $usuario->login             = $request->login;
-        $usuario->senha             = Hash::make($request->senha);
-        $usuario->save();
+        $usuario['nome']              = $request->nome;
+        $usuario['cpf']               = preg_replace('/[^0-9]/is', '', $request->cpf);
+        $usuario['data_nascimento']   = $request->data_nascimento;
+        $usuario['email']             = $request->email;
+        $usuario['celular']           = $request->celular;
+        $usuario['senha']             = $nova_senha;
+        $user->where('id', $id)->update($usuario);
 
-        $endereco                   = Endereco_usuario::find();
-        $endereco->fk_usuario       = $usuario->id;
-        $endereco->fk_cidade        = $request->cidade;
-        $endereco->cep              = $request->cep;
-        $endereco->rua              = $request->rua;
-        $endereco->numero           = $request->numero_casa;
-        $endereco->complemento      = $request->complemento;
-        $endereco->save();
-        
-        $usuario_mm_empresa             = new Usuario_mm_empresa();
-        $usuario_mm_empresa->fk_usuario = $usuario->id;
-        $usuario_mm_empresa->fk_empresa = Auth::user()->fk_empresa;
-        $usuario_mm_empresa->save();
+        $endereco['fk_cidade']        = $request->cidade;
+        $endereco['cep']              = $request->cep;
+        $endereco['rua']              = $request->rua;
+        $endereco['numero']           = $request->numero_casa;
+        $endereco['complemento']      = $request->complemento;
+        $endereco_user->where('fk_usuario', $id)->update($endereco);
 
         return redirect('/usuarios')->with('success', 'Sucesso!');
- 
     }
 
     /**

@@ -18,9 +18,6 @@
 <!-- ================== GLOBAL APP SCRIPTS ==================-->
 <script src="{{asset('assets/js/global/app.js')}}"></script>
 
-<!-- ================== PAGE LEVEL COMPONENT SCRIPTS ==================-->
-<script src="{{asset('assets/js/components/sweetalert2.js')}}"></script>
-
 <!-- ================== MASK ==================-->
 <script src="{{asset('assets/vendor/jquery-mask/jquery.mask.min.js')}}"></script>
 <script src="{{asset('assets/js/components/jquery-mask-init.js')}}"></script>
