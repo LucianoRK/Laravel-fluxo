@@ -28,10 +28,18 @@
             <div class="input-group col-md-8 agenda_line">
                 <span class="input-group-text text-white bg-primary" id="horario"><strong>{{$horario}}</strong></span>
                 <button type="button" class="form-control btn-white btn-block agenda_visivel text-left"></button>
-                <input type="text" class="form-control agenda_editavel agenda_nome bg-white" placeholder="Nome" aria-describedby="horario">
+                <div class="btn-group dropdown">
+                    <input type="text" class="form-control agenda_editavel agenda_nome bg-white" placeholder="Nome" aria-describedby="horario">
+                    <button class="btn btn-info agenda_editavel" data-toggle="dropdown"><i class="la la-search text-white"></i></button>
+                    <div class="dropdown-menu drop-select-agenda" x-placement="bottom-start">
+                        <a class="dropdown-item" href="#">Orto - 33333 - Lucas  </a>
+                        <a class="dropdown-item" href="#">Clinico gelral - 4444 - Maria </a>
+                        <a class="dropdown-item" href="#">Orto - 33333 - Carlos </a>
+                    </div>
+                </div>
                 <input type="text" class="form-control agenda_editavel agenda_telefone bg-white" placeholder="Telefone">
-                <button class="btn-success agenda_btn_salvar "><i class="la la-check text-white"></i></button>
-                <button class="btn-danger agenda_btn_cancelar"><i class="la la-close text-white"></i></button>
+                <button class="btn btn-success agenda_btn_salvar "><i class="la la-check text-white"></i></button>
+                <button class="btn btn-danger agenda_btn_cancelar"><i class="la la-close text-white"></i></button>
             </div>
             <div class="col-md-4">
                 <button class="btn btn-info">Editar</button>
