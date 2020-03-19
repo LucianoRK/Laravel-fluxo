@@ -13,12 +13,16 @@
     </style>
     <div class="row mb-3">
         <div class="input-group col-md-8">
-            <input type="date" class="btn btn-primary" required>
-            <select class="form-control">
-                <option>teste</option>
+            <input type="date" class="btn btn-primary data_agenda" required>
+            <select class="form-control dentista_agenda">
+                <option value="0" selected='selected'>Agenda de Avaliações</option>
+                @foreach ($dentistas as $dentista)
+                    <option value="{{ $dentista->id }}">{{ $dentista->nome }}</option>
+                @endforeach
             </select>
         </div>
     </div>
+   
     @foreach ($horarios as $horario)
         <div class="row mb-2">
             <div class="input-group col-md-8 agenda_line">
@@ -39,7 +43,7 @@
     <script>
         $('.agenda_editavel').hide();
         esconderBotoes();
-        function agendarAvaliacao(){
+        function agendar(){
             $('.agenda_visivel').click(function(){
                 let nome;
                 let telefone;
@@ -55,6 +59,7 @@
                 cancelarAgendamento();
             });
         }
+        
         function salvarAgendamento(){
             $('.agenda_btn_salvar').click(function(){
                 let nome;
@@ -71,6 +76,7 @@
                 $(this).parent().find('.agenda_visivel').text(texto);
             });
         }
+
         function cancelarAgendamento(){
             $('.agenda_btn_cancelar').click(function(){
                 $('.agenda_editavel').hide();
@@ -79,21 +85,21 @@
                 $(this).parent().find('.agenda_visivel').text('');
             });
         }
+
         function esconderBotoes(){
             $('.agenda_btn_salvar').hide();
             $('.agenda_btn_cancelar').hide();
         }
+
         function data_agenda(){
-            $('.data_agenda').change(function(){
-                
+            $('.data_agenda').change(function(){     
                 alert($(this).val());
             });
         }
 
         $(document).ready(function(){
             data_agenda();
-            agendarAvaliacao();
-            $('.data_agenda').val(Date());
+            agendar();
         });
     </script>
 @endsection

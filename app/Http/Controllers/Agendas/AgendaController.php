@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agendas\Agenda;
+use App\Models\Usuarios\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AgendaController extends Controller
 {
@@ -14,8 +17,14 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        $horarios = $this->horariosAgenda();
-        return View('Agendas.agenda',compact('horarios'));
+        $dentistas = DB::table('usuarios')->select('id', 'nome')
+            ->where('fk_tipo_usuario', 3)
+            ->where('fk_empresa', Auth::user()->fk_empresa)
+            ->where('ativo', 1)
+            ->get();
+        $horarios  = $this->horariosAgenda();
+    
+        return View('Agendas.agenda',compact('horarios', 'dentistas'));
     }
 
     /**
