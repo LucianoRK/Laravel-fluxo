@@ -3,6 +3,7 @@
 namespace App\Models\Permissoes;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Permissao_mm_usuario extends Model
 {
@@ -12,7 +13,7 @@ class Permissao_mm_usuario extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'fk_usuario', 'fk_pemissao', 'acesso_regra'
     ];
 
     /**
@@ -32,4 +33,14 @@ class Permissao_mm_usuario extends Model
     protected $casts = [
         
     ];
+
+    public function getAllPermissoesUsuario($usuario, $fk_empresa)
+    {
+        $data = DB::table('permissao_mm_usuarios')
+        ->where([ ['fk_usuario', '=', $usuario], ['fk_empresa', '=', $fk_empresa], ['acesso_regra', '=', true], ])
+        ->select('fk_permissao')
+        ->get();
+
+        return $data;
+    }
 }

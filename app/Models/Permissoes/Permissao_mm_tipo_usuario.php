@@ -12,7 +12,7 @@ class Permissao_mm_tipo_usuario extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'fk_tipo_usuario', 'fk_permissao'
     ];
 
     /**

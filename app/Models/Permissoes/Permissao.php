@@ -1,18 +1,21 @@
 <?php
 
 namespace App\Models\Permissoes;
-
+use Permissoes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Permissao extends Model
 {
+    protected $table = 'permissoes';
+
      /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        
+        'id', 'nome', 'ativo',
     ];
 
     /**
@@ -32,4 +35,14 @@ class Permissao extends Model
     protected $casts = [
         
     ];
+
+    public function getAllIdPermissoes()
+    {
+        $data = DB::table('permissoes')
+        ->where([ ['ativo', '=', true], ])
+        ->select('id')
+        ->get();
+
+        return $data; 
+    }
 }

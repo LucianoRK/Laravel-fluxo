@@ -7,6 +7,7 @@ use App\Http\Requests\SalvarUsuarioRequest;
 use App\Models\Empresas\Empresa;
 use App\Models\Enderecos\Endereco_usuario;
 use App\Models\Enderecos\Estado;
+use App\Models\Permissoes\Permissao_mm_usuario;
 use App\Models\Usuarios\Tipo_usuario;
 use App\Models\Usuarios\Usuario;
 use App\Models\Usuarios\Usuario_mm_empresa;

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Models\Permissoes\Permissao_mm_usuario;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -51,6 +51,20 @@ class LoginController extends Controller
        $dados = ['login'=>$request->login, 'password'=>$request->senha];
        
        if (Auth::attempt($dados)) {
+            $permissoes = new Permissao_mm_usuario();
+            $permissoes_user = $permissoes->getAllPermissoesUsuario(Auth::user()->id, Auth::user()->fk_empresa);
+
+            if (count($permissoes_user) > 0) {
+                foreach ($permissoes_user as $p) {
+                    $array_permissao[] = $p->fk_permissao;
+                }
+            } else {
+                $array_permissao = false;
+            }
+
+            // Gravo todas as permissões do usuário
+            session()->put('permissoes', $array_permissao);
+
             return redirect()->intended('/');
        } else {
             return redirect()->back()->with('warning', 'Usuário ou senha incorreto!');

@@ -21,7 +21,9 @@
                 <li class="nav-dropdown">
                     <a class="has-arrow" href="#" aria-expanded="false"><i class="icon dripicons-to-do"></i><span>Cadastrar</span></a>
                     <ul class="collapse nav-sub" aria-expanded="false">
-                        <li><a href="/usuarios"><span> Usuarios </span></a></li>
+                        @can('permissao', 10)
+                            <li><a href="/usuarios"><span> Usuarios </span></a></li>
+                        @endcan
                         <li><a href="/permissoes"><span> Permissoes </span></a></li>
                     </ul>
                 </li>

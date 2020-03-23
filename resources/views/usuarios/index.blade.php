@@ -4,112 +4,114 @@
 
 @section('content')
 
-<div class="row">
-    <div class="col-md-12">
-        <!-- USUARIOS ATIVOS -->
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <h5 class="card-header text-success">
-                        <div class="text-right">
-                            <a class="btn btn-primary" href="usuarios/create">Novo Usuário</a>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <span class="align-middle">USUÁRIOS ATIVOS - [ {{ $empresa->nome }} ]</span>
-                            </div>
-                        </div>
-                    </h5>
-
-                    <table class="table table-bordered table-striped table_ativos">
-                        <thead class="text-center">
-                            <tr>
-                                <th class="text-success">#</th>
-                                <th class="text-success">NOME</th>
-                                <th class="text-success">TIPO</th>
-                                <th class="text-success">OPÇÕES</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if ($usuarios['ativos']) 
-                                @foreach ($usuarios['ativos'] as $usuario)
-                                    <tr>
-                                        <td class="text-center">
-                                            {{ $count++}}
-                                        </td>
-                                        <td>
-                                            [{{ $usuario->id }}] - {{ $usuario->nome }}
-                                        </td>
-                                        <td>
-                                            {{ $usuario->tipo_usuario }}
-                                        </td>
-                                        <td class="text-center" id_user="{{ $usuario->id }}">
-                                        <a href="{{ url("usuarios/$usuario->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 
-                                                <i class="la la-edit text-white font-size-22"></i> 
-                                            </a>
-
-                                            <button class="btn btn-danger btn-sm desativar" title="Desativar"> 
-                                                <i class="la la-trash text-white font-size-22"></i> 
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif    
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- USUARIOS INATIVOS -->
-        @if ( count($usuarios['inativos']) > 0) 
+@can('permissao', 10)
+    <div class="row">
+        <div class="col-md-12">
+            <!-- USUARIOS ATIVOS -->
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <h5 class="card-header text-danger">
+                        <h5 class="card-header text-success">
+                            <div class="text-right">
+                                <a class="btn btn-primary" href="usuarios/create">Novo Usuário</a>
+                            </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <span class="align-middle">USUÁRIOS INATIVOS - [ {{ $empresa->nome }} ]</span>
+                                    <span class="align-middle">USUÁRIOS ATIVOS - [ {{ $empresa->nome }} ]</span>
                                 </div>
                             </div>
                         </h5>
 
-                        <table id="bs4-table" class="table table-striped table-bordered table_inativos">
+                        <table class="table table-bordered table-striped table_ativos">
                             <thead class="text-center">
                                 <tr>
-                                    <th class="text-danger">#</th>
-                                    <th class="text-danger">NOME</th>
-                                    <th class="text-danger">TIPO</th>
-                                    <th class="text-danger">OPÇÕES</th>
+                                    <th class="text-success">#</th>
+                                    <th class="text-success">NOME</th>
+                                    <th class="text-success">TIPO</th>
+                                    <th class="text-success">OPÇÕES</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($usuarios['inativos'] as $usuario)
-                                    <tr>
-                                        <td class="text-center">
-                                            {{ $usuario->id }}
-                                        </td>
-                                        <td>
-                                            {{ $usuario->nome }}
-                                        </td>
-                                        <td>
-                                            {{ $usuario->tipo_usuario }}
-                                        </td>
-                                        <td class="text-center" id_user="{{ $usuario->id }}">
-                                            <button class="btn btn-success btn-sm ativar" title="Ativar"> 
-                                                <i class="la la-check-square text-white font-size-22"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @if ($usuarios['ativos']) 
+                                    @foreach ($usuarios['ativos'] as $usuario)
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ $count++}}
+                                            </td>
+                                            <td>
+                                                [{{ $usuario->id }}] - {{ $usuario->nome }}
+                                            </td>
+                                            <td>
+                                                {{ $usuario->tipo_usuario }}
+                                            </td>
+                                            <td class="text-center" id_user="{{ $usuario->id }}">
+                                            <a href="{{ url("usuarios/$usuario->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 
+                                                    <i class="la la-edit text-white font-size-22"></i> 
+                                                </a>
+
+                                                <button class="btn btn-danger btn-sm desativar" title="Desativar"> 
+                                                    <i class="la la-trash text-white font-size-22"></i> 
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif    
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-        @endif 
+
+            <!-- USUARIOS INATIVOS -->
+            @if ( count($usuarios['inativos']) > 0) 
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <h5 class="card-header text-danger">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <span class="align-middle">USUÁRIOS INATIVOS - [ {{ $empresa->nome }} ]</span>
+                                    </div>
+                                </div>
+                            </h5>
+
+                            <table id="bs4-table" class="table table-striped table-bordered table_inativos">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th class="text-danger">#</th>
+                                        <th class="text-danger">NOME</th>
+                                        <th class="text-danger">TIPO</th>
+                                        <th class="text-danger">OPÇÕES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($usuarios['inativos'] as $usuario)
+                                        <tr>
+                                            <td class="text-center">
+                                                {{ $usuario->id }}
+                                            </td>
+                                            <td>
+                                                {{ $usuario->nome }}
+                                            </td>
+                                            <td>
+                                                {{ $usuario->tipo_usuario }}
+                                            </td>
+                                            <td class="text-center" id_user="{{ $usuario->id }}">
+                                                <button class="btn btn-success btn-sm ativar" title="Ativar"> 
+                                                    <i class="la la-check-square text-white font-size-22"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            @endif 
+        </div>
     </div>
-</div>
+@endcan
 
 <script>
     function desativarUsuario() {
