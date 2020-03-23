@@ -7,7 +7,7 @@
         :root {
             --largura_horario: 60px; /* Valor da largura do horario */
         }
-        #horario{
+        #horario {
             width: var(--largura_horario);
         }
     </style>
@@ -30,12 +30,8 @@
                 <button type="button" class="form-control btn-white btn-block agenda_visivel text-left"></button>
                 <div class="btn-group dropdown">
                     <input type="text" class="form-control agenda_editavel agenda_nome bg-white" placeholder="Nome" aria-describedby="horario">
-                    <button class="btn btn-info agenda_editavel" data-toggle="dropdown"><i class="la la-search text-white"></i></button>
-                    <div class="dropdown-menu drop-select-agenda" x-placement="bottom-start">
-                        <a class="dropdown-item" href="#">Orto - 33333 - Lucas  </a>
-                        <a class="dropdown-item" href="#">Clinico gelral - 4444 - Maria </a>
-                        <a class="dropdown-item" href="#">Orto - 33333 - Carlos </a>
-                    </div>
+                    <button class="btn btn-info agenda_editavel btn_buscar_cliente" data-toggle="dropdown"><i class="la la-search text-white"></i></button>
+                    <div class="dropdown-menu drop-select-agenda lista_clintes" x-placement="bottom-start"></div>
                 </div>
                 <input type="text" class="form-control agenda_editavel agenda_telefone bg-white" placeholder="Telefone">
                 <button class="btn btn-success agenda_btn_salvar "><i class="la la-check text-white"></i></button>
@@ -51,8 +47,9 @@
     <script>
         $('.agenda_editavel').hide();
         esconderBotoes();
+
         function agendar(){
-            $('.agenda_visivel').click(function(){
+            $('.agenda_visivel').on('click',function(){
                 let nome;
                 let telefone;
                 $('.agenda_editavel').hide();
@@ -63,13 +60,16 @@
                 $(this).parent().find('.agenda_nome').select();
                 $(this).parent().find('.agenda_btn_salvar').show();
                 $(this).parent().find('.agenda_btn_cancelar').show();
+                if($('.dentista_agenda').val() == 0){
+                    $('.btn_buscar_cliente').hide(); 
+                }
                 salvarAgendamento();
                 cancelarAgendamento();
             });
         }
         
         function salvarAgendamento(){
-            $('.agenda_btn_salvar').click(function(){
+            $('.agenda_btn_salvar').on('click',function(){
                 let nome;
                 let telefone;
                 let texto;
@@ -86,7 +86,7 @@
         }
 
         function cancelarAgendamento(){
-            $('.agenda_btn_cancelar').click(function(){
+            $('.agenda_btn_cancelar').on('click',function(){
                 $('.agenda_editavel').hide();
                 $('.agenda_visivel').show();
                 esconderBotoes();
@@ -99,15 +99,35 @@
             $('.agenda_btn_cancelar').hide();
         }
 
-        function data_agenda(){
+        function infosChange(){
             $('.data_agenda').change(function(){     
-                alert($(this).val());
+                location.reload();
+            });
+            $('.dentista_agenda').change(function(){     
+                location.reload();
             });
         }
 
+        function buscarCliente(){
+            $('.btn_buscar_cliente').on('click', function(){
+                $(".lista_clintes").css("width","120%");
+
+                let nome = $(this).parent().find('.agenda_nome').val();
+
+                $(this).parent().find( ".lista_clintes" ).load( "lista-clientes-filtrado" ,{
+                    nome:nome, 
+                    _token: "{{ csrf_token() }}"
+                }, function(clientes){
+                    
+                });        
+            })
+        }
+
         $(document).ready(function(){
-            data_agenda();
+            
+            infosChange();
             agendar();
+            buscarCliente();
         });
     </script>
 @endsection

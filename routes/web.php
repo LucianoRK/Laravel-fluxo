@@ -34,6 +34,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('agenda', 'AgendaController');
     } 
 
+    /* CLIENTES */{
+        Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
+    }
+
     /* ENDEREÇO */ {
         Route::post('/endereco/comboCidades', 'CidadeController@index')->name('comboCidades');;
     }

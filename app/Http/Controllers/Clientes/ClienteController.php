@@ -82,4 +82,21 @@ class ClienteController extends Controller
     {
         //
     }
+
+    /**
+     * Buscas os clientes por nome.
+     *
+     * @param  \App\Models\Clientes\Cliente  $nome
+     * @return \Illuminate\Http\Response
+     */
+    public function listaClientesFiltrado(Request $request)
+    {
+        $clientes = Cliente::select("*")
+            ->where('nome', 'like', "%$request->nome%")
+            ->get();
+            
+        return View('Agendas.load.lista_clientes_filtrado',compact('clientes'));
+    }
+
+    
 }
