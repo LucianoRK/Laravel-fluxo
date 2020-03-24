@@ -45,7 +45,7 @@
                                                 {{ $usuario->tipo_usuario }}
                                             </td>
                                             <td class="text-center" id_user="{{ $usuario->id }}">
-                                            <a href="{{ url("usuarios/$usuario->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 
+                                                <a href="{{ url("usuarios/$usuario->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 
                                                     <i class="la la-edit text-white font-size-22"></i> 
                                                 </a>
 

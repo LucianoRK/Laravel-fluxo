@@ -24,7 +24,7 @@ class CreateUsuariosTable extends Migration
             $table->string('celular', 20)->nullable();
             $table->string('login', 30);
             $table->string('senha', 100);
-            $table->smallInteger('qtd_acesso');
+            $table->smallInteger('qtd_acesso')->default('1');
             $table->boolean('ativo')->default(true);
             $table->timestamps();
         });

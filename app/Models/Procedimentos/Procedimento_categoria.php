@@ -3,6 +3,7 @@
 namespace App\Models\Procedimentos;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Procedimento_categoria extends Model
 {
@@ -12,7 +13,7 @@ class Procedimento_categoria extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'id', 'fk_empresa', 'nome', 'ativo'
     ];
 
     /**

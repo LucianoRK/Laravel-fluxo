@@ -23,31 +23,54 @@ class CpfRule implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $cpf)
     {
-        $value = preg_replace('/[^0-9]/is', '', $value);
-
-        if (strlen($value) != 11) {
-            return false;
+        $cpf = "$cpf";
+        if (strpos($cpf, "-") !== false) {
+            $cpf = str_replace("-", "", $cpf);
+        }
+        if (strpos($cpf, ".") !== false) {
+            $cpf = str_replace(".", "", $cpf);
+        }
+        $sum = 0;
+        $cpf = str_split($cpf);
+        $cpftrueverifier = array();
+        $cpfnumbers = array_splice($cpf, 0, 9);
+        $cpfdefault = array(10, 9, 8, 7, 6, 5, 4, 3, 2);
+        for ($i = 0; $i <= 8; $i++) {
+            $sum += $cpfnumbers[$i] * $cpfdefault[$i];
+        }
+        $sumresult = $sum % 11;
+        if ($sumresult < 2) {
+            $cpftrueverifier[0] = 0;
+        } else {
+            $cpftrueverifier[0] = 11 - $sumresult;
+        }
+        $sum = 0;
+        $cpfdefault = array(11, 10, 9, 8, 7, 6, 5, 4, 3, 2);
+        $cpfnumbers[9] = $cpftrueverifier[0];
+        for ($i = 0; $i <= 9; $i++) {
+            $sum += $cpfnumbers[$i] * $cpfdefault[$i];
+        }
+        $sumresult = $sum % 11;
+        if ($sumresult < 2) {
+            $cpftrueverifier[1] = 0;
+        } else {
+            $cpftrueverifier[1] = 11 - $sumresult;
+        }
+        $returner = false;
+        if ($cpf == $cpftrueverifier) {
+            $returner = true;
         }
 
-        if (preg_match('/(\d)\1{10}/', $value)) {
-            return false;
-        }
 
-        for ($t = 9; $t < 11; $t++) {
-            for ($d = 0, $c = 0; $c < $t; $c++) {
-                $d += $value{
-                $c} * (($t + 1) - $c);
-            }
-            $d = ((10 * $d) % 11) % 10;
-            if ($value{
-            $c} != $d) {
-                return false;
-            }
+        $cpfver = array_merge($cpfnumbers, $cpf);
+
+        if (count(array_unique($cpfver)) == 1 || $cpfver == array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0)) {
+
+            $returner = false;
         }
-        
-        return true;
+        return $returner;
     }
 
     /**

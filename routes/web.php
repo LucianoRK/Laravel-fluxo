@@ -1,44 +1,42 @@
 <?php
-
-/* LOGIN */
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-{
-    Route::get('/login', 'Auth\LoginController@index')->name('login');
-    Route::post('/logar', 'Auth\LoginController@logar')->name('logar');
-}
+/* PUBLICO - LOGIN */
+Route::get('/login', 'Auth\LoginController@index')->name('login');
+Route::post('/logar', 'Auth\LoginController@logar')->name('logar');
 
 /* AUTENTICADO */
 Route::group(['middleware' => ['auth']], function () {
     
-    /* SAIR DO SISTEMA */ {
-        Route::get('/sair', function () {
-            Auth::logout();
-            return redirect()->route('login');
-        });
-    }
+    /* SAIR DO SISTEMA */ 
+    Route::get('/sair', function () {
+        Auth::logout();
+        return redirect()->route('login');
+    });
 
-    /* HOME */ {
-        Route::get('/home', 'HomeController@index')->name('home');
-        Route::get('/', 'HomeController@index')->name('home');
-    }
+    /* HOME */ 
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
 
-    /* USUARIOS */ {
-        Route::resource('usuarios', 'UsuarioController');
-        Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
-    } 
-
-    /* AGENDA */ {
-        Route::resource('agenda', 'AgendaController');
-    } 
-
-    /* CLIENTES */{
-        Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
-    }
-
-    /* ENDEREÇO */ {
-        Route::post('/endereco/comboCidades', 'CidadeController@index')->name('comboCidades');;
+    /* CRUD USUARIOS */ 
+    Route::resource('usuarios', 'UsuarioController');
+    Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
+    
+    /* AGENDA */ 
+    Route::resource('agenda', 'AgendaController');
+    
+    /* CLIENTES */
+    Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
+    
+    /* COMBO CIDADES */ 
+    Route::post('/endereco/comboCidades', 'CidadeController@index')->name('comboCidades');;
+    
+    /* CADASTRO DE PROCEDIMENTOS CLÍNICA */ {
+        // Categoria 
+        Route::resource('procedimentosCategorias', 'ProcedimentoCategoriaController');
+        
+        // Procedimento 
+        Route::resource('procedimenmtos', 'ProcedimentoController');
     }
 });

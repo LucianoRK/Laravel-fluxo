@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('permissao', function ($usuario, $permissao) {
             $permissoes = session('permissoes');
 
-            if (isset($permissoes) && in_array($permissao, $permissoes)) {
+            if (isset($permissoes) && !empty($permissoes) && in_array($permissao, $permissoes)) {
                 return true;
             } else {
                 return false;
