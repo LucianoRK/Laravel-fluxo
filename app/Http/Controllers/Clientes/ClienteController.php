@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clientes\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
@@ -92,11 +93,11 @@ class ClienteController extends Controller
     public function listaClientesFiltrado(Request $request)
     {
         $clientes = Cliente::select("*")
+            ->where('fk_empresa', '=', Auth::user()->fk_empresa)
+           //->where('fk_dentista', '=', $request->dentista)
             ->where('nome', 'like', "%$request->nome%")
             ->get();
-            
+
         return View('Agendas.load.lista_clientes_filtrado',compact('clientes'));
     }
-
-    
 }

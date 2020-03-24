@@ -111,12 +111,14 @@
         function buscarCliente(){
             $('.btn_buscar_cliente').on('click', function(){
                 $(".lista_clintes").css("width","120%");
+                let dentista =  $('.dentista_agenda').val();
 
                 let nome = $(this).parent().find('.agenda_nome').val();
 
                 $(this).parent().find( ".lista_clintes" ).load( "lista-clientes-filtrado" ,{
-                    nome:nome, 
-                    _token: "{{ csrf_token() }}"
+                    _token: "{{ csrf_token() }}",
+                    nome: nome, 
+                    dentista: dentista
                 }, function(clientes){
                     
                 });        
