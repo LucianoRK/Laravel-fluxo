@@ -1,13 +1,12 @@
 @extends('layouts.app')
 @section('title', 'Agenda')
 
-
 @section('content')
     <style>
         :root {
             --largura_horario: 60px; /* Valor da largura do horario */
         }
-        #horario {
+        .horario {
             width: var(--largura_horario);
         }
     </style>
@@ -26,7 +25,7 @@
     @foreach ($horarios as $horario)
         <div class="row mb-2">
             <div class="input-group col-md-8 agenda_line">
-                <span class="input-group-text text-white bg-primary" id="horario"><strong>{{$horario}}</strong></span>
+                <span class="input-group-text text-white bg-primary horario"><strong>{{$horario}}</strong></span>
                 <button type="button" class="form-control btn-white btn-block agenda_visivel text-left"></button>
                 <div class="btn-group dropdown">
                     <input type="text" class="form-control agenda_editavel agenda_nome bg-white" placeholder="Nome" aria-describedby="horario">
@@ -110,7 +109,7 @@
 
         function buscarCliente(){
             $('.btn_buscar_cliente').on('click', function(){
-                $(".lista_clintes").css("width","120%");
+                $(".lista_clintes").css("width","150%");
                 let dentista =  $('.dentista_agenda').val();
 
                 let nome = $(this).parent().find('.agenda_nome').val();
@@ -118,7 +117,8 @@
                 $(this).parent().find( ".lista_clintes" ).load( "lista-clientes-filtrado" ,{
                     _token: "{{ csrf_token() }}",
                     nome: nome, 
-                    dentista: dentista
+                    dentista: dentista,
+
                 }, function(clientes){
                     
                 });        
@@ -126,7 +126,6 @@
         }
 
         $(document).ready(function(){
-            
             infosChange();
             agendar();
             buscarCliente();

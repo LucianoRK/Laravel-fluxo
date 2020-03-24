@@ -92,10 +92,18 @@ class ClienteController extends Controller
      */
     public function listaClientesFiltrado(Request $request)
     {
-        $clientes = Cliente::select("*")
-            ->where('fk_empresa', '=', Auth::user()->fk_empresa)
-           //->where('fk_dentista', '=', $request->dentista)
-            ->where('nome', 'like', "%$request->nome%")
+        $clientes = Cliente::select(
+                "clientes.id", 
+                "tratamentos.id as id_tratamento", 
+                "clientes.nome", 
+                "especialidades.nome as especialidade_descricao", 
+                "cpf"
+            )
+            ->join('tratamentos', 'tratamentos.fk_cliente', '=', 'clientes.id')
+            ->join('especialidades', 'especialidades.id', '=', 'tratamentos.fk_especialidade')
+            ->where('clientes.fk_empresa', '=', Auth::user()->fk_empresa)
+            ->where('tratamentos.fk_usuario_dentista', '=', $request->dentista)
+            ->where('clientes.nome', 'like', "%$request->nome%")
             ->get();
 
         return View('Agendas.load.lista_clientes_filtrado',compact('clientes'));
