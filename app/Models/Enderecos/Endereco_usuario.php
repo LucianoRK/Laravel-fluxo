@@ -36,12 +36,9 @@ class Endereco_usuario extends Model
 
     public function getEnderecoUsuario($usuario)
     {
-        $data = DB::table('endereco_usuarios')
-        ->where([ ['endereco_usuarios.fk_usuario', '=', $usuario], ])
-        ->leftJoin('cidades', 'cidades.id', '=', 'endereco_usuarios.fk_cidade')
-        ->select('endereco_usuarios.*', 'cidades.fk_estado')
-        ->first();
-
-        return $data;
+        return Endereco_usuario::select('endereco_usuarios.*', 'cidades.fk_estado')
+            ->where([ ['endereco_usuarios.fk_usuario', '=', $usuario], ])
+            ->leftJoin('cidades', 'cidades.id', '=', 'endereco_usuarios.fk_cidade')
+            ->first();
     }
 }

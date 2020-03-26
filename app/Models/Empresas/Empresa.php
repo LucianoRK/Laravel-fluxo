@@ -36,20 +36,6 @@ class Empresa extends Model
 
     public function getNomeEmpresa($fk_empresa)
     {
-        $data = DB::table('empresas')->find($fk_empresa);
-
-        return $data;
-    }
-
-    public function getAllEmpresasUsuario($id_usuario)
-    {
-        $data = DB::table('usuario_mm_empresas')
-            ->where([ ['fk_usuario', '=', $id_usuario], ['empresas.ativo', '=', true], ])
-            ->join('empresas', 'empresas.id', '=', 'usuario_mm_empresas.fk_empresa')
-            ->select('empresas.nome', 'empresas.id')
-            ->orderBy('empresas.nome')
-            ->get();
-
-        return $data;
+        return Empresa::select('nome')->find($fk_empresa);
     }
 }

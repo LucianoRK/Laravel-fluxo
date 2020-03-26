@@ -45,4 +45,7 @@
     <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
     <script src="{{asset('assets/js/myMasks.js')}}"></script>
+
+    <!-- ================== FORMATO DE DINHEIRO NO INPUT ==================-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 </head>

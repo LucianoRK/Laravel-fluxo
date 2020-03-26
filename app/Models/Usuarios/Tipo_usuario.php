@@ -36,12 +36,9 @@ class Tipo_usuario extends Model
 
     public function getAllTiposUsuarios()
     {
-        $data = DB::table('tipo_usuarios')
+        return Tipo_usuario::select('*')
             ->where([ ['ativo', '=', true], ])
-            ->select('*')
             ->orderBy('nome')
             ->get();
-
-        return $data;
     }
 }

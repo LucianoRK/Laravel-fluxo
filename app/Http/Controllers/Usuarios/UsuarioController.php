@@ -22,16 +22,13 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Usuario $user, Empresa $empresa)
     {
-        $user                   = new Usuario();
-        $empresa                = new Empresa();
-
         // Usado para contar as linhas da tabela
         $count = 1;
 
-        $usuarios['ativos']     = $user->getAllusuarioAtivo(Auth::user()->fk_empresa);
-        $usuarios['inativos']   = $user->getAllusuarioInativo(Auth::user()->fk_empresa);
+        $usuarios['ativos']     = $user->getAllusuarioAtivoEmpresa(Auth::user()->fk_empresa);
+        $usuarios['inativos']   = $user->getAllUsuarioInativoEmpresa(Auth::user()->fk_empresa);
         $empresa                = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
 
         return view('usuarios.index', compact('usuarios', 'empresa', 'count'));
@@ -42,12 +39,8 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Usuario_mm_empresa $empresa, Tipo_usuario $tipo_usuario, Estado $estado)
     {
-        $empresa        = new Empresa();
-        $tipo_usuario   = new Tipo_usuario();
-        $estado         = new Estado();
-
         $empresas       = $empresa->getAllEmpresasUsuario(Auth::user()->id);
         $tipos_usuarios = $tipo_usuario->getAllTiposUsuarios();
         $estados        = $estado->getAllEstados();
@@ -83,12 +76,12 @@ class UsuarioController extends Controller
         $endereco->numero           = $request->numero_casa;
         $endereco->complemento      = $request->complemento;
         $endereco->save();
-        
+
         $usuario_mm_empresa             = new Usuario_mm_empresa();
         $usuario_mm_empresa->fk_usuario = $usuario->id;
         $usuario_mm_empresa->fk_empresa = Auth::user()->fk_empresa;
         $usuario_mm_empresa->save();
-        
+
         return redirect('/usuarios/create')->with('success', 'Sucesso!');
     }
 
@@ -116,7 +109,7 @@ class UsuarioController extends Controller
         $enderecos      = new Endereco_usuario();
 
         $estados        = $estado->getAllEstados();
-        $usuario        = $usuarios->getDadosUsuario($usuario->id, Auth::user()->fk_empresa);
+        $usuario        = $usuarios->getDadosUsuarioEmpresa($usuario->id, Auth::user()->fk_empresa);
         $endereco       = $enderecos->getEnderecoUsuario($usuario->id);
 
         return view('usuarios.editarUsuario', compact('estados', 'usuario', 'endereco'));
@@ -129,13 +122,10 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuarios\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(SalvarEdicaoUsuarioRequest $request, $id)
+    public function update(Usuario $user, Endereco_usuario $endereco, SalvarEdicaoUsuarioRequest $request, $id)
     {
-        $user           = new Usuario();
-        $endereco_user  = new Endereco_usuario();
-        
         // Verifica se existe o usuario e se é da empresa do usuario logado
-        $usuario_existe = $user->verificaUsuarioExiste($id, Auth::user()->fk_empresa);
+        $usuario_existe = $user->verificaUsuarioExisteEmpresa($id, Auth::user()->fk_empresa);
 
         if (!$usuario_existe) {
             return redirect()->back()->with('warning', 'Usuário não encontrado');
@@ -161,7 +151,7 @@ class UsuarioController extends Controller
         $endereco['rua']              = $request->rua;
         $endereco['numero']           = $request->numero_casa;
         $endereco['complemento']      = $request->complemento;
-        $endereco_user->where('fk_usuario', $id)->update($endereco);
+        $endereco->where('fk_usuario', $id)->update($endereco);
 
         return redirect('/usuarios')->with('success', 'Sucesso!');
     }
@@ -174,10 +164,11 @@ class UsuarioController extends Controller
      */
     public function destroy(Request $request)
     {
-        $user = new Usuario();
-        $user = $user->desativarUsuario($request->id, Auth::user()->fk_empresa);
+        $desativado = Usuario::where('id', $request->id)
+            ->where('fk_empresa', Auth::user()->fk_empresa)
+            ->update(['ativo' => false]);
 
-        if ($user) {
+        if ($desativado) {
             return json_encode(true);
         } else {
             return json_encode(false);
@@ -186,10 +177,11 @@ class UsuarioController extends Controller
 
     public function ativar(Request $request)
     {
-        $user = new Usuario();
-        $user = $user->ativarUsuario($request->id, Auth::user()->fk_empresa);
+        $ativado = Usuario::where('id', $request->id)
+            ->where('fk_empresa', Auth::user()->fk_empresa)
+            ->update(['ativo' => true]);
 
-        if ($user) {
+        if ($ativado) {
             return json_encode(true);
         } else {
             return json_encode(false);

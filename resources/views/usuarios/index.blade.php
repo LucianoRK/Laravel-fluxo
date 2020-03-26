@@ -120,7 +120,7 @@
             desativaBotao(this);
             
             swal({
-                title: 'Desativar usuário?',
+                title: 'Desativar?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -177,7 +177,7 @@
             desativaBotao(this);
             
             swal({
-                title: 'Ativar usuário?',
+                title: 'Ativar?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

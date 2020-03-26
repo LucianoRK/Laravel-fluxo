@@ -32,4 +32,12 @@ class Especialidade extends Model
     protected $casts = [
         
     ];
+
+    public function getAllEspecialidades()
+    {
+        return Especialidade::select('*')
+            ->where([ ['ativo', '=', true], ])
+            ->orderBy('nome')
+            ->get();
+    }
 }

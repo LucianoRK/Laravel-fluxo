@@ -12,7 +12,7 @@ class Procedimento extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'id', 'fk_empresa', 'fk_especialidade', 'fk_categoria', 'nome', 'protetico', 'ativo'
     ];
 
     /**
@@ -32,4 +32,28 @@ class Procedimento extends Model
     protected $casts = [
         
     ];
+
+    public function getAllProcedimentoEmpresa($empresa)
+    {
+        return Procedimento::select('procedimentos.id', 'procedimentos.valor_sugerido', 'especialidades.nome AS nome_esp', 'procedimento_categorias.nome AS nome_cat',
+                'procedimentos.nome AS nome_proc', 'protetico'
+            )
+            ->where([['procedimentos.fk_empresa', '=', $empresa], ['procedimentos.ativo', '=', true]])
+            ->join('especialidades', 'especialidades.id', '=', 'procedimentos.fk_especialidade')
+            ->join('procedimento_categorias', 'procedimento_categorias.id', '=', 'procedimentos.fk_categoria')
+            ->orderBy('procedimento_categorias.nome')
+            ->get();
+    }
+
+    public function getProcedimentoEmpresa($empresa, $id)
+    {
+        return Procedimento::select('procedimentos.id', 'procedimentos.valor_sugerido', 'especialidades.nome AS nome_esp', 'procedimento_categorias.nome AS nome_cat',
+                'procedimentos.nome AS nome_proc', 'protetico'
+            )
+            ->where([['procedimentos.id', '=', $id], ['procedimentos.fk_empresa', '=', $empresa], ['procedimentos.ativo', '=', true]])
+            ->join('especialidades', 'especialidades.id', '=', 'procedimentos.fk_especialidade')
+            ->join('procedimento_categorias', 'procedimento_categorias.id', '=', 'procedimentos.fk_categoria')
+            ->orderBy('procedimento_categorias.nome')
+            ->first();
+    }
 }

@@ -18,7 +18,10 @@ class CreateProcedimentosTable extends Migration
             $table->integer('fk_empresa');
             $table->integer('fk_especialidade');
             $table->integer('fk_categoria');
-            $table->integer('fk_protetico');
+            $table->string('nome');
+            $table->boolean('protetico');
+            $table->bigInteger('valor_sugerido');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

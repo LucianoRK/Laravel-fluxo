@@ -32,11 +32,11 @@ Route::group(['middleware' => ['auth']], function () {
     /* COMBO CIDADES */ 
     Route::post('/endereco/comboCidades', 'CidadeController@index')->name('comboCidades');;
     
-    /* CADASTRO DE PROCEDIMENTOS CLÍNICA */ {
+    /* CRUD PROCEDIMENTOS CLÍNICA */ {
         // Categoria 
         Route::resource('procedimentosCategorias', 'ProcedimentoCategoriaController');
         
         // Procedimento 
-        Route::resource('procedimenmtos', 'ProcedimentoController');
+        Route::resource('procedimentos', 'ProcedimentoController');
     }
 });

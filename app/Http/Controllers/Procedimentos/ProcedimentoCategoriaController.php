@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Procedimentos\Procedimento;
 use App\Models\Procedimentos\Procedimento_categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,17 +14,14 @@ class ProcedimentoCategoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Procedimento_categoria $c)
     {
-        $categorias = Procedimento_categoria::select('id', 'fk_empresa', 'nome', 'ativo')
-            ->where([ ['fk_empresa', '=', Auth::user()->fk_empresa], ['ativo', '=', true], ])
-            ->orderBy('nome')
-            ->get();
+        $categorias = $c->getAllCategoriaEmpresa(Auth::user()->fk_empresa);
 
         // Usado para contar as linhas da tabela
         $count = 1;
         
-        return view('ProcedimentosCategorias.index', compact('categorias', 'count'));
+        return view('Procedimentos.Categorias.index', compact('categorias', 'count'));
     }
 
     /**
@@ -33,7 +31,7 @@ class ProcedimentoCategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('Procedimentos.Categorias.novaCategoria');
     }
 
     /**
@@ -42,9 +40,17 @@ class ProcedimentoCategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Procedimento_categoria $categoria,Request $request)
     {
-        //
+        $request->validate([
+            'nome_categoria' => ['required','min: 4', 'max: 20']
+        ]);
+
+        $categoria->fk_empresa = Auth::user()->fk_empresa;
+        $categoria->nome       = $request->nome_categoria;
+        $categoria->save();
+
+        return redirect('/procedimentosCategorias')->with('success', 'Sucesso!');
     }
 
     /**
@@ -91,6 +97,11 @@ class ProcedimentoCategoriaController extends Controller
     {
         $desativado = Procedimento_categoria::where('id', $request->id)
             ->where('fk_empresa', Auth::user()->fk_empresa)
+            ->update(['ativo' => false]);
+
+        // Desativa todos os procedimentos vinculado a categoria 
+        Procedimento::where('fk_empresa', Auth::user()->fk_empresa)
+            ->where('fk_categoria', $request->id)
             ->update(['ativo' => false]);
 
         if ($desativado) {

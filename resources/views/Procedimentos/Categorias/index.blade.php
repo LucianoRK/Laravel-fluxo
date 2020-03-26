@@ -12,7 +12,7 @@
                     <div class="table-responsive">
                         <h5 class="card-header text-success">
                             <div class="text-right">
-                                <a class="btn btn-primary" href="usuarios/create">Nova Categoria</a>
+                                <a class="btn btn-primary" href="procedimentosCategorias/create">Nova Categoria</a>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -63,7 +63,8 @@
             desativaBotao(this);
             
             swal({
-                title: 'Desativar categoria?',
+                title: 'Desativar?',
+                text: 'Ao desativar a categoria, todos os procedimentos vinculados serão desativados.',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

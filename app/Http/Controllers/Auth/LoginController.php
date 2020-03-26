@@ -46,12 +46,11 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function logar(LoginRequest $request)
+    public function logar(Permissao_mm_usuario $permissoes, LoginRequest $request)
     {
        $dados = ['login'=>$request->login, 'password'=>$request->senha];
        
        if (Auth::attempt($dados)) {
-            $permissoes = new Permissao_mm_usuario();
             $permissoes_user = $permissoes->getAllPermissoesUsuario(Auth::user()->id, Auth::user()->fk_empresa);
 
             if (count($permissoes_user) > 0) {

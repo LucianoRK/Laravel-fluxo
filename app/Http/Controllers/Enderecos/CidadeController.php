@@ -12,9 +12,8 @@ class CidadeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Cidade $cidade, Request $request)
     {
-        $cidade      = new Cidade();
         $cidades     = $cidade->getAllCidadeEstado($request->estado);
 
         /* Usado ao editar usuario para carregar a cidade já selecionada */

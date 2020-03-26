@@ -3,6 +3,7 @@
 namespace App\Models\Procedimentos;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Procedimento_categoria extends Model
@@ -33,4 +34,12 @@ class Procedimento_categoria extends Model
     protected $casts = [
         
     ];
+
+    public function getAllCategoriaEmpresa($empresa)
+    {
+        return Procedimento_categoria::select('id', 'fk_empresa', 'nome', 'ativo')
+            ->where([ ['fk_empresa', '=', $empresa], ['ativo', '=', true], ])
+            ->orderBy('nome')
+            ->get();
+    }
 }

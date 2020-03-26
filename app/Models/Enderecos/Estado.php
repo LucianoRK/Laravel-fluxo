@@ -36,12 +36,9 @@ class Estado extends Model
 
     public function getAllEstados()
     {
-        $data = DB::table('estados')
+        return Estado::select('estados.*')
             ->where([ ['ativo', '=', true] ])
-            ->select('estados.*')
             ->orderBy('estados.nome')
             ->get();
-
-        return $data;
     }
 }

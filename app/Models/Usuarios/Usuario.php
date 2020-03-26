@@ -45,77 +45,44 @@ class Usuario extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getAllUsuarioAtivo($fk_empresa)
+    public function getAllusuarioAtivoEmpresa($fk_empresa)
     {
-        $data = DB::table('usuarios')
+        return Usuario::select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
             ->where([ ['usuarios.ativo', '=', true], ['fk_empresa', '=', $fk_empresa], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
-            ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
             ->orderBy('usuarios.nome')
             ->get();
-
-        return $data;
     }
 
-    public function getAllUsuarioInativo($fk_empresa)
+    public function getAllUsuarioInativoEmpresa($fk_empresa)
     {
-        $data = DB::table('usuarios')
+        return Usuario::select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
             ->where([ ['usuarios.ativo', '=', false], ['fk_empresa', '=', $fk_empresa], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
-            ->select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
             ->orderBy('usuarios.nome')
             ->get();
-
-        return $data;
     }
 
-    public function desativarUsuario($usuario, $fk_empresa)
-    { 
-        $data = DB::table('usuarios')
-            ->where([ ['id', '=', $usuario], ['fk_empresa', '=', $fk_empresa], ])
-            ->update(['ativo' => false]);
-
-        return $data;
-    }
-
-    public function ativarUsuario($usuario, $fk_empresa)
-    { 
-        $data = DB::table('usuarios')
-            ->where([ ['id', '=', $usuario], ['fk_empresa', '=', $fk_empresa], ])
-            ->update(['ativo' => true]);
-
-        return $data;
-    }
-
-    public function getDadosUsuario($usuario, $fk_empresa)
+    public function getDadosUsuarioEmpresa($usuario, $fk_empresa)
     {
-        $data = DB::table('usuarios')
-        ->where([ ['usuarios.id', '=', $usuario], ['usuarios.fk_empresa', '=', $fk_empresa], ['usuarios.ativo', '=', true], ])
-        ->join('empresas', 'empresas.id', '=', 'usuarios.fk_empresa')
-        ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
-        ->select('usuarios.*', 'empresas.nome AS nome_empresa', 'tipo_usuarios.nome AS nome_tipo_usuario')
-        ->first();
-
-        return $data;
+        return Usuario::select('usuarios.*', 'empresas.nome AS nome_empresa', 'tipo_usuarios.nome AS nome_tipo_usuario')
+            ->where([ ['usuarios.id', '=', $usuario], ['usuarios.fk_empresa', '=', $fk_empresa], ['usuarios.ativo', '=', true], ])
+            ->join('empresas', 'empresas.id', '=', 'usuarios.fk_empresa')
+            ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
+            ->first();
     }
 
     public function verificaLoginExiste($login)
     {
-        $data = DB::table('usuarios')
-        ->where([ ['login', '=', $login], ])
-        ->select('id')
-        ->first();
-
-        return $data;
+        return Usuario::select('id')
+            ->where([ ['login', '=', $login], ])
+            ->first();
     }
 
-    public function verificaUsuarioExiste($usuario, $fk_empresa)
+    public function verificaUsuarioExisteEmpresa($usuario, $fk_empresa)
     {
-        $data = DB::table('usuarios')
-        ->where([ ['usuarios.id', '=', $usuario], ['usuarios.fk_empresa', '=', $fk_empresa], ['usuarios.ativo', '=', true], ])
-        ->select('id', 'senha')
-        ->first();
-
-        return $data; 
+        return Usuario::select('id', 'senha')
+            ->where([ ['usuarios.id', '=', $usuario], ['usuarios.fk_empresa', '=', $fk_empresa], ['usuarios.ativo', '=', true], ])
+            ->first();
     }
 }

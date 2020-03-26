@@ -32,4 +32,13 @@ class Usuario_mm_empresa extends Model
     protected $casts = [
         
     ];
+
+    public function getAllEmpresasUsuario($id_usuario)
+    {
+        return Usuario_mm_empresa::select('empresas.nome', 'empresas.id')
+            ->where([ ['fk_usuario', '=', $id_usuario], ['empresas.ativo', '=', true], ])
+            ->join('empresas', 'empresas.id', '=', 'usuario_mm_empresas.fk_empresa')
+            ->orderBy('empresas.nome')
+            ->get();
+    }
 }

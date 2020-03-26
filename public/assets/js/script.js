@@ -29,3 +29,7 @@ function dataTable(nome, paginacao = false, pesquisa = false) {
         }
     });
 }
+
+function campoTipoMoedaBr(campo) {
+    $('.'+campo).maskMoney({decimal: ',', thousands: '.'});
+}

@@ -36,12 +36,9 @@ class Cidade extends Model
 
     public function getAllCidadeEstado($fk_estado)
     {
-        $data = DB::table('cidades')
+        return Cidade::select('cidades.*')
             ->where([ ['fk_estado', '=', $fk_estado] ])
-            ->select('cidades.*')
             ->orderBy('cidades.nome')
             ->get();
-
-        return $data;
     }
 }

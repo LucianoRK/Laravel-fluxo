@@ -10,7 +10,7 @@
             <h5 class="card-header">Novo Usuário</h5>
             <form action="{{ route('usuarios.store') }}" method="POST">
 
-                @include('usuarios.formUsuario');
+                @include('usuarios.formUsuario')
 
                 <div class="card-footer bg-light">
                     <div class="form-actions">
