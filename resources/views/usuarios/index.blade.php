@@ -91,7 +91,7 @@
                                                 {{ $usuario->id }}
                                             </td>
                                             <td>
-                                                {{ $usuario->nome }}
+                                                [{{ $usuario->id }}] - {{ $usuario->nome }}
                                             </td>
                                             <td>
                                                 {{ $usuario->tipo_usuario }}

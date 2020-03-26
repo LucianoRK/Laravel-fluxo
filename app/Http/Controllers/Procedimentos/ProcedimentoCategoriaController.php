@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Logs\LogSistemaController;
 use App\Models\Procedimentos\Procedimento;
 use App\Models\Procedimentos\Procedimento_categoria;
 use Illuminate\Http\Request;
@@ -49,6 +50,8 @@ class ProcedimentoCategoriaController extends Controller
         $categoria->fk_empresa = Auth::user()->fk_empresa;
         $categoria->nome       = $request->nome_categoria;
         $categoria->save();
+        
+        LogSistemaController::logSistemaTipoInsert('procedimento_categorias', $categoria);
 
         return redirect('/procedimentosCategorias')->with('success', 'Sucesso!');
     }
@@ -93,16 +96,19 @@ class ProcedimentoCategoriaController extends Controller
      * @param  \App\Models\Procedimentos\Procedimento_categoria  $procedimento_categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
-        $desativado = Procedimento_categoria::where('id', $request->id)
-            ->where('fk_empresa', Auth::user()->fk_empresa)
-            ->update(['ativo' => false]);
+        $c                  = new Procedimento_categoria();
+        $categoria['ativo'] = false;
+        $desativado         = $c->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($categoria);
 
         // Desativa todos os procedimentos vinculado a categoria 
-        Procedimento::where('fk_empresa', Auth::user()->fk_empresa)
-            ->where('fk_categoria', $request->id)
-            ->update(['ativo' => false]);
+        $p                     = new Procedimento();
+        $procedimento['ativo'] = false;
+        $p->where('fk_categoria', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($procedimento);
+
+        LogSistemaController::logSistemaTipoUpdate($id, 'id', 'procedimento_categorias', $categoria);
+        LogSistemaController::logSistemaTipoUpdate($id, 'fk_categoria', 'procedimentos', $categoria);
 
         if ($desativado) {
             return json_encode(true);

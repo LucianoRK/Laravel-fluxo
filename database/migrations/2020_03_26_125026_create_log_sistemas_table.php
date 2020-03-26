@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEnderecoUsuariosTable extends Migration
+class CreateLogSistemasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateEnderecoUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('endereco_usuarios', function (Blueprint $table) {
+        Schema::create('log_sistemas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('tabela', 100);
+            $table->integer('tipo');
+            $table->longText('descricao');
             $table->integer('fk_empresa');
             $table->integer('fk_usuario');
-            $table->integer('fk_cidade')->nullable();
-            $table->string('cep', 15)->nullable();
-            $table->string('rua', 100)->nullable();
-            $table->string('numero', 10)->nullable();
-            $table->string('complemento', 100)->nullable();
-            $table->boolean('ativo')->default(true);;
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ class CreateEnderecoUsuariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('endereco_usuarios');
+        Schema::dropIfExists('log_sistemas');
     }
 }

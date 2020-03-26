@@ -50,7 +50,7 @@
                                                 [{{ $procedimento->id }}] - {{ $procedimento->nome_proc }}
                                             </td>
                                             <td class="text-center">
-                                                {{ number_format($procedimento->valor_sugerido,2,",",".") }}
+                                                {{ Helper::currencyMysqlForBr($procedimento->valor_sugerido) }}
                                             </td>
                                             <td class="text-center">
                                                 {{ $procedimento->protetico ? 'Sim' : 'Não' }}

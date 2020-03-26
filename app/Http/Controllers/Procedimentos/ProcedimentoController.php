@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
+use App\Http\Controllers\Logs\LogSistemaController;
 use App\Http\Requests\ProcedimentoRequest;
 use App\Models\Procedimentos\Procedimento;
 use App\Models\Procedimentos\Procedimento_categoria;
@@ -78,6 +80,7 @@ class ProcedimentoController extends Controller
             $p->protetico        = $protetico;
             $p->valor_sugerido   = $valor_sugerido;
             $p->save();
+            LogSistemaController::logSistemaTipoInsert('procedimentos', $p);
         }
         if (isset($request->implantodontia)) {
             $p->fk_empresa       = Auth::user()->fk_empresa;
@@ -87,6 +90,7 @@ class ProcedimentoController extends Controller
             $p->protetico        = $protetico;
             $p->valor_sugerido   = $valor_sugerido;
             $p->save();
+            LogSistemaController::logSistemaTipoInsert('procedimentos', $p);
         }
         if (isset($request->odontopediatria)) {
             $p->fk_empresa       = Auth::user()->fk_empresa;
@@ -96,6 +100,7 @@ class ProcedimentoController extends Controller
             $p->protetico        = $protetico;
             $p->valor_sugerido   = $valor_sugerido;
             $p->save();
+            LogSistemaController::logSistemaTipoInsert('procedimentos', $p);
         }
         if (isset($request->orofacial)) {
             $p->fk_empresa       = Auth::user()->fk_empresa;
@@ -105,6 +110,7 @@ class ProcedimentoController extends Controller
             $p->protetico        = false;
             $p->valor_sugerido   = $valor_sugerido;
             $p->save();
+            LogSistemaController::logSistemaTipoInsert('procedimentos', $p);
         }
 
         return redirect('/procedimentos')->with('success', 'Sucesso!');
@@ -129,7 +135,8 @@ class ProcedimentoController extends Controller
      */
     public function edit(Procedimento $procedimento)
     {
-        $procedimento = $procedimento->getProcedimentoEmpresa(Auth::user()->fk_empresa, $procedimento->id);
+        $procedimento                   = $procedimento->getProcedimentoEmpresa(Auth::user()->fk_empresa, $procedimento->id);
+        $procedimento['valor_sugerido'] = Helper::currencyMysqlForBr($procedimento['valor_sugerido']);
 
         return view('Procedimentos.editarProcedimento', compact('procedimento'));
     }
@@ -141,19 +148,22 @@ class ProcedimentoController extends Controller
      * @param  \App\Models\Procedimentos\Procedimento  $procedimento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Procedimento $procedimento)
+    public function update(Request $request, $id, Procedimento $p)
     {
         if (!$request->valor_sugerido) {
             $proc['valor_sugerido'] = 0;
         } else {
-            $value = str_replace(".", "", $request->valor_sugerido);
-            $valor = str_replace(",", ".", $value);
-            $proc['valor_sugerido'] = $valor;
+            $proc['valor_sugerido'] = Helper::currencyBrForMysql($request->valor_sugerido);
         }
 
-        $procedimento->where('id', $procedimento->id)->where('fk_empresa', Auth::user()->fk_empresa)->update($proc);
+        $edit = $p->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($proc);
+        LogSistemaController::logSistemaTipoUpdate($id, 'id', 'procedimentos', $proc);
 
-        return redirect('/procedimentos')->with('success', 'Sucesso!');
+        if ($edit) {
+            return redirect('/procedimentos')->with('success', 'Sucesso!');
+        } else {
+            return redirect('/procedimentos')->with('success', 'Erro!');
+        }
     }
 
     /**
@@ -162,11 +172,13 @@ class ProcedimentoController extends Controller
      * @param  \App\Models\Procedimentos\Procedimento  $procedimento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Procedimento $p, $id)
     {
-        $desativado = Procedimento::where('id', $request->id)
-            ->where('fk_empresa', Auth::user()->fk_empresa)
-            ->update(['fk_usuario_desativou' => Auth::user()->id, 'ativo' => false]);
+
+        $procedimento['ativo'] = false;
+        $desativado            = $p->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($procedimento);
+
+        LogSistemaController::logSistemaTipoUpdate($id, 'id', 'procedimentos', $procedimento);
 
         if ($desativado) {
             return json_encode(true);

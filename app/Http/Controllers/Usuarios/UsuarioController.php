@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Logs\LogSistemaController;
 use App\Http\Requests\SalvarEdicaoUsuarioRequest;
 use App\Http\Requests\SalvarUsuarioRequest;
 use App\Models\Empresas\Empresa;
@@ -69,6 +70,7 @@ class UsuarioController extends Controller
         $usuario->save();
 
         $endereco                   = new Endereco_usuario();
+        $endereco->fk_empresa       = Auth::user()->fk_empresa;
         $endereco->fk_usuario       = $usuario->id;
         $endereco->fk_cidade        = $request->cidade;
         $endereco->cep              = $request->cep;
@@ -82,7 +84,11 @@ class UsuarioController extends Controller
         $usuario_mm_empresa->fk_empresa = Auth::user()->fk_empresa;
         $usuario_mm_empresa->save();
 
-        return redirect('/usuarios/create')->with('success', 'Sucesso!');
+        LogSistemaController::logSistemaTipoInsert('usuarios', $usuario);
+        LogSistemaController::logSistemaTipoInsert('endereco_usuarios', $endereco);
+        LogSistemaController::logSistemaTipoInsert('usuario_mm_empresas', $usuario_mm_empresa);
+
+        return redirect('/usuarios')->with('success', 'Sucesso!');
     }
 
     /**
@@ -122,8 +128,11 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuarios\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Usuario $user, Endereco_usuario $endereco, SalvarEdicaoUsuarioRequest $request, $id)
+    public function update(SalvarEdicaoUsuarioRequest $request, $id)
     {
+        $user             = new Usuario(); 
+        $endereco_usuario = new Endereco_usuario();
+
         // Verifica se existe o usuario e se é da empresa do usuario logado
         $usuario_existe = $user->verificaUsuarioExisteEmpresa($id, Auth::user()->fk_empresa);
 
@@ -144,14 +153,17 @@ class UsuarioController extends Controller
         $usuario['email']             = $request->email;
         $usuario['celular']           = $request->celular;
         $usuario['senha']             = $nova_senha;
-        $user->where('id', $id)->update($usuario);
+        $user->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($usuario);
 
         $endereco['fk_cidade']        = $request->cidade;
         $endereco['cep']              = $request->cep;
         $endereco['rua']              = $request->rua;
         $endereco['numero']           = $request->numero_casa;
         $endereco['complemento']      = $request->complemento;
-        $endereco->where('fk_usuario', $id)->update($endereco);
+        $endereco_usuario->where('fk_usuario', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($endereco);
+
+        LogSistemaController::logSistemaTipoUpdate($id,'id', 'usuarios', $usuario);
+        LogSistemaController::logSistemaTipoUpdate($id, 'fk_usuario', 'enderecos', $endereco);
 
         return redirect('/usuarios')->with('success', 'Sucesso!');
     }
@@ -162,11 +174,12 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuarios\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Usuario $user, Request $request, $id)
     {
-        $desativado = Usuario::where('id', $request->id)
-            ->where('fk_empresa', Auth::user()->fk_empresa)
-            ->update(['ativo' => false]);
+        $usuario['ativo'] = false;
+        $desativado       = $user->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($usuario);
+
+        LogSistemaController::logSistemaTipoUpdate($id, 'id', 'usuarios', $usuario);
 
         if ($desativado) {
             return json_encode(true);
@@ -175,11 +188,12 @@ class UsuarioController extends Controller
         }
     }
 
-    public function ativar(Request $request)
+    public function ativar(Usuario $user, $id)
     {
-        $ativado = Usuario::where('id', $request->id)
-            ->where('fk_empresa', Auth::user()->fk_empresa)
-            ->update(['ativo' => true]);
+        $usuario['ativo'] = true;
+        $ativado          = $user->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($usuario);
+
+        LogSistemaController::logSistemaTipoUpdate($id, 'id', 'usuarios', $usuario);
 
         if ($ativado) {
             return json_encode(true);

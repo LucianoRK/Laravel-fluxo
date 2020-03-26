@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Models\Usuarios;
+namespace App\Models\Logs;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-class Tipo_usuario extends Model
+class Log_sistema extends Model
 {
-     /**
+    protected $table = 'log_sistema';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id', 'nome', 'ativo'
+        'id', 'tabela', 'tipo', 'fk_usuario', 'fk_empresa'  
     ];
 
     /**
@@ -33,12 +34,4 @@ class Tipo_usuario extends Model
     protected $casts = [
         
     ];
-
-    public function getAllTiposUsuarios()
-    {
-        return Tipo_usuario::select('*')
-            ->where([ ['id', '!=', 1], ['ativo', '=', true]])
-            ->orderBy('nome')
-            ->get();
-    }
 }
