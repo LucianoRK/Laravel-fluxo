@@ -15,6 +15,13 @@ class CreateProteticosTable extends Migration
     {
         Schema::create('proteticos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('fk_empresa');
+            $table->string('razao_social', 50);
+            $table->string('nome_fantasia', 50);
+            $table->string('cnpj', 14);
+            $table->string('email', 50)->nullable();
+            $table->string('celular', 20)->nullable();
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

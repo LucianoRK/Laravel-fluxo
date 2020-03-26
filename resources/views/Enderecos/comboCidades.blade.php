@@ -1,4 +1,4 @@
-<label class="control-label text-right col-md-3">Cidades</label>
+<label class="control-label text-right col-md-3">Cidade</label>
 <div class="col-md-6">
     <select id="cidade" name="cidade" value="{{$endereco->fk_cidade ?? old('cidade') }}" class="form-control">
         @if ($cidades)

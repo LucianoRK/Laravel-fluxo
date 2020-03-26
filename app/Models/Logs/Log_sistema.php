@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Log_sistema extends Model
 {
-    protected $table = 'log_sistema';
-
     /**
      * The attributes that are mass assignable.
      *

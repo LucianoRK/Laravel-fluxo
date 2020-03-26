@@ -47,7 +47,7 @@ class ProcedimentoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Procedimento $p)
+    public function store(Request $request)
     {
         if (!isset($request->clinico_geral) && !isset($request->implantodontia) && !isset($request->odontopediatria) && !isset($request->orofacial)) {
             return redirect()->back()->with('especialidade', 'Por favor, selecione ao menos uma especialidade');
@@ -73,6 +73,7 @@ class ProcedimentoController extends Controller
         }
 
         if (isset($request->clinico_geral)) {
+            $p                   = new Procedimento();
             $p->fk_empresa       = Auth::user()->fk_empresa;
             $p->fk_especialidade = 1;
             $p->fk_categoria     = $request->categoria;
@@ -83,6 +84,7 @@ class ProcedimentoController extends Controller
             LogSistemaController::logSistemaTipoInsert('procedimentos', $p);
         }
         if (isset($request->implantodontia)) {
+            $p                   = new Procedimento();
             $p->fk_empresa       = Auth::user()->fk_empresa;
             $p->fk_especialidade = 3;
             $p->fk_categoria     = $request->categoria;
@@ -93,6 +95,7 @@ class ProcedimentoController extends Controller
             LogSistemaController::logSistemaTipoInsert('procedimentos', $p);
         }
         if (isset($request->odontopediatria)) {
+            $p                   = new Procedimento();
             $p->fk_empresa       = Auth::user()->fk_empresa;
             $p->fk_especialidade = 4;
             $p->fk_categoria     = $request->categoria;
@@ -103,6 +106,7 @@ class ProcedimentoController extends Controller
             LogSistemaController::logSistemaTipoInsert('procedimentos', $p);
         }
         if (isset($request->orofacial)) {
+            $p                   = new Procedimento();
             $p->fk_empresa       = Auth::user()->fk_empresa;
             $p->fk_especialidade = 5;
             $p->fk_categoria     = $request->categoria;
@@ -150,6 +154,13 @@ class ProcedimentoController extends Controller
      */
     public function update(Request $request, $id, Procedimento $p)
     {
+        // Verifica se existe este pocedimento e se é da empresa do usuario logado
+        $procedimento_existe = $p->verificaProcedimentoExisteEmpresa($id, Auth::user()->fk_empresa);
+
+        if (!$procedimento_existe) {
+            return redirect()->back()->with('warning', 'Procedimento não encontrado');
+        }
+
         if (!$request->valor_sugerido) {
             $proc['valor_sugerido'] = 0;
         } else {

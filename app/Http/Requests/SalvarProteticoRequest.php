@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\CpfRule;
-use App\Rules\LoginRule;
-use App\Rules\PasswordRule;
+use App\Rules\CnpjRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SalvarUsuarioRequest extends FormRequest
+class SalvarProteticoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,15 +25,11 @@ class SalvarUsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'fk_tipo_usuario' => 'required',
-            'nome' => 'required',
-            'data_nascimento' => 'required',
-            'cpf' => ['required', 'string', new CpfRule],
+            'razao_social' => 'required',
+            'nome_fantasia' => 'required',
+            'cnpj' => ['required', 'string', new CnpjRule],
             'email' => 'required|email',
             'celular' => 'required|min:16|max:16',
-            'login' => ['required', 'min: 6', new LoginRule],
-            'senha' => ['required', 'string', new PasswordRule],
-            'repita_senha' => ['required', 'string', new PasswordRule, 'same:senha'],
             'numero' => 'max:10',
         ];
     }
@@ -43,7 +37,6 @@ class SalvarUsuarioRequest extends FormRequest
     public function messages()
     {
         return [
-            'fk_tipo_usuario.required' => 'O campo tipo de usuário é obrigatório.',
             'celular.min' => 'Celular digitado inválido',
             'celular.max' => 'Celular digitado inválido',
             'numero.max' => 'O campo número deve conter no máximo 10 carácter',

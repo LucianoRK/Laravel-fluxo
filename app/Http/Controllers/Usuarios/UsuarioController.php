@@ -40,13 +40,13 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Usuario_mm_empresa $empresa, Tipo_usuario $tipo_usuario, Estado $estado)
+    public function create(Empresa $empresa, Tipo_usuario $tipo_usuario, Estado $estado)
     {
-        $empresas       = $empresa->getAllEmpresasUsuario(Auth::user()->id);
+        $empresa        = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
         $tipos_usuarios = $tipo_usuario->getAllTiposUsuarios();
         $estados        = $estado->getAllEstados();
 
-        return view('usuarios.novoUsuario', compact('empresas', 'tipos_usuarios', 'estados'));
+        return view('usuarios.novoUsuario', compact('empresa', 'tipos_usuarios', 'estados'));
     }
 
     /**
@@ -58,7 +58,7 @@ class UsuarioController extends Controller
     public function store(SalvarUsuarioRequest $request)
     {
         $usuario                    = new Usuario();
-        $usuario->fk_empresa        = $request->fk_empresa;
+        $usuario->fk_empresa        = Auth::user()->fk_empresa;
         $usuario->fk_tipo_usuario   = $request->fk_tipo_usuario;
         $usuario->nome              = $request->nome;
         $usuario->cpf               = preg_replace('/[^0-9]/is', '', $request->cpf);
@@ -75,7 +75,7 @@ class UsuarioController extends Controller
         $endereco->fk_cidade        = $request->cidade;
         $endereco->cep              = $request->cep;
         $endereco->rua              = $request->rua;
-        $endereco->numero           = $request->numero_casa;
+        $endereco->numero           = $request->numero;
         $endereco->complemento      = $request->complemento;
         $endereco->save();
 
@@ -158,7 +158,7 @@ class UsuarioController extends Controller
         $endereco['fk_cidade']        = $request->cidade;
         $endereco['cep']              = $request->cep;
         $endereco['rua']              = $request->rua;
-        $endereco['numero']           = $request->numero_casa;
+        $endereco['numero']           = $request->numero;
         $endereco['complemento']      = $request->complemento;
         $endereco_usuario->where('fk_usuario', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($endereco);
 
@@ -174,7 +174,7 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuarios\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $user, Request $request, $id)
+    public function destroy(Usuario $user, $id)
     {
         $usuario['ativo'] = false;
         $desativado       = $user->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($usuario);

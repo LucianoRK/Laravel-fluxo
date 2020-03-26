@@ -39,4 +39,8 @@ Route::group(['middleware' => ['auth']], function () {
         // Procedimento 
         Route::resource('procedimentos', 'ProcedimentoController');
     }
+
+    /* CRUD PROTÉTICO */
+    Route::resource('proteticos', 'ProteticoController');
+    Route::put('/proteticos/ativar/{id}', 'ProteticoController@ativar');
 });

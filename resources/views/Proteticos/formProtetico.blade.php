@@ -5,57 +5,37 @@
         <div class="form-group row">
             <label class="control-label text-right col-md-3">Empresa</label>
             <div class="col-md-6">
-                <strong> {{ $usuario->nome_empresa ?? $empresa['nome'] }} </strong>
-            </div>
-        </div>
-
-        <div class="form-group row {{ $errors->has('fk_tipo_usuario') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*Tipo de Usuario</label>
-            <div class="col-md-6">
-                @if(!isset($usuario->nome_tipo_usuario))
-                    <select name="fk_tipo_usuario" value="{{ old('fk_tipo_usuario') }}" class="form-control">
-                        @if ($tipos_usuarios)
-                            @foreach($tipos_usuarios as $tipo_usuario)
-                                <option value="{{ $tipo_usuario->id }}"> {{ $tipo_usuario->nome }} </option>
-                            @endforeach
-                        @endif
-                    </select>
-                    @if ($errors->has('fk_tipo_usuario')) 
-                        <h6> <span class="help-block"> {{ $errors->first('fk_tipo_usuario') }} </span> </h6>
-                    @endif
-                @else
-                    <strong> {{$usuario->nome_tipo_usuario}} </strong>
-                @endif
+                <strong> {{ $protetico->nome_empresa ?? $empresa['nome'] }} </strong>
             </div>
         </div>
 
         <hr class="dashed">
-        <div class="form-group row {{ $errors->has('nome') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*Nome Completo</label>
+        <div class="form-group row {{ $errors->has('razao_social') ? 'has-error' : '' }}">
+            <label class="control-label text-right col-md-3">*Razão Social</label>
             <div class="col-md-6">
-                <input name="nome" value="{{$usuario->nome ?? old('nome') }}" type="text" class="form-control">
-                @if ($errors->has('nome')) 
-                    <h6> <span class="help-block"> {{ $errors->first('nome') }} </span> </h6>
+                <input name="razao_social" value="{{$protetico->razao_social ?? old('razao_social') }}" type="text" class="form-control">
+                @if ($errors->has('razao_social')) 
+                    <h6> <span class="help-block"> {{ $errors->first('razao_social') }} </span> </h6>
                 @endif
             </div>
         </div>
 
-        <div class="form-group row {{ $errors->has('data_nascimento') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*Data de Nascimento</label>
+        <div class="form-group row {{ $errors->has('nome_fantasia') ? 'has-error' : '' }}">
+            <label class="control-label text-right col-md-3">*Nome Fantasia</label>
             <div class="col-md-6">
-                <input name="data_nascimento" value="{{$usuario->data_nascimento ?? old('data_nascimento') }}" type="date" class="form-control" placeholder="dd/mm/yyyy">
-                @if ($errors->has('data_nascimento')) 
-                    <h6> <span class="help-block"> {{ $errors->first('data_nascimento') }} </span> </h6>
+                <input name="nome_fantasia" value="{{$protetico->nome_fantasia ?? old('nome_fantasia') }}" type="text" class="form-control">
+                @if ($errors->has('nome_fantasia')) 
+                    <h6> <span class="help-block"> {{ $errors->first('nome_fantasia') }} </span> </h6>
                 @endif
             </div>
         </div>
 
-        <div class="form-group row {{ $errors->has('cpf') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*CPF</label>
+        <div class="form-group row {{ $errors->has('cnpj') ? 'has-error' : '' }}">
+            <label class="control-label text-right col-md-3">*CNPJ</label>
             <div class="col-md-6">
-                <input name="cpf" value="{{$usuario->cpf ?? old('cpf') }}" type="text" class="form-control cpfMask" placeholder="000.000.000-00">
-                @if ($errors->has('cpf')) 
-                    <h6> <span class="help-block"> {{ $errors->first('cpf') }} </span> </h6>
+                <input name="cnpj" value="{{$protetico->cnpj ?? old('cnpj') }}" type="text" class="form-control cnpjMask" placeholder="000.000.000-00">
+                @if ($errors->has('cnpj')) 
+                    <h6> <span class="help-block"> {{ $errors->first('cnpj') }} </span> </h6>
                 @endif
             </div>
         </div>
@@ -63,7 +43,7 @@
         <div class="form-group row {{ $errors->has('email') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">*Email</label>
             <div class="col-md-6">
-                <input name="email" value="{{$usuario->email ?? old('email') }}" type="text" class="form-control" placeholder="ficticio@gmail.com">
+                <input name="email" value="{{$protetico->email ?? old('email') }}" type="text" class="form-control" placeholder="ficticio@gmail.com">
                 @if ($errors->has('email')) 
                     <h6> <span class="help-block"> {{ $errors->first('email') }} </span> </h6>
                 @endif
@@ -73,7 +53,7 @@
         <div class="form-group row {{ $errors->has('celular') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">*Celular</label>
             <div class="col-md-6">
-                <input name="celular" value="{{$usuario->celular ?? old('celular') }}" type="text" class="form-control celularMask" placeholder="(00) 0 0000-0000">
+                <input name="celular" value="{{$protetico->celular ?? old('celular') }}" type="text" class="form-control celularMask" placeholder="(00) 0 0000-0000">
                 @if ($errors->has('celular')) 
                     <h6> <span class="help-block"> {{ $errors->first('celular') }} </span> </h6>
                 @endif
@@ -81,7 +61,6 @@
         </div>
 
         <hr class="dashed">
-
         <div class="form-group row {{ $errors->has('cep') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">CEP</label>
             <div class="col-md-6">
@@ -146,42 +125,6 @@
                 <input name="complemento" value="{{$endereco->complemento ?? old('complemento') }}" type="text" class="form-control">
                 @if ($errors->has('complemento')) 
                     <h6> <span class="help-block"> {{ $errors->first('complemento') }} </span> </h6>
-                @endif
-            </div>
-        </div>
-
-        <hr class="dashed">
-
-        <div class="form-group row {{ $errors->has('login') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*Login</label>
-            <div class="col-md-6">
-                @if(!isset($usuario->login))
-                    <input name="login" value="{{ old('login') }}" type="text" class="form-control" placeholder="O login deve conter no mínimo 6 caracteres">
-                    @if ($errors->has('login')) 
-                        <h6> <span class="help-block"> {{ $errors->first('login') }} </span> </h6>
-                    @endif
-                @else
-                    <strong> {{$usuario->login}} </strong>
-                @endif
-            </div>
-        </div>
-
-        <div class="form-group row {{ $errors->has('senha') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*Senha</label>
-            <div class="col-md-6">
-                <input name="senha" value="{{ old('senha') }}" type="password" class="form-control" placeholder="A senha deve conter no mínimo 8 caracteres com letras e números">
-                @if ($errors->has('senha')) 
-                    <h6> <span class="help-block"> {{ $errors->first('senha') }} </span> </h6>
-                @endif
-            </div>
-        </div>
-
-        <div class="form-group row {{ $errors->has('repita_senha') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*Repita a senha</label>
-            <div class="col-md-6">
-                <input name="repita_senha" value="{{ old('repita_senha') }}" type="password" class="form-control" placeholder="A senha deve conter no mínimo 8 caracteres com letras e números">
-                @if ($errors->has('repita_senha')) 
-                    <h6> <span class="help-block"> {{ $errors->first('repita_senha') }} </span> </h6>
                 @endif
             </div>
         </div>

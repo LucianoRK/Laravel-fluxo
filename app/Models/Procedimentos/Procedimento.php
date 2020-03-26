@@ -56,4 +56,11 @@ class Procedimento extends Model
             ->orderBy('procedimento_categorias.nome')
             ->first();
     }
+
+    public function verificaProcedimentoExisteEmpresa($procedimento, $fk_empresa)
+    {
+        return Procedimento::select('id')
+            ->where([ ['id', '=', $procedimento], ['fk_empresa', '=', $fk_empresa], ['ativo', '=', true] ])
+            ->first();
+    }
 }

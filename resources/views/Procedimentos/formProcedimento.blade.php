@@ -66,7 +66,7 @@
         </div>
 
         <div class="form-group row {{ $errors->has('valor_sugerido') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*Valor Sugerido</label>
+            <label class="control-label text-right col-md-3">Valor Sugerido</label>
             <div class="col-md-6">
                 <input name="valor_sugerido" value="{{ $procedimento->valor_sugerido ?? old('valor_sugerido') }}" type="text" class="form-control valor_sugerido">
                 @if ($errors->has('valor_sugerido')) 
@@ -76,7 +76,7 @@
         </div>
 
         <div class="form-group row {{ $errors->has('protetico') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*Protético</label>
+            <label class="control-label text-right col-md-3">Protético</label>
             <div class="col-md-6">
                 @if(!isset($procedimento->protetico))
                     <div class="custom-control custom-checkbox custom-control-inline">

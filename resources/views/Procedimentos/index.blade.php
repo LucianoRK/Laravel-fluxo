@@ -9,41 +9,41 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <h5 class="card-header text-success">
-                            <div class="text-right">
-                                <a class="btn btn-primary" href="procedimentos/create">Novo Procedimento</a>
+                    <h5 class="card-header text-success">
+                        <div class="text-right">
+                            <a class="btn btn-primary" href="procedimentos/create">Novo Procedimento</a>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <span class="align-middle">PROCEDIMENTOS</span>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <span class="align-middle">PROCEDIMENTOS</span>
-                                </div>
-                            </div>
-                        </h5>
-
-                        <table class="table table-bordered table-striped table_procedimentos">
+                        </div>
+                    </h5>
+                    
+                    <div class="table-responsive" style="max-width: 100% !important;">
+                        <table class="table table-sm table-striped table_procedimentos">
                             <thead class="text-center">
                                 <tr>
-                                    <th class="text-success">#</th>
-                                    <th class="text-success">ESPECIALIDADE</th>
-                                    <th class="text-success">CATEGORIA</th>
-                                    <th class="text-success">PROCEDIMENTO</th>
-                                    <th class="text-success">VALOR</th>
-                                    <th class="text-success">PROTETICO</th>
-                                    <th class="text-success">OPÇÕES</th>
+                                    <th scope="col" class="text-success">#</th>
+                                    <th scope="col" class="text-success">ESPECIALIDADE</th>
+                                    <th scope="col" class="text-success">CATEGORIA</th>
+                                    <th scope="col" class="text-success">PROCEDIMENTO</th>
+                                    <th scope="col" class="text-success">VALOR</th>
+                                    <th scope="col" class="text-success">PROTETICO</th>
+                                    <th scope="col" class="text-success">OPÇÕES</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="container">
                                 @if ($procedimentos) 
                                     @foreach ($procedimentos as $procedimento)
                                         <tr>
                                             <td class="text-center">
                                                 {{ $count++}}
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                {{ $procedimento->nome_esp }}
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 {{ $procedimento->nome_cat }}
                                             </td>
                                             <td>

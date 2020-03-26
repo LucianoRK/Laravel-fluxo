@@ -1,23 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'Usuarios')
+@section('title', 'Protéticos')
 
 @section('content')
 
 @can('permissao', 10)
     <div class="row">
         <div class="col-md-12">
-            <!-- USUARIOS ATIVOS -->
+            <!-- PROTÉTICOS ATIVOS -->
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
                         <h5 class="card-header text-success">
                             <div class="text-right">
-                                <a class="btn btn-primary" href="usuarios/create">Novo Usuário</a>
+                                <a class="btn btn-primary" href="proteticos/create">Novo Protético</a>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <span class="align-middle">USUÁRIOS ATIVOS - [ {{ $empresa->nome }} ]</span>
+                                    <span class="align-middle">PROTÉTICOS ATIVOS - [ {{ $empresa->nome }} ]</span>
                                 </div>
                             </div>
                         </h5>
@@ -26,30 +26,30 @@
                             <thead class="text-center">
                                 <tr>
                                     <th class="text-success">#</th>
-                                    <th class="text-success">NOME</th>
-                                    <th class="text-success">TIPO</th>
-                                    <th class="text-success">LOGIN</th>
+                                    <th class="text-success">RAZÃO SOCIAL</th>
+                                    <th class="text-success">NOME FANTASIA</th>
+                                    <th class="text-success">CONTATO</th>
                                     <th class="text-success">OPÇÕES</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($usuarios['ativos']) 
-                                    @foreach ($usuarios['ativos'] as $usuario)
+                                @if ($proteticos['ativos']) 
+                                    @foreach ($proteticos['ativos'] as $protetico)
                                         <tr>
                                             <td class="text-center">
                                                 {{ $count++}}
                                             </td>
                                             <td>
-                                                [{{ $usuario->id }}] - {{ $usuario->nome }}
+                                                [{{ $protetico->id }}] - {{ $protetico->nome_fantasia }}
                                             </td>
                                             <td>
-                                                {{ $usuario->tipo_usuario }}
+                                                {{ $protetico->razao_social }}
                                             </td>
-                                            <td>
-                                                {{ $usuario->login }}
+                                            <td class="text-center">
+                                                {{ $protetico->celular }}
                                             </td>
-                                            <td class="text-center" id_user="{{ $usuario->id }}">
-                                                <a href="{{ url("usuarios/$usuario->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 
+                                            <td class="text-center" id_protetico="{{ $protetico->id }}">
+                                                <a href="{{ url("proteticos/$protetico->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 
                                                     <i class="la la-edit text-white font-size-22"></i> 
                                                 </a>
 
@@ -67,14 +67,14 @@
             </div>
 
             <!-- USUARIOS INATIVOS -->
-            @if ( count($usuarios['inativos']) > 0) 
+            @if ( count($proteticos['inativos']) > 0) 
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
                             <h5 class="card-header text-danger">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <span class="align-middle">USUÁRIOS INATIVOS - [ {{ $empresa->nome }} ]</span>
+                                        <span class="align-middle">PROTÉTICOS INATIVOS - [ {{ $empresa->nome }} ]</span>
                                     </div>
                                 </div>
                             </h5>
@@ -82,29 +82,29 @@
                             <table class="table table-striped table-bordered table_inativos">
                                 <thead class="text-center">
                                     <tr>
-                                        <th class="text-danger">#</th>
-                                        <th class="text-danger">NOME</th>
-                                        <th class="text-danger">TIPO</th>
-                                        <th class="text-danger">LOGIN</th>
-                                        <th class="text-danger">OPÇÕES</th>
+                                        <th class="text-success">#</th>
+                                        <th class="text-success">RAZÃO SOCIAL</th>
+                                        <th class="text-success">NOME FANTASIA</th>
+                                        <th class="text-success">CONTATO</th>
+                                        <th class="text-success">OPÇÕES</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($usuarios['inativos'] as $usuario)
+                                    @foreach ($proteticos['inativos'] as $protetico)
                                         <tr>
                                             <td class="text-center">
-                                                {{ $usuario->id }}
+                                                {{ $count++ }}
                                             </td>
                                             <td>
-                                                [{{ $usuario->id }}] - {{ $usuario->nome }}
+                                                [{{ $protetico->id }}] - {{ $protetico->razao_social }}
                                             </td>
                                             <td>
-                                                {{ $usuario->tipo_usuario }}
+                                                {{ $protetico->nome_fantasia }}
                                             </td>
-                                            <td>
-                                                {{ $usuario->login }}
+                                            <td class="text-center">
+                                                {{ $protetico->celular }}
                                             </td>
-                                            <td class="text-center" id_user="{{ $usuario->id }}">
+                                            <td class="text-center" id_protetico="{{ $protetico->id }}">
                                                 <button class="btn btn-success btn-sm ativar" title="Ativar"> 
                                                     <i class="la la-check-square text-white font-size-22"></i>
                                                 </button>
@@ -124,7 +124,7 @@
 <script>
     function desativarUsuario() {
         $('.desativar').on('click', function() {
-            let id_user = $(this).parent().attr('id_user');
+            let id_protetico = $(this).parent().attr('id_protetico');
             desativaBotao(this);
             
             swal({
@@ -142,12 +142,12 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: "usuarios/"+id_user,
+                        url: "proteticos/"+id_protetico,
                         type: 'delete',
                         dataType: "JSON",
                         data: {
                             _token: "{{ csrf_token() }}",
-                            id: id_user
+                            id: id_protetico
                         },
                         success: function (data){
                             if (data) {
@@ -181,7 +181,7 @@
 
     function ativarUsuario() {
         $('.ativar').on('click', function() {
-            let id_user = $(this).parent().attr('id_user');
+            let id_protetico = $(this).parent().attr('id_protetico');
             desativaBotao(this);
             
             swal({
@@ -199,12 +199,12 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: "usuarios/ativar/"+id_user,
+                        url: "proteticos/ativar/"+id_protetico,
                         type: 'put',
                         dataType: "JSON",
                         data: {
                             _token: "{{ csrf_token() }}",
-                            id: id_user
+                            id: id_protetico
                         },
                         success: function (data){
                             if (data) {
