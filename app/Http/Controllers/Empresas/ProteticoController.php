@@ -27,7 +27,7 @@ class ProteticoController extends Controller
         $proteticos['inativos'] = $protetico->getAllproteticoInativoEmpresa(Auth::user()->fk_empresa);
         $empresa                = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
 
-        return view('proteticos.index', compact('proteticos', 'empresa', 'count'));
+        return view('empresas.proteticos.index', compact('proteticos', 'empresa', 'count'));
     }
 
     /**
@@ -40,7 +40,7 @@ class ProteticoController extends Controller
         $empresa = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
         $estados = $estado->getAllEstados();
 
-        return view('proteticos.novoProtetico', compact('empresa', 'estados'));
+        return view('empresas.proteticos.novoProtetico', compact('empresa', 'estados'));
     }
 
     /**
@@ -103,7 +103,7 @@ class ProteticoController extends Controller
         $protetico  = $proteticos->getDadosProteticoEmpresa($protetico->id, Auth::user()->fk_empresa);
         $endereco   = $enderecos->getEnderecoProtetico($protetico->id);
 
-        return view('proteticos.editarProtetico', compact('estados', 'protetico', 'endereco'));
+        return view('empresas.proteticos.editarProtetico', compact('estados', 'protetico', 'endereco'));
     }
 
     /**
@@ -118,7 +118,7 @@ class ProteticoController extends Controller
         $e = new Endereco_protetico();
 
         // Verifica se existe o protético e se é da empresa do usuario logado
-        $protetico_existe = $p->verificaUsuarioExisteEmpresa($id, Auth::user()->fk_empresa);
+        $protetico_existe = $p->verificaProteticoExisteEmpresa($id, Auth::user()->fk_empresa);
 
         if (!$protetico_existe) {
             return redirect()->back()->with('warning', 'Protético não encontrado');

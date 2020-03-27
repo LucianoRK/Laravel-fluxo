@@ -37,6 +37,11 @@
                         <li><a href="/proteticos"><i class="icon dripicons-user-id"></i><span> Protéticos </span></a></li>
                     </li>
                 @endcan
+                @can('permissao', 13)
+                    <li class="nav-dropdown">
+                        <li><a href="/radiologistas"><i class="icon dripicons-user-id"></i><span> Radiologistas </span></a></li>
+                    </li>
+                @endcan
 
                 <li class="sidebar-header"><span>SUPORTE</span></li>
                 <li>

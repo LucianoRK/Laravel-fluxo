@@ -12,7 +12,7 @@ class Protetico extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'id', 'fk_empresa', 'razao_social', 'nome_fantasia', 'cnpj', 'email', 'celular', 'ativo'
     ];
 
     /**
@@ -58,7 +58,7 @@ class Protetico extends Model
             ->first();
     }
 
-    public function verificaUsuarioExisteEmpresa($protetico, $fk_empresa)
+    public function verificaProteticoExisteEmpresa($protetico, $fk_empresa)
     {
         return Protetico::select('id')
             ->where([ ['id', '=', $protetico], ['fk_empresa', '=', $fk_empresa], ['ativo', '=', true] ])

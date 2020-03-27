@@ -11,7 +11,7 @@
                 <form action="{{ route('proteticos.update', $protetico->id)}}" method="POST">
                     @method('PUT')
                     
-                    @include('proteticos.formProtetico');
+                    @include('empresas.proteticos.formProtetico');
                     <input type="hidden" name="cidade_edit" id="cidade_edit" value="{{$endereco->fk_cidade ?? false }}">
 
                     <div class="card-footer bg-light">

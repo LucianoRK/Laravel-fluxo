@@ -1,23 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'Protéticos')
+@section('title', 'Radiologistas')
 
 @section('content')
 
 @can('permissao', 12)
     <div class="row">
         <div class="col-md-12">
-            <!-- PROTÉTICOS ATIVOS -->
+            <!-- RADIOLOGISTAS ATIVOS -->
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
                         <h5 class="card-header text-success">
                             <div class="text-right">
-                                <a class="btn btn-primary" href="proteticos/create">Novo Protético</a>
+                                <a class="btn btn-primary" href="radiologistas/create">Novo Radiologistas</a>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <span class="align-middle">PROTÉTICOS ATIVOS - [ {{ $empresa->nome }} ]</span>
+                                    <span class="align-middle">RADIOLOGISTAS ATIVOS - [ {{ $empresa->nome }} ]</span>
                                 </div>
                             </div>
                         </h5>
@@ -33,23 +33,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($proteticos['ativos']) 
-                                    @foreach ($proteticos['ativos'] as $protetico)
+                                @if ($radiologistas['ativos']) 
+                                    @foreach ($radiologistas['ativos'] as $radiologista)
                                         <tr>
                                             <td class="text-center">
                                                 {{ $count++}}
                                             </td>
                                             <td>
-                                                [{{ $protetico->id }}] - {{ $protetico->nome_fantasia }}
+                                                [{{ $radiologista->id }}] - {{ $radiologista->razao_social }}
                                             </td>
                                             <td>
-                                                {{ $protetico->razao_social }}
+                                                {{ $radiologista->nome_fantasia }}
                                             </td>
                                             <td class="text-center">
-                                                {{ $protetico->celular }}
+                                                {{ $radiologista->celular }}
                                             </td>
-                                            <td class="text-center" id_protetico="{{ $protetico->id }}">
-                                                <a href="{{ url("proteticos/$protetico->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 
+                                            <td class="text-center" id_radiologista="{{ $radiologista->id }}">
+                                                <a href="{{ url("radiologistas/$radiologista->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 
                                                     <i class="la la-edit text-white font-size-22"></i> 
                                                 </a>
 
@@ -66,15 +66,15 @@
                 </div>
             </div>
 
-            <!-- USUARIOS INATIVOS -->
-            @if ( count($proteticos['inativos']) > 0) 
+            <!-- RADIOLOGISTAS INATIVOS -->
+            @if ( count($radiologistas['inativos']) > 0) 
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
                             <h5 class="card-header text-danger">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <span class="align-middle">PROTÉTICOS INATIVOS - [ {{ $empresa->nome }} ]</span>
+                                        <span class="align-middle">RADIOLOGISTAS INATIVOS - [ {{ $empresa->nome }} ]</span>
                                     </div>
                                 </div>
                             </h5>
@@ -90,21 +90,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($proteticos['inativos'] as $protetico)
+                                    @foreach ($radiologistas['inativos'] as $radiologista)
                                         <tr>
                                             <td class="text-center">
                                                 {{ $count++ }}
                                             </td>
                                             <td>
-                                                [{{ $protetico->id }}] - {{ $protetico->razao_social }}
+                                                [{{ $radiologista->id }}] - {{ $radiologista->razao_social }}
                                             </td>
                                             <td>
-                                                {{ $protetico->nome_fantasia }}
+                                                {{ $radiologista->nome_fantasia }}
                                             </td>
                                             <td class="text-center">
-                                                {{ $protetico->celular }}
+                                                {{ $radiologista->celular }}
                                             </td>
-                                            <td class="text-center" id_protetico="{{ $protetico->id }}">
+                                            <td class="text-center" id_radiologista="{{ $radiologista->id }}">
                                                 <button class="btn btn-success btn-sm ativar" title="Ativar"> 
                                                     <i class="la la-check-square text-white font-size-22"></i>
                                                 </button>
@@ -122,9 +122,9 @@
 @endcan
 
 <script>
-    function desativarUsuario() {
+    function desativarRadiologista() {
         $('.desativar').on('click', function() {
-            let id_protetico = $(this).parent().attr('id_protetico');
+            let id_radiologista = $(this).parent().attr('id_radiologista');
             desativaBotao(this);
             
             swal({
@@ -142,12 +142,12 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: "proteticos/"+id_protetico,
+                        url: "radiologistas/"+id_radiologista,
                         type: 'delete',
                         dataType: "JSON",
                         data: {
                             _token: "{{ csrf_token() }}",
-                            id: id_protetico
+                            id: id_radiologista
                         },
                         success: function (data){
                             if (data) {
@@ -179,9 +179,9 @@
         });
     }
 
-    function ativarUsuario() {
+    function ativarRadiologista() {
         $('.ativar').on('click', function() {
-            let id_protetico = $(this).parent().attr('id_protetico');
+            let id_radiologista = $(this).parent().attr('id_radiologista');
             desativaBotao(this);
             
             swal({
@@ -199,12 +199,12 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: "proteticos/ativar/"+id_protetico,
+                        url: "radiologistas/ativar/"+id_radiologista,
                         type: 'put',
                         dataType: "JSON",
                         data: {
                             _token: "{{ csrf_token() }}",
-                            id: id_protetico
+                            id: id_radiologista
                         },
                         success: function (data){
                             if (data) {
@@ -237,8 +237,8 @@
     }
 
     $(document).ready(function() {
-        desativarUsuario();
-        ativarUsuario();
+        desativarRadiologista();
+        ativarRadiologista();
         dataTable('table_ativos');
         dataTable('table_inativos');
     });
