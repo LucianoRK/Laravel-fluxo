@@ -3,7 +3,6 @@
 @section('title', 'Editar Usuário')
 
 @section('content')
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -13,6 +12,7 @@
                     
                     @include('usuarios.formUsuario');
                     <input type="hidden" name="cidade_edit" id="cidade_edit" value="{{$endereco->fk_cidade ?? false }}">
+                    <input type="hidden" name="fk_tipo_usuario" id="fk_tipo_usuario" value="{{$usuario->fk_tipo_usuario ?? false }}">
 
                     <div class="card-footer bg-light">
                         <div class="form-actions">
@@ -46,10 +46,15 @@
         }
     
         $(document).ready(function() { 
+            let tipo_user = $("#fk_tipo_usuario").val();
             comboCidades();
     
             if ($("#estado").val()) {
                 $("#estado").trigger( "change" );
+            }
+
+            if (tipo_user == 3) {
+                $('input:checkbox').prop("disabled", false);
             }
         });
     </script>

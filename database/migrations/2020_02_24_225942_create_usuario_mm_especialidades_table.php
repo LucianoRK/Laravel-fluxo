@@ -14,8 +14,10 @@ class CreateUsuarioMmEspecialidadesTable extends Migration
     public function up()
     {
         Schema::create('usuario_mm_especialidades', function (Blueprint $table) {
+            $table->integer('fk_empresa');
             $table->integer('fk_usuario');
             $table->integer('fk_especialidade');
+            $table->integer('ativo');
             $table->timestamps();
         });
     }

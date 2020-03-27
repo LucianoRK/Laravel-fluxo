@@ -8,15 +8,19 @@
                 <strong> {{ $usuario->nome_empresa ?? $empresa['nome'] }} </strong>
             </div>
         </div>
-
+        
         <div class="form-group row {{ $errors->has('fk_tipo_usuario') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">*Tipo de Usuario</label>
             <div class="col-md-6">
                 @if(!isset($usuario->nome_tipo_usuario))
-                    <select name="fk_tipo_usuario" value="{{ old('fk_tipo_usuario') }}" class="form-control">
+                    <select name="fk_tipo_usuario" id="fk_tipo_usuario" value="{{ old('fk_tipo_usuario') }}" class="form-control">
                         @if ($tipos_usuarios)
                             @foreach($tipos_usuarios as $tipo_usuario)
-                                <option value="{{ $tipo_usuario->id }}"> {{ $tipo_usuario->nome }} </option>
+                                @if (session('especialidade') || old('fk_tipo_usuario') == 3)
+                                    <option selected value="{{ $tipo_usuario->id }}"> {{ $tipo_usuario->nome }} </option>
+                                @else
+                                    <option value="{{ $tipo_usuario->id }}"> {{ $tipo_usuario->nome }} </option>
+                                @endif
                             @endforeach
                         @endif
                     </select>
@@ -25,6 +29,35 @@
                     @endif
                 @else
                     <strong> {{$usuario->nome_tipo_usuario}} </strong>
+                @endif
+            </div>
+        </div>
+
+        <div id='especialidade' class="form-group row {{ session('especialidade') ? 'has-error' : '' }}">
+            <label class="control-label text-right col-md-3">*Especialidade</label>
+            <div class="col-md-6">
+                <div class="custom-control-inline custom-checkbox checkbox-primary form-check">
+                    <input disabled type="checkbox" class="custom-control-input" name="clinico_geral" {{ in_array(1, $array_espe) ? 'checked' : ''}} {{ old('clinico_geral') ? 'checked' : ''}} id="stateCheck1">
+                    <label class="custom-control-label" for="stateCheck1">Clínico geral</label>
+                </div>
+                <div class="custom-control-inline custom-checkbox checkbox-warning form-check">
+                    <input disabled type="checkbox" class="custom-control-input" name="ortodontia" {{ in_array(2, $array_espe) ? 'checked' : ''}} {{ old('ortodontia') ? 'checked' : ''}} id="stateCheck2">
+                    <label class="custom-control-label" for="stateCheck2">Ortodontia</label>
+                </div>
+                <div class="custom-control-inline custom-checkbox checkbox-accent form-check">
+                    <input disabled type="checkbox" class="custom-control-input" name="implantodontia" {{ in_array(3, $array_espe) ? 'checked' : ''}} {{ old('implantodontia') ? 'checked' : ''}} id="stateCheck3">
+                    <label class="custom-control-label" for="stateCheck3">Implantodontia</label>
+                </div>
+                <div class="custom-control-inline custom-checkbox checkbox-success form-check">
+                    <input disabled type="checkbox" class="custom-control-input" name="odontopediatria" {{ in_array(4, $array_espe) ? 'checked' : ''}} {{ old('odontopediatria') ? 'checked' : ''}} id="stateCheck4">
+                    <label class="custom-control-label" for="stateCheck4">Odontopediatria</label>
+                </div>
+                <div class="custom-control-inline custom-checkbox checkbox-info form-check">
+                    <input disabled type="checkbox" class="custom-control-input" name="orofacial" {{ in_array(5, $array_espe) ? 'checked' : ''}} {{ old('orofacial') ? 'checked' : ''}} id="stateCheck5">
+                    <label class="custom-control-label" for="stateCheck5">Orofacial</label>
+                </div>
+                @if (session('especialidade')) 
+                    <h6> <span class="help-block"> {{ session('especialidade') }} </span> </h6>
                 @endif
             </div>
         </div>

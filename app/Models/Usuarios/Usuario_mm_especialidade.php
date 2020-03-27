@@ -12,7 +12,7 @@ class Usuario_mm_especialidade extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'fk_empresa', 'fk_usuario', 'fk_especialidade'
     ];
 
     /**
@@ -32,4 +32,12 @@ class Usuario_mm_especialidade extends Model
     protected $casts = [
         
     ];
+
+    public function getEspecialidadesUsuarioEmpresa($usuario, $fk_empresa)
+    {
+        return Usuario_mm_especialidade::select('fk_especialidade')
+            ->where([ ['fk_usuario', '=', $usuario], ['fk_empresa', '=', $fk_empresa], ['ativo', '=', true] ])
+            ->groupBy('fk_especialidade')
+            ->get();
+    }
 }

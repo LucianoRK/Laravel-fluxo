@@ -43,4 +43,8 @@ Route::group(['middleware' => ['auth']], function () {
     /* CRUD PROTÉTICO */
     Route::resource('proteticos', 'ProteticoController');
     Route::put('/proteticos/ativar/{id}', 'ProteticoController@ativar');
+
+    /* CRUD RADIOLOGISTAS */
+    Route::resource('proteticos', 'ProteticoController');
+    Route::put('/proteticos/ativar/{id}', 'ProteticoController@ativar');
 });

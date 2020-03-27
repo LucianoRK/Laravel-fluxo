@@ -4,7 +4,7 @@
 
 @section('content')
 
-@can('permissao', 10)
+@can('permissao', 12)
     <div class="row">
         <div class="col-md-12">
             <!-- PROTÉTICOS ATIVOS -->

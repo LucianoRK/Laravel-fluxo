@@ -12,6 +12,7 @@ use App\Models\Permissoes\Permissao_mm_usuario;
 use App\Models\Usuarios\Tipo_usuario;
 use App\Models\Usuarios\Usuario;
 use App\Models\Usuarios\Usuario_mm_empresa;
+use App\Models\Usuarios\Usuario_mm_especialidade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -46,7 +47,10 @@ class UsuarioController extends Controller
         $tipos_usuarios = $tipo_usuario->getAllTiposUsuarios();
         $estados        = $estado->getAllEstados();
 
-        return view('usuarios.novoUsuario', compact('empresa', 'tipos_usuarios', 'estados'));
+        // Usado no editar usuario preciso passar no criar usuario se não da erro.
+        $array_espe[]   = false;
+
+        return view('usuarios.novoUsuario', compact('empresa', 'tipos_usuarios', 'estados', 'array_espe'));
     }
 
     /**
@@ -57,6 +61,13 @@ class UsuarioController extends Controller
      */
     public function store(SalvarUsuarioRequest $request)
     {
+        // Se for dentista preciso validar se foi selecionado ao menos uma especialidade
+        if ($request->fk_tipo_usuario == 3) {
+            if (!isset($request->clinico_geral) && !isset($request->implantodontia) && !isset($request->odontopediatria) && !isset($request->orofacial) && !isset($request->ortodontia)) {
+                return redirect()->back()->with('especialidade', 'Por favor, selecione ao menos uma especialidade')->withInput();
+            }
+        }
+
         $usuario                    = new Usuario();
         $usuario->fk_empresa        = Auth::user()->fk_empresa;
         $usuario->fk_tipo_usuario   = $request->fk_tipo_usuario;
@@ -68,6 +79,7 @@ class UsuarioController extends Controller
         $usuario->login             = $request->login;
         $usuario->senha             = Hash::make($request->senha);
         $usuario->save();
+        LogSistemaController::logSistemaTipoInsert('usuarios', $usuario);
 
         $endereco                   = new Endereco_usuario();
         $endereco->fk_empresa       = Auth::user()->fk_empresa;
@@ -78,15 +90,89 @@ class UsuarioController extends Controller
         $endereco->numero           = $request->numero;
         $endereco->complemento      = $request->complemento;
         $endereco->save();
+        LogSistemaController::logSistemaTipoInsert('endereco_usuarios', $endereco);
 
         $usuario_mm_empresa             = new Usuario_mm_empresa();
         $usuario_mm_empresa->fk_usuario = $usuario->id;
         $usuario_mm_empresa->fk_empresa = Auth::user()->fk_empresa;
         $usuario_mm_empresa->save();
-
-        LogSistemaController::logSistemaTipoInsert('usuarios', $usuario);
-        LogSistemaController::logSistemaTipoInsert('endereco_usuarios', $endereco);
         LogSistemaController::logSistemaTipoInsert('usuario_mm_empresas', $usuario_mm_empresa);
+
+        if ($request->fk_tipo_usuario == 3) {
+            $usuario_mm_esp                   = new Usuario_mm_especialidade();
+            $usuario_mm_esp->fk_empresa       = Auth::user()->fk_empresa;
+            $usuario_mm_esp->fk_usuario       = $usuario->id;
+            $usuario_mm_esp->fk_especialidade = 1;
+
+            if (isset($request->clinico_geral)) {
+                $usuario_mm_esp['ativo'] = 1;
+            } else {
+                $usuario_mm_esp['ativo'] = 0;
+            }
+
+            $usuario_mm_esp->save();
+            LogSistemaController::logSistemaTipoInsert('usuario_mm_especialidade', $usuario_mm_esp);
+        }
+        if ($request->fk_tipo_usuario == 3) {
+            $usuario_mm_esp                   = new Usuario_mm_especialidade();
+            $usuario_mm_esp->fk_empresa       = Auth::user()->fk_empresa;
+            $usuario_mm_esp->fk_usuario       = $usuario->id;
+            $usuario_mm_esp->fk_especialidade = 2;
+
+            if (isset($request->ortodontia)) {
+                $usuario_mm_esp['ativo'] = 1;
+            } else {
+                $usuario_mm_esp['ativo'] = 0;
+            }
+
+            $usuario_mm_esp->save();
+            LogSistemaController::logSistemaTipoInsert('usuario_mm_especialidade', $usuario_mm_esp);
+        }
+        if ($request->fk_tipo_usuario == 3) {
+            $usuario_mm_esp                   = new Usuario_mm_especialidade();
+            $usuario_mm_esp->fk_empresa       = Auth::user()->fk_empresa;
+            $usuario_mm_esp->fk_usuario       = $usuario->id;
+            $usuario_mm_esp->fk_especialidade = 3;
+
+            if (isset($request->implantodontia)) {
+                $usuario_mm_esp['ativo'] = 1;
+            } else {
+                $usuario_mm_esp['ativo'] = 0;
+            }
+
+            $usuario_mm_esp->save();
+            LogSistemaController::logSistemaTipoInsert('usuario_mm_especialidade', $usuario_mm_esp);
+        }
+        if ($request->fk_tipo_usuario == 3) {
+            $usuario_mm_esp                   = new Usuario_mm_especialidade();
+            $usuario_mm_esp->fk_empresa       = Auth::user()->fk_empresa;
+            $usuario_mm_esp->fk_usuario       = $usuario->id;
+            $usuario_mm_esp->fk_especialidade = 4;
+
+            if (isset($request->odontopediatria)) {
+                $usuario_mm_esp['ativo'] = 1;
+            } else {
+                $usuario_mm_esp['ativo'] = 0;
+            }
+
+            $usuario_mm_esp->save();
+            LogSistemaController::logSistemaTipoInsert('usuario_mm_especialidade', $usuario_mm_esp);
+        }
+        if ($request->fk_tipo_usuario == 3) {
+            $usuario_mm_esp                   = new Usuario_mm_especialidade();
+            $usuario_mm_esp->fk_empresa       = Auth::user()->fk_empresa;
+            $usuario_mm_esp->fk_usuario       = $usuario->id;
+            $usuario_mm_esp->fk_especialidade = 5;
+            
+            if (isset($request->orofacial)) {
+                $usuario_mm_esp['ativo'] = 1;
+            } else {
+                $usuario_mm_esp['ativo'] = 0;
+            }
+
+            $usuario_mm_esp->save();
+            LogSistemaController::logSistemaTipoInsert('usuario_mm_especialidade', $usuario_mm_esp);
+        }
 
         return redirect('/usuarios')->with('success', 'Sucesso!');
     }
@@ -113,12 +199,21 @@ class UsuarioController extends Controller
         $estado         = new Estado();
         $usuarios       = new Usuario();
         $enderecos      = new Endereco_usuario();
+        $especialidades = new Usuario_mm_especialidade();
+        $array_espe[]   = false;
 
         $estados        = $estado->getAllEstados();
         $usuario        = $usuarios->getDadosUsuarioEmpresa($usuario->id, Auth::user()->fk_empresa);
         $endereco       = $enderecos->getEnderecoUsuario($usuario->id);
+        $especialidades = $especialidades->getEspecialidadesUsuarioEmpresa($usuario->id, Auth::user()->fk_empresa);
 
-        return view('usuarios.editarUsuario', compact('estados', 'usuario', 'endereco'));
+        if ($especialidades) {
+            foreach ($especialidades as $especialidade) {
+                $array_espe[] = $especialidade['fk_especialidade'];
+            }
+        }
+
+        return view('usuarios.editarUsuario', compact('estados', 'usuario', 'endereco', 'array_espe'));
     }
 
     /**
@@ -140,6 +235,13 @@ class UsuarioController extends Controller
             return redirect()->back()->with('warning', 'Usuário não encontrado');
         }
 
+        // Se for dentista preciso validar se foi selecionado ao menos uma especialidade
+        if ($request->fk_tipo_usuario == 3) {
+            if (!isset($request->clinico_geral) && !isset($request->implantodontia) && !isset($request->odontopediatria) && !isset($request->orofacial) && !isset($request->ortodontia)) {
+                return redirect()->back()->with('especialidade', 'Por favor, selecione ao menos uma especialidade')->withInput();
+            }
+        }
+
         // Verifica se foi solicitado alteração de senha
         if (!$request->senha) {
             $nova_senha = $usuario_existe->senha;
@@ -154,6 +256,7 @@ class UsuarioController extends Controller
         $usuario['celular']           = $request->celular;
         $usuario['senha']             = $nova_senha;
         $user->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($usuario);
+        LogSistemaController::logSistemaTipoUpdate($id,'id', 'usuarios', $usuario);
 
         $endereco['fk_cidade']        = $request->cidade;
         $endereco['cep']              = $request->cep;
@@ -161,9 +264,88 @@ class UsuarioController extends Controller
         $endereco['numero']           = $request->numero;
         $endereco['complemento']      = $request->complemento;
         $endereco_usuario->where('fk_usuario', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($endereco);
-
-        LogSistemaController::logSistemaTipoUpdate($id,'id', 'usuarios', $usuario);
         LogSistemaController::logSistemaTipoUpdate($id, 'fk_usuario', 'enderecos', $endereco);
+
+        if ($request->fk_tipo_usuario == 3) {
+            $mm_esp = new Usuario_mm_especialidade();
+            $mm_especialidade['fk_especialidade'] = 1;
+
+            if (isset($request->clinico_geral)) {
+                $mm_especialidade['ativo'] = 1;
+            } else {
+                $mm_especialidade['ativo'] = 0;
+            }
+
+            $mm_esp->where('fk_usuario', $id)
+                   ->where('fk_empresa', Auth::user()->fk_empresa)
+                   ->where('fk_especialidade', 1)
+                   ->update($mm_especialidade);
+            LogSistemaController::logSistemaTipoUpdate($id, 'fk_usuario', 'usuario_mm_especialidade', $mm_especialidade);
+        }
+        if ($request->fk_tipo_usuario == 3) {
+            $mm_esp = new Usuario_mm_especialidade();
+            $mm_especialidade['fk_especialidade'] = 2;
+
+            if (isset($request->ortodontia)) {
+                $mm_especialidade['ativo'] = 1;
+            } else {
+                $mm_especialidade['ativo'] = 0;
+            }
+
+            $mm_esp->where('fk_usuario', $id)
+                   ->where('fk_empresa', Auth::user()->fk_empresa)
+                   ->where('fk_especialidade', 2)
+                   ->update($mm_especialidade);
+            LogSistemaController::logSistemaTipoUpdate($id, 'fk_usuario', 'usuario_mm_especialidade', $mm_especialidade);
+        }
+        if ($request->fk_tipo_usuario == 3) {
+            $mm_esp = new Usuario_mm_especialidade();
+            $mm_especialidade['fk_especialidade'] = 3;
+
+            if (isset($request->implantodontia)) {
+                $mm_especialidade['ativo'] = 1;
+            } else {
+                $mm_especialidade['ativo'] = 0;
+            }
+
+            $mm_esp->where('fk_usuario', $id)
+                   ->where('fk_empresa', Auth::user()->fk_empresa)
+                   ->where('fk_especialidade', 3)
+                   ->update($mm_especialidade);
+            LogSistemaController::logSistemaTipoUpdate($id, 'fk_usuario', 'usuario_mm_especialidade', $mm_especialidade);
+        }
+        if ($request->fk_tipo_usuario == 3) {
+            $mm_esp = new Usuario_mm_especialidade();
+            $mm_especialidade['fk_especialidade'] = 4;
+
+            if (isset($request->odontopediatria)) {
+                $mm_especialidade['ativo'] = 1;
+            } else {
+                $mm_especialidade['ativo'] = 0;
+            }
+
+            $mm_esp->where('fk_usuario', $id)
+                   ->where('fk_empresa', Auth::user()->fk_empresa)
+                   ->where('fk_especialidade', 4)
+                   ->update($mm_especialidade);
+            LogSistemaController::logSistemaTipoUpdate($id, 'fk_usuario', 'usuario_mm_especialidade', $mm_especialidade);
+        }
+        if ($request->fk_tipo_usuario == 3) {
+            $mm_esp = new Usuario_mm_especialidade();
+            $mm_especialidade['fk_especialidade'] = 5;
+
+            if (isset($request->orofacial)) {
+                $mm_especialidade['ativo'] = 1;
+            } else {
+                $mm_especialidade['ativo'] = 0;
+            }
+
+            $mm_esp->where('fk_usuario', $id)
+                   ->where('fk_empresa', Auth::user()->fk_empresa)
+                   ->where('fk_especialidade', 5)
+                   ->update($mm_especialidade);
+            LogSistemaController::logSistemaTipoUpdate($id, 'fk_usuario', 'usuario_mm_especialidade', $mm_especialidade);
+        }
 
         return redirect('/usuarios')->with('success', 'Sucesso!');
     }

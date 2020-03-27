@@ -3,5 +3,5 @@
 @section('title', 'Home')
 
 @section('content')
-    <p> Home do sistema </p>
+    <p> Home colaborador </p>
 @endsection

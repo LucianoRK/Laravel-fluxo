@@ -32,18 +32,34 @@
 </div>
 
 <script>
+    function habilitaDesabilitaEspecialidade() {
+        if ($('#fk_tipo_usuario').val() == 3) {
+            $('input:checkbox').prop("disabled", false);
+        }
+
+        $('#fk_tipo_usuario').on('change', function() {
+            let fk_tipo_usuario = $(this).val();
+
+            if (fk_tipo_usuario == 3) {
+                $('input:checkbox').prop("disabled", false);
+            } else {
+                $('input:checkbox').prop("disabled", true);
+                $('input:checkbox').prop("checked", false);
+            }
+        });
+    }
+
     function comboCidades() {
         $("#estado").on('change', function() {
             let estado = $(this).val();
-
-            $("#comboCidades").load("/endereco/comboCidades", { _token: "{{ csrf_token() }}", estado:estado }, function() {
-                
-            });
+            
+            $("#comboCidades").load("/endereco/comboCidades", { _token: "{{ csrf_token() }}", estado:estado }, function() {});
         });
     }
 
     $(document).ready(function() { 
         comboCidades();
+        habilitaDesabilitaEspecialidade();
     });
 </script>
 @endsection

@@ -32,9 +32,11 @@
                         </ul>
                     </li>
                 @endcan
-                <li class="nav-dropdown">
-                    <li><a href="/proteticos"><i class="icon dripicons-user-id"></i><span> Protéticos </span></a></li>
-                </li>
+                @can('permissao', 12)
+                    <li class="nav-dropdown">
+                        <li><a href="/proteticos"><i class="icon dripicons-user-id"></i><span> Protéticos </span></a></li>
+                    </li>
+                @endcan
 
                 <li class="sidebar-header"><span>SUPORTE</span></li>
                 <li>

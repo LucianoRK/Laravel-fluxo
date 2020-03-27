@@ -8,7 +8,7 @@
                 @if(!isset($procedimento->nome_esp))
                     <div class="custom-control-inline custom-checkbox checkbox-primary form-check">
                         <input type="checkbox" class="custom-control-input" name="clinico_geral" {{ old('clinico_geral') ? 'checked' : ''}} id="stateCheck1">
-                        <label class="custom-control-label" for="stateCheck1">Clinico geral</label>
+                        <label class="custom-control-label" for="stateCheck1">Clínico geral</label>
                     </div>
                     <div class="custom-control-inline custom-checkbox checkbox-accent form-check">
                         <input type="checkbox" class="custom-control-input" name="implantodontia" {{ old('implantodontia') ? 'checked' : ''}} id="stateCheck3">
