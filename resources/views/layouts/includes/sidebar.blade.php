@@ -63,9 +63,11 @@
                         <li><a href="/radiologistas"><i class="icon dripicons-user-id"></i><span> Radiologistas </span></a></li>
                     </li>
                 @endcan
+                @can('permissao', 14)
                 <li class="nav-dropdown">
                     <li><a href="/feriados"><i class="icon dripicons-calendar"></i><span> Feriados </span></a></li>
                 </li>
+                @endcan
                 <li class="nav-dropdown">
                     <a class="has-arrow" href="#" aria-expanded="false"><i class="icon dripicons-to-do"></i><span>Ortodontia</span></a>
                     <ul class="collapse nav-sub" aria-expanded="false">

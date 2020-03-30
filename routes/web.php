@@ -47,4 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
     /* CRUD RADIOLOGISTAS */
     Route::resource('radiologistas', 'Empresas\RadiologistaController');
     Route::put('/radiologistas/ativar/{id}', 'Empresas\RadiologistaController@ativar');
+
+    /* CRUD FERIADOS */
+    Route::resource('feriados', 'Feriados\FeriadoController');
 });

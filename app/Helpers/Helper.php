@@ -4,15 +4,27 @@ namespace App\Helpers;
 
 class Helper
 {
-    static function currencyBrForMysql($valor)
+    public static function currencyBrForMysql($valor)
     {
         $valor2 = str_replace('.', '', $valor);
         
         return str_replace(',', '.', $valor2);
     }
 
-    static function currencyMysqlForBr($valor)
+    public static function currencyMysqlForBr($valor)
     {
         return number_format($valor, 2, ',', '.');
+    }
+
+    public static function mysqlToDate($date)
+    {
+        return date("d/m/Y", strtotime($date));
+    }
+
+    public static function dateToMysql($date)
+    {
+        $explode = explode("/", $date);
+        
+        return date('Y-m-d', strtotime($explode[2]."-".$explode[1]."-".$explode[0]));
     }
 }
