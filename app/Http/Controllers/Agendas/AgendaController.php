@@ -17,7 +17,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        $dentistas = DB::table('usuarios')->select('id', 'nome')
+        $dentistas = Usuario::select('id', 'nome')
             ->where('fk_tipo_usuario', 3)
             ->where('fk_empresa', Auth::user()->fk_empresa)
             ->where('ativo', 1)
@@ -107,5 +107,14 @@ class AgendaController extends Controller
         }
     
         return $horarios;
+    }
+
+    public function getAgendados(Request $request){
+        return Agenda::select('*')
+            ->leftJoin('clientes', 'clientes.id', '=', 'agendas.fk_cliente')
+            ->where('agendas.fk_usuario_dentista', $request->dentista)
+            ->where('agendas.fk_empresa', Auth::user()->fk_empresa)
+            ->where('agendas.data_agendamento', $request->data)
+            ->get();
     }
 }
