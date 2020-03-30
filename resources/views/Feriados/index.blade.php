@@ -41,7 +41,7 @@
                                                {{ $feriado->descricao }}
                                             </td>
                                             <td class="text-center">
-                                                {{ Helper::mysql_to_date($feriado->data) }}
+                                                {{ Helper::mysqlToDate($feriado->data) }}
                                             </td>
 
                                             <td class="text-center" id_feriado="{{ $feriado->id }}">
