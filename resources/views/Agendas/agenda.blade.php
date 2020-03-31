@@ -21,138 +21,35 @@
             </select>
         </div>
     </div>
-   
-    @foreach ($horarios as $horario)
-        <div class="row mb-2">
-            <div class="input-group col-md-8 agenda_line">
-                <span class="input-group-text text-white bg-primary horario"><strong>{{$horario}}</strong></span>
-                <button type="button" class="form-control btn-white btn-block agenda_visivel text-left {{ str_replace(':', '', $horario.'00') }}"></button>
-                <div class="btn-group dropdown">
-                    <input type="text" class="form-control agenda_editavel agenda_nome bg-white" placeholder="Nome" aria-describedby="horario">
-                    <button class="btn btn-info agenda_editavel btn_buscar_cliente" data-toggle="dropdown"><i class="la la-search text-white"></i></button>
-                    <div class="dropdown-menu drop-select-agenda lista_clintes" x-placement="bottom-start"></div>
-                </div>
-                <input type="text" class="form-control agenda_editavel agenda_telefone bg-white" placeholder="Telefone">
-                <button class="btn btn-success agenda_btn_salvar "><i class="la la-check text-white"></i></button>
-                <button class="btn btn-danger agenda_btn_cancelar"><i class="la la-close text-white"></i></button>
-            </div>
-            <div class="col-md-4">
-                <button class="btn btn-info">Editar</button>
-                <button class="btn btn-danger">Deletar</button>
-                <button class="btn btn-success">Cadastrar</button>
-            </div>
-        </div>
-    @endforeach
+    <div class="agenda_lista"></div>
     <script>
-        $('.agenda_editavel').hide();
-        esconderBotoes();
-
-        function agendar(){
-            $('.agenda_visivel').on('click',function(){
-                let nome;
-                let telefone;
-                $('.agenda_editavel').hide();
-                $('.agenda_visivel').show();
-                esconderBotoes();
-                $(this).hide();
-                $(this).parent().find('.agenda_editavel').show();
-                $(this).parent().find('.agenda_nome').select();
-                $(this).parent().find('.agenda_btn_salvar').show();
-                $(this).parent().find('.agenda_btn_cancelar').show();
-                if($('.dentista_agenda').val() == 0){
-                    $('.btn_buscar_cliente').hide(); 
-                }
-                salvarAgendamento();
-                cancelarAgendamento();
-            });
-        }
-        
-        function salvarAgendamento(){
-            $('.agenda_btn_salvar').on('click',function(){
-                let nome;
-                let telefone;
-                let texto;
-
-                nome = $(this).parent().find('.agenda_nome').val();
-                telefone = $(this).parent().find('.agenda_telefone').val();
-                texto = '[ AVALIAÇÃO ] '+ nome + ' - ' + telefone;
-
-                $('.agenda_editavel').hide();
-                $('.agenda_visivel').show();
-                esconderBotoes();
-                $(this).parent().find('.agenda_visivel').text(texto);
-            });
-        }
-
-        function cancelarAgendamento(){
-            $('.agenda_btn_cancelar').on('click',function(){
-                $('.agenda_editavel').hide();
-                $('.agenda_visivel').show();
-                esconderBotoes();
-                $(this).parent().find('.agenda_visivel').text('');
-            });
-        }
-
-        function esconderBotoes(){
-            $('.agenda_btn_salvar').hide();
-            $('.agenda_btn_cancelar').hide();
+        function getAgenda(){
+            let data = $('.data_agenda').val();
+            let dentista = $('.dentista_agenda').val();
+            $( ".agenda_lista" ).load( "agenda-lista" ,{
+                _token: "{{ csrf_token() }}",
+                data: data, 
+                dentista: dentista
+            });        
         }
 
         function infosChange(){
-            $('.data_agenda').change(function(){     
-                location.reload();
+            $('.data_agenda').change(function(){    
+                getAgenda();
             });
             $('.dentista_agenda').change(function(){     
-                location.reload();
+                getAgenda();
             });
         }
-
-        function getAgendados(){
-            let dentista = $('.dentista_agenda').val();
-            let data = $('.data_agenda').val();
-            $.post( "get-agendados", {
-                _token: "{{ csrf_token() }}",
-                dentista: dentista,
-                data: data                
-            }, function( agendas ) {
-                agendas.forEach(agenda => {
-                    let string_view;
-                    let classe_replace = '.' + agenda.hora_agendamento.replace(/:/g, '');
-                    if(agenda.fk_tratamento){
-                        string_view = agenda.nome + ' [' + agenda.fk_tratamento + '] ';
-                    }else{
-                        string_view = '[ AVALIAÇÃO ] '+ agenda.nome
-                    }
-                    $(classe_replace).text(string_view);
-                    $(classe_replace).attr("disabled", true);
-                    $(classe_replace).css("background-color","#FFF");
-                });
-            });
-        }
-
-        function buscarCliente(){
-            $('.btn_buscar_cliente').on('click', function(){
-                $(".lista_clintes").css("width","150%");
-                let dentista =  $('.dentista_agenda').val();
-
-                let nome = $(this).parent().find('.agenda_nome').val();
-
-                $(this).parent().find( ".lista_clintes" ).load( "lista-clientes-filtrado" ,{
-                    _token: "{{ csrf_token() }}",
-                    nome: nome, 
-                    dentista: dentista,
-
-                }, function(clientes){
-                    
-                });        
-            })
+        
+        function resetarCampos(){
+            $('.agenda_mostrar').show();
+            $('.agenda_adicionar').hide();
         }
 
         $(document).ready(function(){
-            getAgendados()
             infosChange();
-            agendar();
-            buscarCliente();
+            getAgenda();
         });
     </script>
 @endsection
