@@ -13,6 +13,7 @@ use App\Models\Usuarios\Tipo_usuario;
 use App\Models\Usuarios\Usuario;
 use App\Models\Usuarios\Usuario_mm_empresa;
 use App\Models\Usuarios\Usuario_mm_especialidade;
+use App\Rules\PasswordRule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -382,5 +383,30 @@ class UsuarioController extends Controller
         } else {
             return json_encode(false);
         }
+    }
+
+    public function minhaConta(Usuario $u)
+    {
+        $dados = $u->getDadosUsuarioEmpresa(Auth::user()->id, Auth::user()->fk_empresa);  
+
+        return view('usuarios.minhaConta.index', compact('dados'));
+    }
+
+    public function alterarSenha(Request $request, Usuario $u)
+    {
+        $request->validate([
+            'senha'        => ['required', 'string', new PasswordRule],
+            'repita_senha' => ['required', 'string', new PasswordRule, 'same:senha'],
+        ]);
+
+        $usuario['senha'] =  Hash::make($request->senha);
+
+        $u->where('id', Auth::user()->id)
+          ->where('fk_empresa', Auth::user()->fk_empresa)
+          ->update($usuario);
+        
+        LogSistemaController::logSistemaTipoUpdate(Auth::user()->id, 'id', 'usuarios', $usuario);
+
+        return redirect('/minhaConta')->with('success', 'Sucesso!');
     }
 }
