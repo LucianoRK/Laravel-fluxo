@@ -17,7 +17,7 @@ class CreateLogRotasTable extends Migration
             $table->bigIncrements('id');
             $table->integer('fk_usuario');
             $table->string('rota', 100);
-            $table->json('dados');
+            $table->string('dados');
             $table->timestamps();
         });
     }

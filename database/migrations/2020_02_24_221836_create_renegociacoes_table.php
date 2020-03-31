@@ -16,7 +16,7 @@ class CreateRenegociacoesTable extends Migration
         Schema::create('renegociacoes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('fk_tratamento');
-            $table->json('regra_renegociada')->nullable();
+            $table->string('regra_renegociada')->nullable();
             $table->boolean('ativo')->default(true);
             $table->timestamps();
         });

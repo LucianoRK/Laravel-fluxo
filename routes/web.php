@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth']], function () {
     /* CRUD USUARIOS */ 
     Route::resource('usuarios', 'UsuarioController');
     Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
+    Route::get('/minhaConta', 'UsuarioController@minhaConta');
+    Route::post('/alterarSenha', 'UsuarioController@alterarSenha')->name('alterarSenha');
     
     /* AGENDA */ 
     Route::resource('agenda', 'AgendaController');
@@ -51,4 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* CRUD FERIADOS */
     Route::resource('feriados', 'Feriados\FeriadoController');
+
+    /* CLIENTE */
+    Route::resource('clientes', 'Clientes\ClienteController');
 });
