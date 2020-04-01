@@ -12,7 +12,7 @@ class Cliente extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'id', 'fk_empresa', 'fk_indicador', 'nome', 'cpf', 'email', 'data_nascimento', 'sexo', 'profissao', 'renda_media', 'inadimplente', 'ativo'
     ];
 
     /**
@@ -32,4 +32,9 @@ class Cliente extends Model
     protected $casts = [
         
     ];
+
+    public function getAllDadosClienteEmpresa($empresa, $cliente)
+    {
+        
+    }
 }

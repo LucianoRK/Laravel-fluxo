@@ -132,7 +132,7 @@
                     <option value="" disabled selected="" disabled="" > Selecione um estado </option>
                     @if ($estados)
                         @foreach($estados as $estado)
-                            @if(isset($endereco->fk_estado) && $endereco->fk_estado == $estado->id)
+                            @if(isset($endereco->fk_estado) && $endereco->fk_estado == $estado->id || old('estado') == $estado->id)
                                 <option selected value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
                             @else
                                 <option value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
@@ -153,12 +153,12 @@
             </div>
         </div>
 
-        <div class="form-group row {{ $errors->has('rua') ? 'has-error' : '' }}">
+        <div class="form-group row {{ $errors->has('logradouro') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">Logradouro</label>
             <div class="col-md-6">
-                <input name="rua" value="{{$endereco->rua ?? old('rua') }}" type="text" class="form-control">
-                @if ($errors->has('rua')) 
-                    <h6> <span class="help-block"> {{ $errors->first('rua') }} </span> </h6>
+                <input name="logradouro" value="{{$endereco->logradouro ?? old('logradouro') }}" type="text" class="form-control">
+                @if ($errors->has('logradouro')) 
+                    <h6> <span class="help-block"> {{ $errors->first('logradouro') }} </span> </h6>
                 @endif
             </div>
         </div>
@@ -169,6 +169,16 @@
                 <input name="numero" value="{{$endereco->numero ?? old('numero') }}" type="text" class="form-control">
                 @if ($errors->has('numero')) 
                     <h6> <span class="help-block"> {{ $errors->first('numero') }} </span> </h6>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row {{ $errors->has('bairro') ? 'has-error' : '' }}">
+            <label class="control-label text-right col-md-3">Bairro</label>
+            <div class="col-md-6">
+                <input name="bairro" value="{{$endereco->bairro ?? old('bairro') }}" type="text" class="form-control">
+                @if ($errors->has('bairro')) 
+                    <h6> <span class="help-block"> {{ $errors->first('bairro') }} </span> </h6>
                 @endif
             </div>
         </div>

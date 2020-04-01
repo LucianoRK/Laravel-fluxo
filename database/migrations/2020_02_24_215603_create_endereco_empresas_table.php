@@ -18,8 +18,9 @@ class CreateEnderecoEmpresasTable extends Migration
             $table->integer('fk_empresa');
             $table->integer('fk_cidade');
             $table->string('cep', 15)->nullable();
-            $table->string('rua', 100)->nullable();
-            $table->smallInteger('numero')->nullable();
+            $table->string('logradouro', 100)->nullable();
+            $table->string('numero', 10)->nullable();
+            $table->string('bairro', 100)->nullable();
             $table->string('complemento', 100)->nullable();
             $table->boolean('ativo')->default(true);;
             $table->timestamps();

@@ -108,4 +108,25 @@ class ClienteController extends Controller
 
         return View('Agendas.load.lista_clientes_filtrado',compact('clientes'));
     }
+
+    public function listaClientesFiltradoNavbar(Request $request)
+    {
+        $clientes = Cliente::select(
+                "clientes.id", 
+                "clientes.nome", 
+                "clientes.cpf"
+            )
+            ->where('clientes.fk_empresa', '=', Auth::user()->fk_empresa)
+            ->where('clientes.nome', 'like', "%$request->nome%")
+            ->limit(10)
+            ->get();
+
+        return View('clientes.searchNavbar.listaClientesFiltrados',compact('clientes'));
+    }
+
+    public function mostraTodosDadosCliente($id)
+    {
+        
+        return view('clientes.index');
+    }
 }

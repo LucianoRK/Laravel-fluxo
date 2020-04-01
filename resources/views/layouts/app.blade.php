@@ -68,21 +68,11 @@
                     </ul>
                 </ul>
 
-                <ul class="site-logo">
-                    <li>
-                        <!-- START LOGO -->
-                        <form>
-                            <input type="search" />
-                            <button type="submit">
-                            <i class="fa fa-search"></i>
-                            </button>
-                            </form>
-                        <!-- END LOGO -->
-                    </li>
-                </ul>
+                <!-- START SEARCH -->
+                @include('clientes.searchNavbar.index')
+                <!-- END SEARCH -->
                 
                 <ul class="navbar-nav nav-right">
-
                     <li class="nav-item dropdown dropdown-notifications dropdown-menu-lg">
                         <a href="javascript:void(0)" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="icon dripicons-bell"></i>

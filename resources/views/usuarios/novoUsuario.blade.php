@@ -52,14 +52,19 @@
     function comboCidades() {
         $("#estado").on('change', function() {
             let estado = $(this).val();
+            let cidade = "{{old('cidade')}}";
             
-            $("#comboCidades").load("/endereco/comboCidades", { _token: "{{ csrf_token() }}", estado:estado }, function() {});
+            $("#comboCidades").load("/endereco/comboCidades", { _token: "{{ csrf_token() }}", estado:estado, cidade_edit:cidade}, function() {});
         });
     }
 
     $(document).ready(function() { 
         comboCidades();
         habilitaDesabilitaEspecialidade();
+
+        if ($("#estado").val()) {
+            $("#estado").trigger( "change" );
+        } 
     });
 </script>
 @endsection

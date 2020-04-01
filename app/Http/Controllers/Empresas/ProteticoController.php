@@ -65,8 +65,9 @@ class ProteticoController extends Controller
         $endereco->fk_protetico     = $protetico->id;
         $endereco->fk_cidade        = $request->cidade;
         $endereco->cep              = $request->cep;
-        $endereco->rua              = $request->rua;
+        $endereco->logradouro       = $request->logradouro;
         $endereco->numero           = $request->numero;
+        $endereco->bairro           = $request->bairro;
         $endereco->complemento      = $request->complemento;
         $endereco->save();
 
@@ -133,8 +134,9 @@ class ProteticoController extends Controller
 
         $endereco['fk_cidade']        = $request->cidade;
         $endereco['cep']              = $request->cep;
-        $endereco['rua']              = $request->rua;
+        $endereco['logradouro']       = $request->logradouro;
         $endereco['numero']           = $request->numero;
+        $endereco['bairro']           = $request->bairro;
         $endereco['complemento']      = $request->complemento;
         $e->where('fk_protetico', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($endereco);
 

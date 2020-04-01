@@ -31,6 +31,8 @@ Route::group(['middleware' => ['auth']], function () {
     
     /* CLIENTES */
     Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
+    Route::post('/listaClientesFiltradoNavbar', 'ClienteController@listaClientesFiltradoNavbar');
+    Route::get('/dadosCliente/{id}', 'ClienteController@mostraTodosDadosCliente')->name('dadosCliente');
     
     /* COMBO CIDADES */ 
     Route::post('/endereco/comboCidades', 'CidadeController@index')->name('comboCidades');;

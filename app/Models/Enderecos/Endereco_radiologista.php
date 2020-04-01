@@ -12,7 +12,7 @@ class Endereco_radiologista extends Model
      * @var array
      */
     protected $fillable = [
-        'fk_empresa', 'fk_radiologista', 'fk_cidade', 'cep', 'rua', 'numero', 'complemento', 'ativo'
+        'fk_empresa', 'fk_radiologista', 'fk_cidade', 'cep', 'logradouro', 'numero', 'complemento', 'ativo'
     ];
 
     /**

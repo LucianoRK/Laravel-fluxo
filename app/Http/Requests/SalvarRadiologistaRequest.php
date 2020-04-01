@@ -30,7 +30,12 @@ class SalvarRadiologistaRequest extends FormRequest
             'cnpj' => ['required', 'string', new CnpjRule],
             'email' => 'required|email',
             'celular' => 'required|min:16|max:16',
+            'cep' => 'required|max:9|min:9',
+            'estado' => 'required',
+            'cidade' => 'required',
+            'logradouro' => 'required',
             'numero' => 'max:10',
+            'bairro' => 'required',
         ];
     }
 

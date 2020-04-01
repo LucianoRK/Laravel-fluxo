@@ -87,8 +87,9 @@ class UsuarioController extends Controller
         $endereco->fk_usuario       = $usuario->id;
         $endereco->fk_cidade        = $request->cidade;
         $endereco->cep              = $request->cep;
-        $endereco->rua              = $request->rua;
+        $endereco->logradouro       = $request->logradouro;
         $endereco->numero           = $request->numero;
+        $endereco->bairro           = $request->bairro;
         $endereco->complemento      = $request->complemento;
         $endereco->save();
         LogSistemaController::logSistemaTipoInsert('endereco_usuarios', $endereco);
@@ -261,8 +262,9 @@ class UsuarioController extends Controller
 
         $endereco['fk_cidade']        = $request->cidade;
         $endereco['cep']              = $request->cep;
-        $endereco['rua']              = $request->rua;
+        $endereco['logradouro']       = $request->logradouro;
         $endereco['numero']           = $request->numero;
+        $endereco['bairro']           = $request->bairro;
         $endereco['complemento']      = $request->complemento;
         $endereco_usuario->where('fk_usuario', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($endereco);
         LogSistemaController::logSistemaTipoUpdate($id, 'fk_usuario', 'enderecos', $endereco);
