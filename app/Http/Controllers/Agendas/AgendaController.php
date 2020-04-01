@@ -108,16 +108,28 @@ class AgendaController extends Controller
         return $horarios;
     }
 
+    public function gravarAvaliacao(Request $request){
+        $agenda                      = new Agenda();
+        $agenda->fk_empresa          = Auth::user()->fk_empresa;
+        $agenda->fk_usuario_dentista = $request->dentista;
+        $agenda->nome                = $request->nome;
+        $agenda->status              = '1';
+        $agenda->data_agendamento    = $request->data;
+        $agenda->hora_agendamento    = $request->horario;
+        $agenda->save();
+    }
+
     public function agendaVazia($horario){
         $agenda = [
-            "hora"             => substr($horario, 0 , 5),
-            "hora_agendamento" => $horario,
-            "hora_presenca"    => "",
-            "id_agenda"        => "",
-            "nome_agenda"      => "",
-            "nome_cliente"     => "",
-            "fk_tratamento"    => "",
-            "status"           => ""
+            "hora"               => substr($horario, 0 , 5),
+            "hora_agendamento"   => $horario,
+            "hora_presenca"      => "",
+            "id_agenda"          => "",
+            "nome"               => "",
+            "fk_tratamento"      => "",
+            "status"             => "",
+            "status"             => "",
+            "nome_especialidade" => "",
         ];
         return $agenda;
     }
@@ -133,9 +145,13 @@ class AgendaController extends Controller
                 'agendas.nome as nome_agenda', 
                 'clientes.nome as nome_cliente',
                 'agendas.fk_tratamento',
-                'agendas.status'
+                'agendas.status',
+                'especialidades.nome as nome_especialidade'
+
             )
             ->leftJoin('clientes', 'clientes.id', '=', 'agendas.fk_cliente')
+            ->leftJoin('tratamentos', 'tratamentos.id', '=', 'agendas.fk_tratamento')
+            ->leftjoin('especialidades', 'especialidades.id', '=', 'tratamentos.fk_especialidade')
             ->where('agendas.fk_usuario_dentista', $request->dentista)
             ->where('agendas.fk_empresa', Auth::user()->fk_empresa)
             ->where('agendas.data_agendamento', $request->data)
@@ -147,15 +163,21 @@ class AgendaController extends Controller
             if(count($agendas) > 0){
                 foreach($agendas as $agenda){
                     if($agenda->hora_agendamento == $horario){
+                        if($agenda->fk_tratamento){
+                            $nome_apresentar = $agenda->nome_cliente.' - '.$agenda->nome_especialidade.' - ['.$agenda->fk_tratamento.']';
+                        }else{
+                            $nome_apresentar = $agenda->nome_agenda;
+                        }
+
                         $agenda_item = [
-                            "hora"             => substr($horario, 0 , 5),
-                            "hora_agendamento" => $horario,
-                            "hora_presenca"    => $agenda->hora_presenca,
-                            "id_agenda"        => $agenda->id_agenda,
-                            "nome_agenda"      => $agenda->nome_agenda,
-                            "nome_cliente"     => $agenda->nome_cliente,
-                            "fk_tratamento"    => $agenda->fk_tratamento,
-                            "status"           => $agenda->status
+                            "hora"               => substr($horario, 0 , 5),
+                            "hora_agendamento"   => $horario,
+                            "hora_presenca"      => $agenda->hora_presenca,
+                            "id_agenda"          => $agenda->id_agenda,
+                            "nome"               => $nome_apresentar,
+                            "fk_tratamento"      => $agenda->fk_tratamento,
+                            "status"             => $agenda->status,
+                            "nome_especialidade" => $agenda->nome_especialidade
                         ];
                     }else{
                         $agenda_item = $this->agendaVazia($horario);
