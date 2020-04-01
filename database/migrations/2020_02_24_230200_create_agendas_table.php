@@ -20,7 +20,7 @@ class CreateAgendasTable extends Migration
             $table->integer('fk_cliente')->nullable();
             $table->integer('fk_tratamento')->nullable();
             $table->smallInteger('status');
-            $table->string('nome');
+            $table->string('nome')->nullable();
             $table->date('data_agendamento');
             $table->time('hora_agendamento');
             $table->time('hora_presenca')->nullable();

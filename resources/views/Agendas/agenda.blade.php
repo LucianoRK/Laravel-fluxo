@@ -6,7 +6,7 @@
         :root {
             --largura_horario: 60px; /* Valor da largura do horario */
         }
-        .horario {
+        .horario_width {
             width: var(--largura_horario);
         }
     </style>
@@ -45,6 +45,7 @@
         function resetarCampos(){
             $('.agenda_mostrar').show();
             $('.agenda_adicionar').hide();
+            $('.select_cliente_busca').hide();
         }
 
         $(document).ready(function(){
