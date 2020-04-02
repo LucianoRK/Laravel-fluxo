@@ -12,10 +12,6 @@
                 </li>
 
                 <li class="nav-dropdown">
-                    <li><a href="/clientes"><i class="icon dripicons-user-group"></i><span> Clientes </span></a></li>
-                </li>
-
-                <li class="nav-dropdown">
                     <li><a href="/clientes"><i class="icon dripicons-print"></i><span> Impressões </span></a></li>
                 </li>
 

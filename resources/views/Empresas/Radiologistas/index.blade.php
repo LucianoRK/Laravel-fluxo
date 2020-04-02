@@ -28,7 +28,8 @@
                                     <th class="text-success">#</th>
                                     <th class="text-success">RAZÃO SOCIAL</th>
                                     <th class="text-success">NOME FANTASIA</th>
-                                    <th class="text-success">CONTATO</th>
+                                    <th class="text-success">TELEFONE</th>
+                                    <th class="text-success">VALOR</th>
                                     <th class="text-success">OPÇÕES</th>
                                 </tr>
                             </thead>
@@ -46,7 +47,10 @@
                                                 {{ $radiologista->nome_fantasia }}
                                             </td>
                                             <td class="text-center">
-                                                {{ $radiologista->celular }}
+                                                {{ $radiologista->telefone }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ Helper::currencyMysqlForBr($radiologista->valor_sugerido) }}
                                             </td>
                                             <td class="text-center" id_radiologista="{{ $radiologista->id }}">
                                                 <a href="{{ url("radiologistas/$radiologista->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Clientes;
 
-use App\Models\Clientes\Cliente_telefone;
+use App\Http\Controllers\Controller;
+use App\Models\Clientes\Conjuge;
 use Illuminate\Http\Request;
 
-class ClienteTelefoneController extends Controller
+class ConjugeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class ClienteTelefoneController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Clientes\Cliente_telefone  $cliente_telefone
+     * @param  \App\Models\Clientes\Conjuge  $conjuge
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente_telefone $cliente_telefone)
+    public function show(Conjuge $conjuge)
     {
         //
     }
@@ -52,10 +53,10 @@ class ClienteTelefoneController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Clientes\Cliente_telefone  $cliente_telefone
+     * @param  \App\Models\Clientes\Conjuge  $conjuge
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente_telefone $cliente_telefone)
+    public function edit(Conjuge $conjuge)
     {
         //
     }
@@ -64,10 +65,10 @@ class ClienteTelefoneController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Clientes\Cliente_telefone  $cliente_telefone
+     * @param  \App\Models\Clientes\Conjuge  $conjuge
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente_telefone $cliente_telefone)
+    public function update(Request $request, Conjuge $conjuge)
     {
         //
     }
@@ -75,10 +76,10 @@ class ClienteTelefoneController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Clientes\Cliente_telefone  $cliente_telefone
+     * @param  \App\Models\Clientes\Conjuge  $conjuge
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente_telefone $cliente_telefone)
+    public function destroy(Conjuge $conjuge)
     {
         //
     }

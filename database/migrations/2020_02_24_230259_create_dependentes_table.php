@@ -15,15 +15,14 @@ class CreateDependentesTable extends Migration
     {
         Schema::create('dependentes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('fk_empresa');
             $table->integer('fk_cliente');
             $table->string('nome', 100);
             $table->string('parentesco', 100)->nullable();
             $table->string('cpf', 15)->nullable();
-            $table->string('email', 100)->nullable();
+            $table->string('rg', 15)->nullable();
             $table->date('data_nascimento')->nullable();
             $table->string('sexo', 20)->nullable();
-            $table->string('profissao', 100)->nullable();
-            $table->integer('renda_media')->nullable();
             $table->boolean('ativo')->default(true);
             $table->timestamps();
         });

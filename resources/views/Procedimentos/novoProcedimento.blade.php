@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <h5 class="card-header">Novo Procedimento</h5>
+            <h5 class="card-header text-primary">NOVO PROCEDIMENTO</h5>
             <form action="{{ route('procedimentos.store') }}" method="POST">
 
                 @include('procedimentos.formProcedimento')

@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <h5 class="card-header">Novo Protético</h5>
+            <h5 class="card-header text-primary">NOVO PROTÉTICO</h5>
             <form action="{{ route('proteticos.store') }}" method="POST">
 
                 @include('empresas.proteticos.formProtetico')

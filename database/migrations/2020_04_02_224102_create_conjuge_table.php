@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEnderecoClientesTable extends Migration
+class CreateConjugeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,19 @@ class CreateEnderecoClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('endereco_clientes', function (Blueprint $table) {
+        Schema::create('conjuge', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('fk_empresa');
             $table->integer('fk_cliente');
-            $table->integer('fk_cidade');
-            $table->string('cep', 15);
-            $table->string('logradouro', 100);
-            $table->string('numero', 10)->nullable();
-            $table->string('bairro', 100);
-            $table->string('complemento', 100)->nullable();
+            $table->string('nome', 100);
+            $table->string('cpf', 15);
+            $table->string('rg', 10)->nullable();
+            $table->date('data_nascimento');
+            $table->string('sexo', 30);
+            $table->string('nacionalidade', 30);
+            $table->string('celular', 20);
+            $table->string('profissao', 100)->nullable();
+            $table->integer('renda_media')->nullable();
             $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
@@ -35,6 +38,6 @@ class CreateEnderecoClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('endereco_clientes');
+        Schema::dropIfExists('conjuge');
     }
 }

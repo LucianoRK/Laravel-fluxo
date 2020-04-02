@@ -50,8 +50,18 @@
             </div>
         </div>
 
+        <div class="form-group row {{ $errors->has('telefone') ? 'has-error' : '' }}">
+            <label class="control-label text-right col-md-3">*Telefone</label>
+            <div class="col-md-6">
+                <input name="telefone" value="{{$protetico->telefone ?? old('telefone') }}" type="text" class="form-control telefoneMask" placeholder="(00) 00000-0000">
+                @if ($errors->has('telefone')) 
+                    <h6> <span class="help-block"> {{ $errors->first('telefone') }} </span> </h6>
+                @endif
+            </div>
+        </div>
+
         <div class="form-group row {{ $errors->has('celular') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*Celular</label>
+            <label class="control-label text-right col-md-3">Celular</label>
             <div class="col-md-6">
                 <input name="celular" value="{{$protetico->celular ?? old('celular') }}" type="text" class="form-control celularMask" placeholder="(00) 0 0000-0000">
                 @if ($errors->has('celular')) 

@@ -28,7 +28,7 @@
                                     <th class="text-success">#</th>
                                     <th class="text-success">RAZÃO SOCIAL</th>
                                     <th class="text-success">NOME FANTASIA</th>
-                                    <th class="text-success">CONTATO</th>
+                                    <th class="text-success">TELEFONE</th>
                                     <th class="text-success">OPÇÕES</th>
                                 </tr>
                             </thead>
@@ -46,7 +46,7 @@
                                                 {{ $protetico->nome_fantasia }}
                                             </td>
                                             <td class="text-center">
-                                                {{ $protetico->celular }}
+                                                {{ $protetico->telefone }}
                                             </td>
                                             <td class="text-center" id_protetico="{{ $protetico->id }}">
                                                 <a href="{{ url("proteticos/$protetico->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 

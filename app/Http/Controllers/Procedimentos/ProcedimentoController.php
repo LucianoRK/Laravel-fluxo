@@ -61,9 +61,7 @@ class ProcedimentoController extends Controller
         if (!$request->valor_sugerido) {
             $valor_sugerido = 0;
         } else {
-            $value = str_replace(".", "", $request->valor_sugerido);
-            $valor = str_replace(",", ".", $value);
-            $valor_sugerido = $valor;
+            $valor_sugerido = Helper::currencyBrForMysql($request->valor_sugerido);
         }
 
         if ($request->protetico) {

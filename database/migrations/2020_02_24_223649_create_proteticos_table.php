@@ -20,6 +20,7 @@ class CreateProteticosTable extends Migration
             $table->string('nome_fantasia', 50);
             $table->string('cnpj', 14);
             $table->string('email', 50)->nullable();
+            $table->string('telefone', 20)->nullable();
             $table->string('celular', 20)->nullable();
             $table->boolean('ativo')->default(true);
             $table->timestamps();

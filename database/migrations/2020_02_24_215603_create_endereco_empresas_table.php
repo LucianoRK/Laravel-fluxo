@@ -22,7 +22,7 @@ class CreateEnderecoEmpresasTable extends Migration
             $table->string('numero', 10)->nullable();
             $table->string('bairro', 100)->nullable();
             $table->string('complemento', 100)->nullable();
-            $table->boolean('ativo')->default(true);;
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

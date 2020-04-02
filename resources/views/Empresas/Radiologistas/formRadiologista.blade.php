@@ -50,8 +50,18 @@
             </div>
         </div>
 
+        <div class="form-group row {{ $errors->has('telefone') ? 'has-error' : '' }}">
+            <label class="control-label text-right col-md-3">*Telefone</label>
+            <div class="col-md-6">
+                <input name="telefone" value="{{$radiologista->telefone ?? old('telefone') }}" type="text" class="form-control telefoneMask" placeholder="(00) 00000-0000">
+                @if ($errors->has('telefone')) 
+                    <h6> <span class="help-block"> {{ $errors->first('telefone') }} </span> </h6>
+                @endif
+            </div>
+        </div>
+
         <div class="form-group row {{ $errors->has('celular') ? 'has-error' : '' }}">
-            <label class="control-label text-right col-md-3">*Celular</label>
+            <label class="control-label text-right col-md-3">Celular</label>
             <div class="col-md-6">
                 <input name="celular" value="{{$radiologista->celular ?? old('celular') }}" type="text" class="form-control celularMask" placeholder="(00) 0 0000-0000">
                 @if ($errors->has('celular')) 
@@ -135,6 +145,17 @@
                 <input name="complemento" value="{{$endereco->complemento ?? old('complemento') }}" type="text" class="form-control">
                 @if ($errors->has('complemento')) 
                     <h6> <span class="help-block"> {{ $errors->first('complemento') }} </span> </h6>
+                @endif
+            </div>
+        </div>
+        
+        <hr class="dashed">
+        <div class="form-group row {{ $errors->has('valor_sugerido') ? 'has-error' : '' }}">
+            <label class="control-label text-right col-md-3">*Valor Sugerido</label>
+            <div class="col-md-6">
+                <input name="valor_sugerido" value="{{ $radiologista->valor_sugerido ?? old('valor_sugerido') }}" type="text" class="form-control valorMask">
+                @if ($errors->has('valor_sugerido')) 
+                    <h6> <span class="help-block"> {{ $errors->first('valor_sugerido') }} </span> </h6>
                 @endif
             </div>
         </div>

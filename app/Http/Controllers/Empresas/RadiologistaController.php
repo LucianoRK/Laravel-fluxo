@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Empresas;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Logs\LogSistemaController;
 use App\Http\Requests\SalvarRadiologistaRequest;
@@ -52,13 +53,21 @@ class RadiologistaController extends Controller
      */
     public function store(SalvarRadiologistaRequest $request)
     {
+        if (!$request->valor_sugerido) {
+            $valor_sugerido = 0;
+        } else {
+            $valor_sugerido = Helper::currencyBrForMysql($request->valor_sugerido);
+        }
+
         $radiologista                    = new Radiologista();
         $radiologista->fk_empresa        = Auth::user()->fk_empresa;
         $radiologista->razao_social      = $request->razao_social;
         $radiologista->nome_fantasia     = $request->nome_fantasia;
         $radiologista->cnpj              = preg_replace('/[^0-9]/is', '', $request->cnpj);
         $radiologista->email             = $request->email;
+        $radiologista->telefone          = $request->telefone;
         $radiologista->celular           = $request->celular;
+        $radiologista->valor_sugerido    = $valor_sugerido;
         $radiologista->save();
 
         $endereco                   = new Endereco_radiologista();
@@ -105,6 +114,7 @@ class RadiologistaController extends Controller
         $estados       = $estado->getAllEstados();
         $radiologista  = $radiologistas->getDadosRadiologistaEmpresa($radiologista->id, Auth::user()->fk_empresa);
         $endereco      = $enderecos->getEnderecoRadiologista($radiologista->id);
+        $radiologista['valor_sugerido'] = Helper::currencyMysqlForBr($radiologista['valor_sugerido']);
 
         return view('empresas.radiologistas.editarRadiologista', compact('estados', 'radiologista', 'endereco'));
     }
@@ -127,11 +137,19 @@ class RadiologistaController extends Controller
             return redirect()->back()->with('warning', 'Protético não encontrado');
         }
 
-        $radiologista['razao_social']  = $request->razao_social;
-        $radiologista['nome_fantasia'] = $request->nome_fantasia;
-        $radiologista['cnpj']          = preg_replace('/[^0-9]/is', '', $request->cnpj);
-        $radiologista['email']         = $request->email;
-        $radiologista['celular']       = $request->celular;
+        if (!$request->valor_sugerido) {
+            $valor_sugerido = 0;
+        } else {
+            $valor_sugerido = Helper::currencyBrForMysql($request->valor_sugerido);
+        }
+
+        $radiologista['razao_social']   = $request->razao_social;
+        $radiologista['nome_fantasia']  = $request->nome_fantasia;
+        $radiologista['cnpj']           = preg_replace('/[^0-9]/is', '', $request->cnpj);
+        $radiologista['email']          = $request->email;
+        $radiologista['telefone']       = $request->telefone;
+        $radiologista['celular']        = $request->celular;
+        $radiologista['valor_sugerido'] = $valor_sugerido;
         $r->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($radiologista);
 
         $endereco['fk_cidade']        = $request->cidade;

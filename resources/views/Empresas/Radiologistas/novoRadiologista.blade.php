@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <h5 class="card-header">Novo Radiologista</h5>
+            <h5 class="card-header text-primary">NOVO RADIOLOGISTA</h5>
             <form action="{{ route('radiologistas.store') }}" method="POST">
 
                 @include('empresas.radiologistas.formRadiologista')

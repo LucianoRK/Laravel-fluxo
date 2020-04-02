@@ -12,7 +12,7 @@ class Radiologista extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'fk_empresa', 'razao_social', 'nome_fantasia', 'cnpj', 'email', 'celular', 'ativo'
+        'id', 'fk_empresa', 'razao_social', 'nome_fantasia', 'cnpj', 'email', 'telefone', 'celular', 'valor_sugerido', 'ativo'
     ];
 
     /**

@@ -57,6 +57,7 @@ class ProteticoController extends Controller
         $protetico->nome_fantasia     = $request->nome_fantasia;
         $protetico->cnpj              = preg_replace('/[^0-9]/is', '', $request->cnpj);
         $protetico->email             = $request->email;
+        $protetico->telefone          = $request->telefone;
         $protetico->celular           = $request->celular;
         $protetico->save();
 
@@ -129,6 +130,7 @@ class ProteticoController extends Controller
         $usuario['nome_fantasia'] = $request->nome_fantasia;
         $usuario['cnpj']          = preg_replace('/[^0-9]/is', '', $request->cnpj);
         $usuario['email']         = $request->email;
+        $usuario['telefone']      = $request->telefone;
         $usuario['celular']       = $request->celular;
         $p->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($usuario);
 

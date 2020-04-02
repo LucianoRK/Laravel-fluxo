@@ -68,7 +68,7 @@
         <div class="form-group row {{ $errors->has('valor_sugerido') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">Valor Sugerido</label>
             <div class="col-md-6">
-                <input name="valor_sugerido" value="{{ $procedimento->valor_sugerido ?? old('valor_sugerido') }}" type="text" class="form-control valor_sugerido">
+                <input name="valor_sugerido" value="{{ $procedimento->valor_sugerido ?? old('valor_sugerido') }}" type="text" class="form-control valorMask">
                 @if ($errors->has('valor_sugerido')) 
                     <h6> <span class="help-block"> {{ $errors->first('valor_sugerido') }} </span> </h6>
                 @endif
@@ -95,9 +95,3 @@
 
     </div>
 </div>
-
-<script>
-    $(document).ready(function() { 
-        campoTipoMoedaBr('valor_sugerido');
-    });
-</script>

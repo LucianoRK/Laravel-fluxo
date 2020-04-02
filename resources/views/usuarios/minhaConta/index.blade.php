@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <h5 class="card-header">Minha Conta</h5>
+            <h5 class="card-header text-primary">MINHA CONTA</h5>
             <form action="{{ route('alterarSenha') }}" method="POST">
                 {{ csrf_field() }}
                 <div class="card-body">

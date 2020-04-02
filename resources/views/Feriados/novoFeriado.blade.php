@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <h5 class="card-header">Novo Feriado</h5>
+            <h5 class="card-header text-primary">NOVO FERIADO</h5>
             <form action="{{ route('feriados.store') }}" method="POST">
 
                 @include('feriados.formFeriado')
