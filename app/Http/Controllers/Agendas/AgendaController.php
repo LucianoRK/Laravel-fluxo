@@ -135,7 +135,6 @@ class AgendaController extends Controller
     }
 
     public function getAgendados(Request $request){
-        $agenda_item = [];
         $agenda_lista = [];
 
         $agendas = Agenda::select(
@@ -161,6 +160,7 @@ class AgendaController extends Controller
 
         foreach($horarios as $horario){
             if(count($agendas) > 0){
+                $agenda_item = [];
                 foreach($agendas as $agenda){
                     if($agenda->hora_agendamento == $horario){
                         if($agenda->fk_tratamento){
@@ -168,7 +168,6 @@ class AgendaController extends Controller
                         }else{
                             $nome_apresentar = $agenda->nome_agenda;
                         }
-
                         $agenda_item = [
                             "hora"               => substr($horario, 0 , 5),
                             "hora_agendamento"   => $horario,
@@ -179,10 +178,12 @@ class AgendaController extends Controller
                             "status"             => $agenda->status,
                             "nome_especialidade" => $agenda->nome_especialidade
                         ];
-                    }else{
-                        $agenda_item = $this->agendaVazia($horario);
                     }
+                }
+                if(count($agenda_item) > 0){
                     array_push($agenda_lista, $agenda_item);
+                }else{
+                    array_push($agenda_lista, $this->agendaVazia($horario));
                 }
             }else{
                 array_push($agenda_lista, $this->agendaVazia($horario));
