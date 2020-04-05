@@ -3,7 +3,7 @@
     <div class="input-group col-md-8 agenda_campos">
         <span class="input-group-text text-white bg-primary horario_width"><strong>{{ $agenda['hora'] }}</strong></span>
         <div class="form-control select_cliente_busca"></div>
-        <button type="button" class="form-control text-left agenda_mostrar agenda_mostrar_nome bg-white">{{ $agenda['nome'] }} </button>
+        <button type="button" class="form-control text-left agenda_mostrar agenda_mostrar_nome bg-white" agenda_id='{{ $agenda['id_agenda'] }}'>{{ $agenda['nome'] }} </button>
         <input type="text" class="form-control agenda_adicionar agenda_adicionar_nome bg-white" placeholder="Nome" aria-describedby="horario">     
         <input type="text" class="form-control agenda_adicionar agenda_adicionar_telefone bg-white" placeholder="Telefone" aria-describedby="horario">     
     </div>
@@ -43,17 +43,19 @@ function buscarCliente(){
 
 function abrirCamposParaAdicionar(){
     $('.agenda_mostrar_nome').on('click',function(){
-        let nome;
-        let telefone;
         resetarCampos();
-        $(this).hide();
-        $(this).parent().find('.agenda_adicionar').show();
-        $(this).parent().find('.agenda_adicionar_nome').select();
-        $(this).parents('.agenda_linha').find('.agenda_adicionar').show();
-        $(this).parents('.agenda_linha').find('.agenda_mostrar').hide();
+        if(!$(this).attr("agenda_id")){
+            let nome;
+            let telefone;
+            $(this).hide();
+            $(this).parent().find('.agenda_adicionar').show();
+            $(this).parent().find('.agenda_adicionar_nome').select();
+            $(this).parents('.agenda_linha').find('.agenda_adicionar').show();
+            $(this).parents('.agenda_linha').find('.agenda_mostrar').hide();
 
-        if($('.dentista_agenda').val() == 0){
-            $('.agenda_btn_buscar_cliente').hide(); 
+            if($('.dentista_agenda').val() == 0){
+                $('.agenda_btn_buscar_cliente').hide(); 
+            }
         }
     });
 }
@@ -61,22 +63,42 @@ function abrirCamposParaAdicionar(){
 function salvarAgendamento(){
     $('.agenda_btn_salvar').on('click',function(){
         resetarCampos();
-        let nome     = $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_adicionar_nome').val();
-        let telefone = $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_adicionar_telefone').val();  
         let horario  = $(this).parents('.agenda_linha').find('.horario').val();  
         let dentista = $('.dentista_agenda').val();
         let data     = $('.data_agenda').val();
-        let texto    = '[ AVALIAÇÃO ] '+ nome + ' - ' + telefone;
-        
-        $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_mostrar_nome').text(texto);
-        
-        $.post( "gravar-avaliacao", {
-            _token: "{{ csrf_token() }}",
-            dentista: dentista,
-            data: data,
-            nome: texto,
-            horario: horario
-        });
+        //select_cliente_busca
+        if($(this).parents('.agenda_linha').find('.select_clientes')){
+            let texto          = $(this).parents('.agenda_linha').find('.select_clientes').val();
+            let id_cliente     = $(this).parents('.agenda_linha').find('.select_clientes').attr("id_cliente");
+            let id_tratamento  = $(this).parents('.agenda_linha').find('.select_clientes').attr("id_tratamento");
+            $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_mostrar_nome').text(texto);
+            console.log(id_cliente);
+            console.log(id_tratamento);
+            /*
+            $.post( "gravar-agendamento-tratamento", {
+                _token: "{{ csrf_token() }}",
+                data: data,
+                horario: horario,
+                id_cliente: id_cliente,
+                id_tratamento: id_tratamento
+            });
+            */
+    
+        }else{
+            let nome     = $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_adicionar_nome').val();
+            let telefone = $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_adicionar_telefone').val();  
+            let texto    = '[ AVALIAÇÃO ] '+ nome + ' - ' + telefone;
+            
+            $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_mostrar_nome').text(texto);
+            
+            $.post( "gravar-avaliacao", {
+                _token: "{{ csrf_token() }}",
+                dentista: dentista,
+                data: data,
+                nome: texto,
+                horario: horario
+            });
+        }
     });
 }
 

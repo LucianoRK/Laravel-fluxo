@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('agenda', 'AgendaController');
     Route::post('agenda-lista', 'AgendaController@getAgendados');
     Route::post('gravar-avaliacao', 'AgendaController@gravarAvaliacao');
+    Route::post('gravar-agendamento-tratamento', 'AgendaController@gravarAgendamentoTratamento');
     
     /* CLIENTES */
     Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');

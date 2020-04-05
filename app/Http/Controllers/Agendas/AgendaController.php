@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agendas\Agenda;
+use App\Models\Tratamentos\Tratamento;
 use App\Models\Usuarios\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -113,6 +114,23 @@ class AgendaController extends Controller
         $agenda->fk_empresa          = Auth::user()->fk_empresa;
         $agenda->fk_usuario_dentista = $request->dentista;
         $agenda->nome                = $request->nome;
+        $agenda->status              = '1';
+        $agenda->data_agendamento    = $request->data;
+        $agenda->hora_agendamento    = $request->horario;
+        $agenda->save();
+    }
+
+    public function gravarAgendamentoTratamento(Request $request){
+        /*
+        *Busco o dentista associado no tratamento,
+        *para não ter a possibilidade de trocar de profissional no agendamento
+        */
+        $tratamento                  = Tratamento::where('id',$request->id_tratamento)->get();
+        $agenda                      = new Agenda();
+        $agenda->fk_empresa          = Auth::user()->fk_empresa;
+        $agenda->fk_usuario_dentista = $tratamento->fk_usuario_dentista;
+        $agenda->fk_cliente          = $request->id_cliente;
+        $agenda->fk_tratamento       = $request->id_tratamento;
         $agenda->status              = '1';
         $agenda->data_agendamento    = $request->data;
         $agenda->hora_agendamento    = $request->horario;
