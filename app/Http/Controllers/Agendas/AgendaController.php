@@ -7,7 +7,6 @@ use App\Models\Tratamentos\Tratamento;
 use App\Models\Usuarios\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AgendaController extends Controller
 {
@@ -125,13 +124,13 @@ class AgendaController extends Controller
         *Busco o dentista associado no tratamento,
         *para não ter a possibilidade de trocar de profissional no agendamento
         */
-        $tratamento                  = Tratamento::where('id',$request->id_tratamento)->get();
+        $tratamento                  = Tratamento::where('id',$request->id_tratamento)->get()->first();
         $agenda                      = new Agenda();
         $agenda->fk_empresa          = Auth::user()->fk_empresa;
         $agenda->fk_usuario_dentista = $tratamento->fk_usuario_dentista;
-        $agenda->fk_cliente          = $request->id_cliente;
+        $agenda->fk_cliente          = $tratamento->fk_cliente;
         $agenda->fk_tratamento       = $request->id_tratamento;
-        $agenda->status              = '1';
+        $agenda->status              = '1'; //agendado
         $agenda->data_agendamento    = $request->data;
         $agenda->hora_agendamento    = $request->horario;
         $agenda->save();

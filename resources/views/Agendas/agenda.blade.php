@@ -26,7 +26,15 @@
         function getAgenda(){
             let data = $('.data_agenda').val();
             let dentista = $('.dentista_agenda').val();
-            $( ".agenda_lista" ).load( "agenda-lista" ,{
+            let route_agenda = 'agenda-lista';
+            let tipo_usuario_logado = '{{Auth::user()->fk_tipo_usuario}}';
+            
+            if(tipo_usuario_logado == 3){
+                route_agenda = 'agenda-lista-dentista';
+                $('.dentista_agenda').hide();
+            }
+       
+            $( ".agenda_lista" ).load( route_agenda ,{
                 _token: "{{ csrf_token() }}",
                 data: data, 
                 dentista: dentista

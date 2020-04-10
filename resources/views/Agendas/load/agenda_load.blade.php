@@ -66,24 +66,20 @@ function salvarAgendamento(){
         let horario  = $(this).parents('.agenda_linha').find('.horario').val();  
         let dentista = $('.dentista_agenda').val();
         let data     = $('.data_agenda').val();
-        //select_cliente_busca
+
         if($(this).parents('.agenda_linha').find('.select_clientes')){
-            let texto          = $(this).parents('.agenda_linha').find('.select_clientes').val();
-            let id_cliente     = $(this).parents('.agenda_linha').find('.select_clientes').attr("id_cliente");
-            let id_tratamento  = $(this).parents('.agenda_linha').find('.select_clientes').attr("id_tratamento");
+
+            let texto          = $(this).parents('.agenda_linha').find('.select_clientes').text();
+            let id_tratamento  = $(this).parents('.agenda_linha').find('.select_clientes').val();
+            
             $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_mostrar_nome').text(texto);
-            console.log(id_cliente);
-            console.log(id_tratamento);
-            /*
+
             $.post( "gravar-agendamento-tratamento", {
                 _token: "{{ csrf_token() }}",
                 data: data,
                 horario: horario,
-                id_cliente: id_cliente,
                 id_tratamento: id_tratamento
-            });
-            */
-    
+            });  
         }else{
             let nome     = $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_adicionar_nome').val();
             let telefone = $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_adicionar_telefone').val();  
