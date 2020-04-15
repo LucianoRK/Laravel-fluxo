@@ -24,20 +24,21 @@
     <div class="agenda_lista"></div>
     <script>
         function getAgenda(){
-            let data = $('.data_agenda').val();
-            let dentista = $('.dentista_agenda').val();
-            let route_agenda = 'agenda-lista';
+            let data                = $('.data_agenda').val();
+            let dentista            = $('.dentista_agenda').val();
+            let agenda_dentista     = false;
             let tipo_usuario_logado = '{{Auth::user()->fk_tipo_usuario}}';
             
             if(tipo_usuario_logado == 3){
-                route_agenda = 'agenda-lista-dentista';
+                agenda_dentista = true;
                 $('.dentista_agenda').hide();
             }
        
-            $( ".agenda_lista" ).load( route_agenda ,{
+            $( ".agenda_lista" ).load( "agenda-lista" ,{
                 _token: "{{ csrf_token() }}",
                 data: data, 
-                dentista: dentista
+                dentista: dentista,
+                agenda_dentista: agenda_dentista
             });        
         }
 

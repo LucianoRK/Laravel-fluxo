@@ -206,6 +206,10 @@ class AgendaController extends Controller
                 array_push($agenda_lista, $this->agendaVazia($horario));
             }
         }
-        return View('Agendas.load.agenda_load',compact('agenda_lista'));
+        if($request->agenda_dentista){
+            return View('Agendas.load.agenda_dentista_load',compact('agenda_lista'));
+        }else{
+            return View('Agendas.load.agenda_load',compact('agenda_lista'));
+        }
     }
 }

@@ -8,9 +8,7 @@
         <input type="text" class="form-control agenda_adicionar agenda_adicionar_telefone bg-white" placeholder="Telefone" aria-describedby="horario">     
     </div>
     <div class="col-md-4 agenda_mostrar">
-        <button class="btn btn-info">Editar</button>
-        <button class="btn btn-danger">Deletar</button>
-        <button class="btn btn-success">Cadastrar</button>
+        
     </div>
     <div class="col-md-4 agenda_adicionar">
         <button class="btn btn-info    agenda_btn_buscar_cliente"><i class="la la-search text-white"></i></button>
