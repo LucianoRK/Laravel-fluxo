@@ -146,9 +146,9 @@
             </div>
         </div>
 
-        <div class="form-group row" id="comboCidades" {{ $errors->has('cidade') ? 'has-error' : '' }}>
+        <div class="form-group row" {{ $errors->has('cidade') ? 'has-error' : '' }}>
             <label class="control-label text-right col-md-3">Cidade</label>
-            <div class="col-md-6">
+            <div class="col-md-6" id="comboCidades">
                 <input disabled value="Selecione um estado antes" type="text" class="form-control">
             </div>
         </div>

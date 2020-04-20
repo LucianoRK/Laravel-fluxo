@@ -21,9 +21,9 @@ class CreateClientesTable extends Migration
             $table->string('cpf', 15);
             $table->string('rg', 10)->nullable();
             $table->date('data_nascimento');
-            $table->string('sexo', 30);
-            $table->string('estado_civil', 30);
-            $table->string('nacionalidade', 30);
+            $table->string('sexo', 50);
+            $table->string('estado_civil', 50);
+            $table->string('nacionalidade', 50);
             $table->string('cel_titular', 20);
             $table->string('cel_recado', 100);
             $table->string('email', 100)->nullable();
@@ -31,7 +31,7 @@ class CreateClientesTable extends Migration
             $table->string('trabalho', 100)->nullable();
             $table->string('fone_trabalho', 100)->nullable();
             $table->integer('renda_media')->nullable();
-            $table->string('residencia', 20)->nullable();
+            $table->string('residencia', 50)->nullable();
             $table->string('nome_mae_titular', 100);
             $table->longText('obs_cadastro')->nullable();
             $table->boolean('ativo')->default(true);

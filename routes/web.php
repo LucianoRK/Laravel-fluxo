@@ -59,5 +59,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('feriados', 'Feriados\FeriadoController');
 
     /* CLIENTE */
-    Route::resource('clientes', 'Clientes\ClienteController');
+    Route::resource('clientes', 'ClienteController');
 });

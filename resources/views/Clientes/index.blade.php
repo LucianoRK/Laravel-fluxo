@@ -9,7 +9,7 @@
         <div class="card">
             <h5 class="card-header"> 
                 <span class="align-middle text-primary">
-                    INFORMAÇÕES DO CLIENTE - [ NOME ]
+                INFORMAÇÕES DO CLIENTE - [{{ $cliente->id }}] [{{strtoupper($cliente->nome)}}]
                 </span>
             </h5>
             <div class="card-body">
@@ -26,22 +26,46 @@
             
             <div class="tab-content">
                 <div class="tab-pane fadeIn active show" id="cliente">
-                    @include('clientes.informacoesCliente.cliente')
+                    @if (isset($cliente) && $cliente)
+                        @include('clientes.informacoesCliente.cliente')
+                    @else 
+                        <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
+                    @endif
                 </div>
                 <div class="tab-pane fadeIn" id="cliente-conjuge">
-                    @include('clientes.informacoesCliente.conjuge')
+                    @if (isset($conjuge) && $conjuge)
+                        @include('clientes.informacoesCliente.cliente')
+                    @else 
+                        <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
+                    @endif
                 </div>
                 <div class="tab-pane fadeIn" id="cliente-dependentes">
-                    @include('clientes.informacoesCliente.dependentes')
+                    @if (isset($dependentes) && $dependentes)
+                        @include('clientes.informacoesCliente.cliente')
+                    @else 
+                        <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
+                    @endif
                 </div>
                 <div class="tab-pane fadeIn" id="cliente-tratamentos">
-                    @include('clientes.informacoesCliente.tratamentos')
+                    @if (isset($tratamentos) && $tratamentos)
+                        @include('clientes.informacoesCliente.cliente')
+                    @else 
+                        <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
+                    @endif
                 </div>
                 <div class="tab-pane fadeIn" id="cliente-financeiro">
-                    @include('clientes.informacoesCliente.financeiro')
+                    @if (isset($financeiro) && $financeiro)
+                        @include('clientes.informacoesCliente.cliente')
+                    @else 
+                        <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
+                    @endif
                 </div>
                 <div class="tab-pane fadeIn" id="cliente-agenda">
-                    @include('clientes.informacoesCliente.agenda')
+                    @if (isset($agenda) && $agenda)
+                        @include('clientes.informacoesCliente.cliente')
+                    @else 
+                        <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
+                    @endif
                 </div>
             </div>
         </div>

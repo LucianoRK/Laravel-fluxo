@@ -267,7 +267,7 @@ class UsuarioController extends Controller
         $endereco['bairro']           = $request->bairro;
         $endereco['complemento']      = $request->complemento;
         $endereco_usuario->where('fk_usuario', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($endereco);
-        LogSistemaController::logSistemaTipoUpdate($id, 'fk_usuario', 'enderecos', $endereco);
+        LogSistemaController::logSistemaTipoUpdate($id, 'fk_usuario', 'endereco_usuarios', $endereco);
 
         if ($request->fk_tipo_usuario == 3) {
             $mm_esp = new Usuario_mm_especialidade();

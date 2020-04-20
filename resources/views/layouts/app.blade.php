@@ -105,8 +105,8 @@
                             </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{asset('assets/img/avatars/profile01.jpg')}}" class="w-35 rounded-circle" alt="Albert Einstein">
+                        <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="icon dripicons-user"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-accout">
                             <div class="dropdown-header pb-3">
