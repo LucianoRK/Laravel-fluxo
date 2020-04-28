@@ -25,9 +25,17 @@ class RadiologistaController extends Controller
         // Usado para contar as linhas da tabela
         $count = 1;
 
-        $radiologistas['ativos']   = $radiologista->getAllradiologistaAtivoEmpresa(Auth::user()->fk_empresa);
-        $radiologistas['inativos'] = $radiologista->getAllradiologistaInativoEmpresa(Auth::user()->fk_empresa);
-        $empresa                   = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
+        $radiologistas['ativos'] = Radiologista::select('radiologistas.*')
+            ->where([['radiologistas.ativo', '=', true], ['fk_empresa', '=', Auth::user()->fk_empresa]])
+            ->orderBy('radiologistas.razao_social')
+            ->get();
+
+        $radiologistas['inativos'] = Radiologista::select('radiologistas.*')
+            ->where([['radiologistas.ativo', '=', false], ['fk_empresa', '=', Auth::user()->fk_empresa]])
+            ->orderBy('radiologistas.razao_social')
+            ->get();
+
+        $empresa = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
 
         return view('empresas.radiologistas.index', compact('radiologistas', 'empresa', 'count'));
     }
@@ -112,11 +120,33 @@ class RadiologistaController extends Controller
 
 
         $estados       = $estado->getAllEstados();
-        $radiologista  = $radiologistas->getDadosRadiologistaEmpresa($radiologista->id, Auth::user()->fk_empresa);
-        $endereco      = $enderecos->getEnderecoRadiologista($radiologista->id);
+
+        $radiologista  = Radiologista::select(
+                'radiologistas.*', 
+                'empresas.nome AS nome_empresa',
+                'endereco_radiologistas.fk_cidade',
+                'endereco_radiologistas.cep',
+                'endereco_radiologistas.logradouro',
+                'endereco_radiologistas.numero',
+                'endereco_radiologistas.bairro',
+                'endereco_radiologistas.complemento',
+                'cidades.fk_estado'
+            )
+            ->join('empresas', 'empresas.id', '=', 'radiologistas.fk_empresa')
+            ->leftJoin('endereco_radiologistas', 'endereco_radiologistas.fk_radiologista', '=', 'radiologistas.id')
+            ->leftJoin('cidades', 'cidades.id', '=', 'endereco_radiologistas.fk_cidade')
+            ->where([
+                    ['radiologistas.id', '=', $radiologista->id], 
+                    ['radiologistas.fk_empresa', '=', Auth::user()->fk_empresa], 
+                    ['radiologistas.ativo', '=', true]
+                ])
+            ->orderBy('radiologistas.razao_social')
+            ->first();
+
+        // Converte o valor para BR
         $radiologista['valor_sugerido'] = Helper::currencyMysqlForBr($radiologista['valor_sugerido']);
 
-        return view('empresas.radiologistas.editarRadiologista', compact('estados', 'radiologista', 'endereco'));
+        return view('empresas.radiologistas.editarRadiologista', compact('estados', 'radiologista'));
     }
 
     /**

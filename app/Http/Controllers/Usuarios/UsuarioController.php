@@ -25,14 +25,24 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Usuario $user, Empresa $empresa)
+    public function index(Empresa $empresa)
     {
         // Usado para contar as linhas da tabela
         $count = 1;
 
-        $usuarios['ativos']     = $user->getAllusuarioAtivoEmpresa(Auth::user()->fk_empresa);
-        $usuarios['inativos']   = $user->getAllUsuarioInativoEmpresa(Auth::user()->fk_empresa);
-        $empresa                = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
+        $usuarios['ativos'] = Usuario::select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
+            ->where([ ['usuarios.ativo', '=', true], ['fk_empresa', '=', Auth::user()->fk_empresa], ])
+            ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
+            ->orderBy('usuarios.nome')
+            ->get();
+
+        $usuarios['inativos'] = Usuario::select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
+            ->where([ ['usuarios.ativo', '=', false], ['fk_empresa', '=', Auth::user()->fk_empresa], ])
+            ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
+            ->orderBy('usuarios.nome')
+            ->get();
+
+        $empresa = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
 
         return view('usuarios.index', compact('usuarios', 'empresa', 'count'));
     }
@@ -199,12 +209,10 @@ class UsuarioController extends Controller
     public function edit(Usuario $usuario)
     {
         $estado         = new Estado();
-        $enderecos      = new Endereco_usuario();
         $especialidades = new Usuario_mm_especialidade();
         $array_espe[]   = false;
-
         $estados        = $estado->getAllEstados();
-        $especialidades = $especialidades->getEspecialidadesUsuarioEmpresa($usuario->id, Auth::user()->fk_empresa);
+        $especialidades = $especialidades->getEspecialidadesUsuarioEmpresa($u->id, Auth::user()->fk_empresa);
 
         $usuario = Usuario::select(
             "usuarios.*", 
@@ -217,15 +225,14 @@ class UsuarioController extends Controller
             "cidades.fk_estado",
             "empresas.nome AS nome_empresa",
             "tipo_usuarios.nome AS nome_tipo_usuario"
-        )
-            ->join('endereco_usuarios', 'endereco_usuarios.fk_usuario', '=', 'usuarios.id')
-            ->join('cidades', 'cidades.id', '=', 'endereco_usuarios.fk_cidade')
+            )
+            ->leftJoin('endereco_usuarios', 'endereco_usuarios.fk_usuario', '=', 'usuarios.id')
+            ->leftJoin('cidades', 'cidades.id', '=', 'endereco_usuarios.fk_cidade')
             ->join('empresas', 'empresas.id', '=', 'usuarios.fk_empresa')
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
-            ->where('usuarios.id', '=', $usuario->id)
+            ->where('usuarios.id', '=', $u->id)
             ->where('usuarios.fk_empresa', '=', Auth::user()->fk_empresa)
             ->where('usuarios.ativo', '=', true)
-            ->where('endereco_usuarios.ativo', '=', true)
             ->first();
 
         if ($especialidades) {

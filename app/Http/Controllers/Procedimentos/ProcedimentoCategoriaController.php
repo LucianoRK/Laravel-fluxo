@@ -17,7 +17,10 @@ class ProcedimentoCategoriaController extends Controller
      */
     public function index(Procedimento_categoria $c)
     {
-        $categorias = $c->getAllCategoriaEmpresa(Auth::user()->fk_empresa);
+        $categorias = Procedimento_categoria::select('id', 'fk_empresa', 'nome', 'ativo')
+            ->where([ ['fk_empresa', '=', Auth::user()->fk_empresa], ['ativo', '=', true], ])
+            ->orderBy('nome')
+            ->get();
 
         // Usado para contar as linhas da tabela
         $count = 1;

@@ -74,7 +74,7 @@
         <div class="form-group row {{ $errors->has('cep') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">*CEP</label>
             <div class="col-md-6">
-                <input name="cep" value="{{$endereco->cep ?? old('cep') }}" type="text" class="form-control cepMask" placeholder="00000-00">
+                <input name="cep" value="{{$protetico->cep ?? old('cep') }}" type="text" class="form-control cepMask" placeholder="00000-00">
                 @if ($errors->has('cep')) 
                     <h6> <span class="help-block"> {{ $errors->first('cep') }} </span> </h6>
                 @endif
@@ -88,7 +88,7 @@
                     <option value="" disabled selected="" disabled="" > Selecione um estado </option>
                     @if ($estados)
                         @foreach($estados as $estado)
-                            @if(isset($endereco->fk_estado) && $endereco->fk_estado == $estado->id || old('estado') == $estado->id)
+                            @if(isset($protetico->fk_estado) && $protetico->fk_estado == $estado->id || old('estado') == $estado->id)
                                 <option selected value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
                             @else
                                 <option value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
@@ -102,9 +102,9 @@
             </div>
         </div>
 
-        <div class="form-group row" id="comboCidades" {{ $errors->has('cidade') ? 'has-error' : '' }}>
+        <div class="form-group row" {{ $errors->has('cidade') ? 'has-error' : '' }}>
             <label class="control-label text-right col-md-3">*Cidade</label>
-            <div class="col-md-6">
+            <div class="col-md-6" id="comboCidades">
                 <input disabled value="Selecione um estado antes" type="text" class="form-control">
             </div>
         </div>
@@ -112,7 +112,7 @@
         <div class="form-group row {{ $errors->has('logradouro') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">*Logradouro</label>
             <div class="col-md-6">
-                <input name="logradouro" value="{{$endereco->logradouro ?? old('logradouro') }}" type="text" class="form-control">
+                <input name="logradouro" value="{{$protetico->logradouro ?? old('logradouro') }}" type="text" class="form-control">
                 @if ($errors->has('logradouro')) 
                     <h6> <span class="help-block"> {{ $errors->first('logradouro') }} </span> </h6>
                 @endif
@@ -122,7 +122,7 @@
         <div class="form-group row {{ $errors->has('numero') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">Número</label>
             <div class="col-md-6">
-                <input name="numero" value="{{$endereco->numero ?? old('numero') }}" type="text" class="form-control">
+                <input name="numero" value="{{$protetico->numero ?? old('numero') }}" type="text" class="form-control">
                 @if ($errors->has('numero')) 
                     <h6> <span class="help-block"> {{ $errors->first('numero') }} </span> </h6>
                 @endif
@@ -132,7 +132,7 @@
         <div class="form-group row {{ $errors->has('bairro') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">*Bairro</label>
             <div class="col-md-6">
-                <input name="bairro" value="{{$endereco->bairro ?? old('bairro') }}" type="text" class="form-control">
+                <input name="bairro" value="{{$protetico->bairro ?? old('bairro') }}" type="text" class="form-control">
                 @if ($errors->has('bairro')) 
                     <h6> <span class="help-block"> {{ $errors->first('bairro') }} </span> </h6>
                 @endif
@@ -142,7 +142,7 @@
         <div class="form-group row {{ $errors->has('complemento') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">Complemento</label>
             <div class="col-md-6">
-                <input name="complemento" value="{{$endereco->complemento ?? old('complemento') }}" type="text" class="form-control">
+                <input name="complemento" value="{{$protetico->complemento ?? old('complemento') }}" type="text" class="form-control">
                 @if ($errors->has('complemento')) 
                     <h6> <span class="help-block"> {{ $errors->first('complemento') }} </span> </h6>
                 @endif

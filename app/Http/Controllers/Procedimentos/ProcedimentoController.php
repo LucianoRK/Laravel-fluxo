@@ -20,7 +20,19 @@ class ProcedimentoController extends Controller
      */
     public function index(Procedimento $p)
     {
-        $procedimentos = $p->getAllProcedimentoEmpresa(Auth::user()->fk_empresa);
+        $procedimentos = Procedimento::select(
+                'procedimentos.id', 
+                'procedimentos.valor_sugerido', 
+                'especialidades.nome AS nome_esp', 
+                'procedimento_categorias.nome AS nome_cat',
+                'procedimentos.nome AS nome_proc', 
+                'protetico'
+            )
+            ->where([['procedimentos.fk_empresa', '=', Auth::user()->fk_empresa], ['procedimentos.ativo', '=', true]])
+            ->join('especialidades', 'especialidades.id', '=', 'procedimentos.fk_especialidade')
+            ->join('procedimento_categorias', 'procedimento_categorias.id', '=', 'procedimentos.fk_categoria')
+            ->orderBy('procedimento_categorias.nome')
+            ->get();
 
         // Usado para contar as linhas da tabela
         $count = 1;
@@ -35,7 +47,11 @@ class ProcedimentoController extends Controller
      */
     public function create(Procedimento_categoria $c, Especialidade $p)
     {
-        $categorias     = $c->getAllCategoriaEmpresa(Auth::user()->fk_empresa);
+        $categorias = Procedimento_categoria::select('id', 'fk_empresa', 'nome', 'ativo')
+            ->where([ ['fk_empresa', '=', Auth::user()->fk_empresa], ['ativo', '=', true] ])
+            ->orderBy('nome')
+            ->get();
+
         $especialidades = $p->getAllEspecialidades();
 
         return view('Procedimentos.novoProcedimento', compact('categorias', 'especialidades'));
@@ -137,7 +153,21 @@ class ProcedimentoController extends Controller
      */
     public function edit(Procedimento $procedimento)
     {
-        $procedimento                   = $procedimento->getProcedimentoEmpresa(Auth::user()->fk_empresa, $procedimento->id);
+        $procedimento = Procedimento::select(
+                'procedimentos.id', 
+                'procedimentos.valor_sugerido', 
+                'especialidades.nome AS nome_esp', 
+                'procedimento_categorias.nome AS nome_cat',
+                'procedimentos.nome AS nome_proc', 
+                'protetico'
+            )
+            ->where([['procedimentos.id', '=', $procedimento->id], ['procedimentos.fk_empresa', '=', Auth::user()->fk_empresa], ['procedimentos.ativo', '=', true]])
+            ->join('especialidades', 'especialidades.id', '=', 'procedimentos.fk_especialidade')
+            ->join('procedimento_categorias', 'procedimento_categorias.id', '=', 'procedimentos.fk_categoria')
+            ->orderBy('procedimento_categorias.nome')
+            ->first();
+
+        // Converto para moeda BR    
         $procedimento['valor_sugerido'] = Helper::currencyMysqlForBr($procedimento['valor_sugerido']);
 
         return view('Procedimentos.editarProcedimento', compact('procedimento'));
@@ -162,6 +192,7 @@ class ProcedimentoController extends Controller
         if (!$request->valor_sugerido) {
             $proc['valor_sugerido'] = 0;
         } else {
+            // Converto para moeda BR    
             $proc['valor_sugerido'] = Helper::currencyBrForMysql($request->valor_sugerido);
         }
 

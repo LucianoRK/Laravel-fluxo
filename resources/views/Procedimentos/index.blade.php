@@ -28,7 +28,7 @@
                                     <th scope="col" class="text-success">ESPECIALIDADE</th>
                                     <th scope="col" class="text-success">CATEGORIA</th>
                                     <th scope="col" class="text-success">PROCEDIMENTO</th>
-                                    <th scope="col" class="text-success">VALOR</th>
+                                    <th scope="col" class="text-success">VALOR SUGERIDO</th>
                                     <th scope="col" class="text-success">PROTETICO</th>
                                     <th scope="col" class="text-success">OPÇÕES</th>
                                 </tr>
@@ -56,7 +56,7 @@
                                                 {{ $procedimento->protetico ? 'Sim' : 'Não' }}
                                             </td>
                                             <td class="text-center" id_procedimento="{{ $procedimento->id }}">
-                                                <a href="{{ url("procedimentos/$procedimento->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar"> 
+                                                <a href="{{ url("procedimentos/$procedimento->id/edit") }}" class="btn btn-info btn-sm editar" title="Editar valor"> 
                                                     <i class="la la-edit text-white font-size-22"></i> 
                                                 </a>
 

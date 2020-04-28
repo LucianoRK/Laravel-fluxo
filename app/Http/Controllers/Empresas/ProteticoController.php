@@ -23,9 +23,17 @@ class ProteticoController extends Controller
         // Usado para contar as linhas da tabela
         $count = 1;
 
-        $proteticos['ativos']   = $protetico->getAllproteticoAtivoEmpresa(Auth::user()->fk_empresa);
-        $proteticos['inativos'] = $protetico->getAllproteticoInativoEmpresa(Auth::user()->fk_empresa);
-        $empresa                = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
+        $proteticos['ativos']   = Protetico::select('proteticos.*')
+            ->where([ ['proteticos.ativo', '=', true], ['fk_empresa', '=', Auth::user()->fk_empresa] ])
+            ->orderBy('proteticos.razao_social')
+            ->get();
+
+        $proteticos['inativos'] = Protetico::select('proteticos.*')
+            ->where([ ['proteticos.ativo', '=', false], ['fk_empresa', '=', Auth::user()->fk_empresa] ])
+            ->orderBy('proteticos.razao_social')
+            ->get();
+
+        $empresa = $empresa->getNomeEmpresa(Auth::user()->fk_empresa);
 
         return view('empresas.proteticos.index', compact('proteticos', 'empresa', 'count'));
     }
@@ -98,14 +106,27 @@ class ProteticoController extends Controller
     public function edit(Protetico $protetico)
     {
         $estado     = new Estado();
-        $proteticos = new Protetico();
-        $enderecos  = new Endereco_protetico();
-
         $estados    = $estado->getAllEstados();
-        $protetico  = $proteticos->getDadosProteticoEmpresa($protetico->id, Auth::user()->fk_empresa);
-        $endereco   = $enderecos->getEnderecoProtetico($protetico->id);
 
-        return view('empresas.proteticos.editarProtetico', compact('estados', 'protetico', 'endereco'));
+        $protetico  = Protetico::select(
+                'proteticos.*', 
+                'empresas.nome AS nome_empresa',
+                'endereco_proteticos.fk_cidade',
+                'endereco_proteticos.cep',
+                'endereco_proteticos.logradouro',
+                'endereco_proteticos.numero',
+                'endereco_proteticos.bairro',
+                'endereco_proteticos.complemento',
+                'cidades.fk_estado'
+            )
+            ->join('empresas', 'empresas.id', '=', 'proteticos.fk_empresa')
+            ->leftJoin('endereco_proteticos', 'endereco_proteticos.fk_protetico', '=', 'proteticos.id')
+            ->leftJoin('cidades', 'cidades.id', '=', 'endereco_proteticos.fk_cidade')
+            ->where([ ['proteticos.id', '=', $protetico->id], ['proteticos.fk_empresa', '=', Auth::user()->fk_empresa], ['proteticos.ativo', '=', true] ])
+            ->orderBy('proteticos.razao_social')
+            ->first();
+
+        return view('empresas.proteticos.editarProtetico', compact('estados', 'protetico'));
     }
 
     /**

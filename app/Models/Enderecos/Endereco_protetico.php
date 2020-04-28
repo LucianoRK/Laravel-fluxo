@@ -26,12 +26,4 @@ class Endereco_protetico extends Model
      * @var array
      */
     protected $casts = [];
-
-    public function getEnderecoProtetico($protetico)
-    {
-        return Endereco_protetico::select('endereco_proteticos.*', 'cidades.fk_estado')
-            ->where([['endereco_proteticos.fk_protetico', '=', $protetico],])
-            ->leftJoin('cidades', 'cidades.id', '=', 'endereco_proteticos.fk_cidade')
-            ->first();
-    }
 }

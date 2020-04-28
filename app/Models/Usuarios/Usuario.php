@@ -45,24 +45,6 @@ class Usuario extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getAllusuarioAtivoEmpresa($fk_empresa)
-    {
-        return Usuario::select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
-            ->where([ ['usuarios.ativo', '=', true], ['fk_empresa', '=', $fk_empresa], ])
-            ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
-            ->orderBy('usuarios.nome')
-            ->get();
-    }
-
-    public function getAllUsuarioInativoEmpresa($fk_empresa)
-    {
-        return Usuario::select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
-            ->where([ ['usuarios.ativo', '=', false], ['fk_empresa', '=', $fk_empresa], ])
-            ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
-            ->orderBy('usuarios.nome')
-            ->get();
-    }
-
     public function verificaLoginExiste($login)
     {
         return Usuario::select('id')

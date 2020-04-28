@@ -12,7 +12,7 @@
                     @method('PUT')
                     
                     @include('empresas.proteticos.formProtetico');
-                    <input type="hidden" name="cidade_edit" id="cidade_edit" value="{{$endereco->fk_cidade ?? false }}">
+                    <input type="hidden" name="cidade_edit" id="cidade_edit" value="{{$protetico->fk_cidade ?? false }}">
 
                     <div class="card-footer bg-light">
                         <div class="form-actions">

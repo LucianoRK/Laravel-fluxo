@@ -14,7 +14,7 @@
             <div class="col-md-6">
                 @if(!isset($usuario->nome_tipo_usuario))
                     <select name="fk_tipo_usuario" id="fk_tipo_usuario" value="{{ old('fk_tipo_usuario') }}" class="form-control">
-                        <option selected disabled value=""> Tipo de usuário </option>
+                        <option selected disabled value=""> Selecione um tipo de usuário </option>
                         @if ($tipos_usuarios)
                             @foreach($tipos_usuarios as $tipo_usuario)
                                 @if (session('especialidade') || old('fk_tipo_usuario') == 3)

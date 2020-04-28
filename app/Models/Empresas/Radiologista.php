@@ -29,31 +29,6 @@ class Radiologista extends Model
      */
     protected $casts = [];
 
-    public function getAllradiologistaAtivoEmpresa($fk_empresa)
-    {
-        return Radiologista::select('radiologistas.*')
-            ->where([['radiologistas.ativo', '=', true], ['fk_empresa', '=', $fk_empresa]])
-            ->orderBy('radiologistas.razao_social')
-            ->get();
-    }
-
-    public function getAllradiologistaInativoEmpresa($fk_empresa)
-    {
-        return Radiologista::select('radiologistas.*')
-            ->where([['radiologistas.ativo', '=', false], ['fk_empresa', '=', $fk_empresa]])
-            ->orderBy('radiologistas.razao_social')
-            ->get();
-    }
-
-    public function getDadosRadiologistaEmpresa($radiologista, $fk_empresa)
-    {
-        return Radiologista::select('radiologistas.*', 'empresas.nome AS nome_empresa')
-            ->where([['radiologistas.id', '=', $radiologista], ['radiologistas.fk_empresa', '=', $fk_empresa], ['radiologistas.ativo', '=', true]])
-            ->join('empresas', 'empresas.id', '=', 'radiologistas.fk_empresa')
-            ->orderBy('radiologistas.razao_social')
-            ->first();
-    }
-
     public function verificaRadiologistaExisteEmpresa($radiologista, $fk_empresa)
     {
         return Radiologista::select('id')
