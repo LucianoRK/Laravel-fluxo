@@ -63,15 +63,6 @@ class Usuario extends Authenticatable
             ->get();
     }
 
-    public function getDadosUsuarioEmpresa($usuario, $fk_empresa)
-    {
-        return Usuario::select('usuarios.*', 'empresas.nome AS nome_empresa', 'tipo_usuarios.nome AS nome_tipo_usuario')
-            ->where([ ['usuarios.id', '=', $usuario], ['usuarios.fk_empresa', '=', $fk_empresa], ['usuarios.ativo', '=', true], ])
-            ->join('empresas', 'empresas.id', '=', 'usuarios.fk_empresa')
-            ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
-            ->first();
-    }
-
     public function verificaLoginExiste($login)
     {
         return Usuario::select('id')

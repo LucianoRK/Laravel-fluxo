@@ -199,15 +199,34 @@ class UsuarioController extends Controller
     public function edit(Usuario $usuario)
     {
         $estado         = new Estado();
-        $usuarios       = new Usuario();
         $enderecos      = new Endereco_usuario();
         $especialidades = new Usuario_mm_especialidade();
         $array_espe[]   = false;
 
         $estados        = $estado->getAllEstados();
-        $usuario        = $usuarios->getDadosUsuarioEmpresa($usuario->id, Auth::user()->fk_empresa);
-        $endereco       = $enderecos->getEnderecoUsuario($usuario->id);
         $especialidades = $especialidades->getEspecialidadesUsuarioEmpresa($usuario->id, Auth::user()->fk_empresa);
+
+        $usuario = Usuario::select(
+            "usuarios.*", 
+            "endereco_usuarios.fk_cidade",
+            "endereco_usuarios.cep",
+            "endereco_usuarios.logradouro",
+            "endereco_usuarios.numero",
+            "endereco_usuarios.bairro",
+            "endereco_usuarios.complemento",
+            "cidades.fk_estado",
+            "empresas.nome AS nome_empresa",
+            "tipo_usuarios.nome AS nome_tipo_usuario"
+        )
+            ->join('endereco_usuarios', 'endereco_usuarios.fk_usuario', '=', 'usuarios.id')
+            ->join('cidades', 'cidades.id', '=', 'endereco_usuarios.fk_cidade')
+            ->join('empresas', 'empresas.id', '=', 'usuarios.fk_empresa')
+            ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
+            ->where('usuarios.id', '=', $usuario->id)
+            ->where('usuarios.fk_empresa', '=', Auth::user()->fk_empresa)
+            ->where('usuarios.ativo', '=', true)
+            ->where('endereco_usuarios.ativo', '=', true)
+            ->first();
 
         if ($especialidades) {
             foreach ($especialidades as $especialidade) {
@@ -215,7 +234,7 @@ class UsuarioController extends Controller
             }
         }
 
-        return view('usuarios.editarUsuario', compact('estados', 'usuario', 'endereco', 'array_espe'));
+        return view('usuarios.editarUsuario', compact('estados', 'usuario', 'array_espe'));
     }
 
     /**

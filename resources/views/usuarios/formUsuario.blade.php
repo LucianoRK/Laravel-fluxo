@@ -14,6 +14,7 @@
             <div class="col-md-6">
                 @if(!isset($usuario->nome_tipo_usuario))
                     <select name="fk_tipo_usuario" id="fk_tipo_usuario" value="{{ old('fk_tipo_usuario') }}" class="form-control">
+                        <option selected disabled value=""> Tipo de usuário </option>
                         @if ($tipos_usuarios)
                             @foreach($tipos_usuarios as $tipo_usuario)
                                 @if (session('especialidade') || old('fk_tipo_usuario') == 3)
@@ -118,7 +119,7 @@
         <div class="form-group row {{ $errors->has('cep') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">CEP</label>
             <div class="col-md-6">
-                <input name="cep" value="{{$endereco->cep ?? old('cep') }}" type="text" class="form-control cepMask" placeholder="00000-00">
+                <input name="cep" value="{{$usuario->cep ?? old('cep') }}" type="text" class="form-control cepMask" placeholder="00000-00">
                 @if ($errors->has('cep')) 
                     <h6> <span class="help-block"> {{ $errors->first('cep') }} </span> </h6>
                 @endif
@@ -129,10 +130,10 @@
             <label class="control-label text-right col-md-3">Estado</label>
             <div class="col-md-6">
                 <select id="estado" name="estado" value="{{ old('estado') }}" class="form-control">
-                    <option value="" disabled selected="" disabled="" > Selecione um estado </option>
+                    <option value="" selected disabled> Selecione um estado </option>
                     @if ($estados)
                         @foreach($estados as $estado)
-                            @if(isset($endereco->fk_estado) && $endereco->fk_estado == $estado->id || old('estado') == $estado->id)
+                            @if(isset($usuario->fk_estado) && $usuario->fk_estado == $estado->id || old('estado') == $estado->id)
                                 <option selected value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
                             @else
                                 <option value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
@@ -149,14 +150,14 @@
         <div class="form-group row" {{ $errors->has('cidade') ? 'has-error' : '' }}>
             <label class="control-label text-right col-md-3">Cidade</label>
             <div class="col-md-6" id="comboCidades">
-                <input disabled value="Selecione um estado antes" type="text" class="form-control">
+                <input disabled value="Selecione uma cidade" type="text" class="form-control">
             </div>
         </div>
 
         <div class="form-group row {{ $errors->has('logradouro') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">Logradouro</label>
             <div class="col-md-6">
-                <input name="logradouro" value="{{$endereco->logradouro ?? old('logradouro') }}" type="text" class="form-control">
+                <input name="logradouro" value="{{$usuario->logradouro ?? old('logradouro') }}" type="text" class="form-control">
                 @if ($errors->has('logradouro')) 
                     <h6> <span class="help-block"> {{ $errors->first('logradouro') }} </span> </h6>
                 @endif
@@ -166,7 +167,7 @@
         <div class="form-group row {{ $errors->has('numero') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">Número</label>
             <div class="col-md-6">
-                <input name="numero" value="{{$endereco->numero ?? old('numero') }}" type="text" class="form-control">
+                <input name="numero" value="{{$usuario->numero ?? old('numero') }}" type="text" class="form-control">
                 @if ($errors->has('numero')) 
                     <h6> <span class="help-block"> {{ $errors->first('numero') }} </span> </h6>
                 @endif
@@ -176,7 +177,7 @@
         <div class="form-group row {{ $errors->has('bairro') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">Bairro</label>
             <div class="col-md-6">
-                <input name="bairro" value="{{$endereco->bairro ?? old('bairro') }}" type="text" class="form-control">
+                <input name="bairro" value="{{$usuario->bairro ?? old('bairro') }}" type="text" class="form-control">
                 @if ($errors->has('bairro')) 
                     <h6> <span class="help-block"> {{ $errors->first('bairro') }} </span> </h6>
                 @endif
@@ -186,7 +187,7 @@
         <div class="form-group row {{ $errors->has('complemento') ? 'has-error' : '' }}">
             <label class="control-label text-right col-md-3">Complemento</label>
             <div class="col-md-6">
-                <input name="complemento" value="{{$endereco->complemento ?? old('complemento') }}" type="text" class="form-control">
+                <input name="complemento" value="{{$usuario->complemento ?? old('complemento') }}" type="text" class="form-control">
                 @if ($errors->has('complemento')) 
                     <h6> <span class="help-block"> {{ $errors->first('complemento') }} </span> </h6>
                 @endif

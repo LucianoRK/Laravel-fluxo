@@ -11,7 +11,7 @@
                     @method('PUT')
                     
                     @include('usuarios.formUsuario');
-                    <input type="hidden" name="cidade_edit" id="cidade_edit" value="{{$endereco->fk_cidade ?? false }}">
+                    <input type="hidden" name="cidade_edit" id="cidade_edit" value="{{$usuario->fk_cidade ?? false }}">
                     <input type="hidden" name="fk_tipo_usuario" id="fk_tipo_usuario" value="{{$usuario->fk_tipo_usuario ?? false }}">
 
                     <div class="card-footer bg-light">
