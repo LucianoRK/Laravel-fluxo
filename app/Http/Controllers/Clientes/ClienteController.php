@@ -164,20 +164,25 @@ class ClienteController extends Controller
         return View('clientes.searchNavbar.listaClientesFiltrados', compact('clientes'));
     }
 
-    public function mostraTodosDadosCliente($id, Estado $estado)
+    public function getDadosCliente($id)
     {
-        $cliente = Cliente::select("*")
-            ->where('id', '=', $id)
-            ->where('fk_empresa', '=', Auth::user()->fk_empresa)
+        $cliente = Cliente::select(
+            "clientes.*", 
+            "endereco_clientes.fk_cidade",
+            "endereco_clientes.cep",
+            "endereco_clientes.logradouro",
+            "endereco_clientes.numero",
+            "endereco_clientes.bairro",
+            "endereco_clientes.complemento",
+            "cidades.fk_estado"
+        )
+            ->join('endereco_clientes', 'endereco_clientes.fk_cliente', '=', 'clientes.id')
+            ->join('cidades', 'cidades.id', '=', 'endereco_clientes.fk_cidade')
+            ->where('clientes.id', '=', $id)
+            ->where('clientes.fk_empresa', '=', Auth::user()->fk_empresa)
+            ->where('clientes.ativo', '=', true)
+            ->where('endereco_clientes.ativo', '=', true)
             ->first();
-
-        $endereco = Endereco_cliente::select("*")
-            ->where('fk_cliente', '=', $id)
-            ->where('fk_empresa', '=', Auth::user()->fk_empresa)
-            ->leftJoin('cidades', 'cidades.id', '=', 'fk_cidade')
-            ->first();
-
-        $estados = $estado->getAllEstados();
 
         if ($cliente['sexo'] == 'masculino') {
             $cliente['masculino'] = true;
@@ -219,6 +224,14 @@ class ClienteController extends Controller
                 break;
         }
 
-        return view('clientes.index', compact('cliente', 'endereco', 'estados'));
+        return $cliente;
+    }
+
+    public function mostraTodosDadosCliente($id, Estado $estado)
+    {
+        $cliente = self::getDadosCliente($id);
+        $estados = $estado->getAllEstados();
+
+        return view('clientes.index', compact('cliente', 'estados'));
     }
 }

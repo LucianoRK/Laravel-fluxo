@@ -6,7 +6,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <h5 class="card-header">Editar Procedimento</h5>
+                <h5 class="card-header"> 
+                    Editar Procedimento 
+                    <i title="Por motivo de integridade não é possível editar os dados do procedimento" style="cursor:pointer" class="zmdi zmdi-help-outline zmdi-hc-fw text-danger"> </i> 
+                </h5>
+
                 <form action="{{ route('procedimentos.update', $procedimento->id)}}" method="POST">
                     @method('PUT')
                     @include('procedimentos.formProcedimento');

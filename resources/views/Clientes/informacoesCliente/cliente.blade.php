@@ -113,7 +113,7 @@
                 <select id="estado" class="form-control" name="estado">
                     @if ($estados)
                         @foreach($estados as $estado)
-                            @if(isset($endereco->fk_estado) && $endereco->fk_estado == $estado->id || old('estado') == $estado->id)
+                            @if(isset($cliente->fk_estado) && $cliente->fk_estado == $estado->id || old('estado') == $estado->id)
                                 <option selected value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
                             @else
                                 <option value="{{ $estado->id }}"> {{ $estado->nome.' - '.$estado->uf }} </option>
@@ -133,26 +133,26 @@
 
             <div class="form-group col-md-4">
                 <label for="inputCep">*CEP</label>
-                <input type="text" class="form-control cepMask" id="inputCep" name="cep" value="{{$endereco->cep ?? false}}">
+                <input type="text" class="form-control cepMask" id="inputCep" name="cep" value="{{$cliente->cep ?? false}}">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="inputLogradouro">*Logradouro</label>
-                <input type="text" class="form-control" id="inputLogradouro" name="logradouro" value="{{$endereco->logradouro ?? false}}">
+                <input type="text" class="form-control" id="inputLogradouro" name="logradouro" value="{{$cliente->logradouro ?? false}}">
             </div>
             <div class="form-group col-md-2">
                 <label for="inputNumero">*Número</label>
-                <input type="text" class="form-control" id="inputNumero" name="numero" value="{{$endereco->numero ?? false}}">
+                <input type="text" class="form-control" id="inputNumero" name="numero" value="{{$cliente->numero ?? false}}">
             </div>
             <div class="form-group col-md-3">
                 <label for="inputBairro">*Bairro</label>
-                <input type="text" class="form-control" id="inputBairro" name="bairro" value="{{$endereco->bairro ?? false}}">
+                <input type="text" class="form-control" id="inputBairro" name="bairro" value="{{$cliente->bairro ?? false}}">
             </div>
             <div class="form-group col-md-3">
                 <label for="inputComplemento">Complemento</label>
-                <input type="text" class="form-control" id="inputComplemento" name="complemento" value="{{$endereco->complemento ?? false}}">
+                <input type="text" class="form-control" id="inputComplemento" name="complemento" value="{{$cliente->complemento ?? false}}">
             </div>
         </div>
 
@@ -173,7 +173,7 @@
             </div>
         </div>
     </div>
-    <input type="hidden" name="cidade_edit" id="cidade_edit" value="{{$endereco->fk_cidade ?? false }}">
+    <input type="hidden" name="cidade_edit" id="cidade_edit" value="{{$cliente->fk_cidade ?? false }}">
 </form>
 
 <script>

@@ -36,6 +36,7 @@
             <div class="col-md-6">
                 @if(!isset($procedimento->nome_cat))
                     <select name="categoria" value="{{ old('categoria') }}" class="form-control">
+                        <option value="" selected disabled> Selecione uma categoria </option>
                         @if ($categorias)
                             @foreach($categorias as $categoria)
                                 <option value="{{ $categoria->id }}"> {{ $categoria->nome }} </option>

@@ -11,29 +11,6 @@
                     <li><a href="/agenda"><i class="icon dripicons-calendar"></i><span> Agenda </span></a></li>
                 </li>
 
-                <li class="nav-dropdown">
-                    <li><a href="/clientes"><i class="icon dripicons-print"></i><span> Impressões </span></a></li>
-                </li>
-
-                <li class="nav-dropdown">
-                    <a class="has-arrow" href="#" aria-expanded="false"><i class="icon dripicons-graph-bar"></i><span>Financeiro</span></a>
-                    <ul class="collapse nav-sub" aria-expanded="false">
-                        <li><a href="/recebimentos"><span> Recebimentos </span></a></li>
-                        <li><a href="/contasPagar"><span> Contas a Pagar </span></a></li>
-                    </ul>
-                </li>
-
-                <li class="nav-dropdown">
-                    <a class="has-arrow" href="#" aria-expanded="false"><i class="icon dripicons-view-thumb"></i><span>Transferência Carteira</span></a>
-                    <ul class="collapse nav-sub" aria-expanded="false">
-                        <li><a href="/transferenciaClinico"><span> Clínico Geral </span></a></li>
-                        <li><a href="/transferenciaOrtodontia"><span> Ortodontia </span></a></li>
-                        <li><a href="/transferenciaImplantodontia"><span> Implantodontia </span></a></li>
-                        <li><a href="/transferenciaOdontopediatria"><span> Odontopediatria </span></a></li>
-                        <li><a href="/transferenciaOrofacial"><span> Orofacial </span></a></li>
-                    </ul>
-                </li>
-
                 <li class="sidebar-header"><span>CONFIGURAÇÕES</span></li>
                 @can('permissao', 10)
                     <li class="nav-dropdown">
@@ -64,12 +41,6 @@
                     <li><a href="/feriados"><i class="icon dripicons-calendar"></i><span> Feriados </span></a></li>
                 </li>
                 @endcan
-                <li class="nav-dropdown">
-                    <a class="has-arrow" href="#" aria-expanded="false"><i class="icon dripicons-to-do"></i><span>Ortodontia</span></a>
-                    <ul class="collapse nav-sub" aria-expanded="false">
-                        <li><a href="/planosOrto"><span> Planos </span></a></li>
-                    </ul>
-                </li>
 
                 <li class="nav-dropdown">
                     <li><a href="/permissoes"><i class="icon dripicons-lock"></i><span> Gerenciar Permissões </span></a></li>

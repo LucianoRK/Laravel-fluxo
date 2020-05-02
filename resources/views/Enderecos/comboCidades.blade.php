@@ -1,4 +1,5 @@
 <select id="cidade" name="cidade" value="{{$endereco->fk_cidade ?? old('cidade') }}" class="form-control">
+    <option selected disabled value=""> Selecione uma cidade </option>
     @if ($cidades)
         @foreach($cidades as $cidade)
             @if (isset($cidade_edit) && $cidade_edit == $cidade->id)
