@@ -31,6 +31,7 @@
             
             if(tipo_usuario_logado == 3){
                 agenda_dentista = true;
+                dentista = '{{Auth::user()->id}}';
                 $('.dentista_agenda').hide();
             }
        

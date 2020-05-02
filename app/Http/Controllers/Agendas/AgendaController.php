@@ -163,7 +163,6 @@ class AgendaController extends Controller
                 'agendas.fk_tratamento',
                 'agendas.status',
                 'especialidades.nome as nome_especialidade'
-
             )
             ->leftJoin('clientes', 'clientes.id', '=', 'agendas.fk_cliente')
             ->leftJoin('tratamentos', 'tratamentos.id', '=', 'agendas.fk_tratamento')
@@ -206,7 +205,8 @@ class AgendaController extends Controller
                 array_push($agenda_lista, $this->agendaVazia($horario));
             }
         }
-        if($request->agenda_dentista){
+        
+        if($request->agenda_dentista == 'true'){
             return View('Agendas.load.agenda_dentista_load',compact('agenda_lista'));
         }else{
             return View('Agendas.load.agenda_load',compact('agenda_lista'));
