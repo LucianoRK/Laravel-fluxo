@@ -15,7 +15,10 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <span class="align-middle">FERIADOS</span>
+                                <span class="align-middle">
+                                    FERIADOS
+                                    <i title="Na lista é mostrado apenas feriados futuros e presente" style="cursor:pointer" class="zmdi zmdi-help-outline zmdi-hc-fw text-danger"> </i> 
+                                </span>
                             </div>
                         </div>
                     </h5>

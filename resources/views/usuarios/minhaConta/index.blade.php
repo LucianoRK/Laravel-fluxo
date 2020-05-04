@@ -62,6 +62,7 @@
                                 <div class="row">
                                     <div class="offset-sm-3 col-md-5">
                                         <button type="submit" class="btn btn-primary btn-rounded">Gravar</button>
+                                        <a href="{{ url("/") }}" class="btn btn-secondary clear-form btn-rounded btn-outline ">Cancelar</a>
                                     </div>
                                 </div>
                             </div>

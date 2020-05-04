@@ -17,8 +17,8 @@ class ProcedimentoCategoriaController extends Controller
      */
     public function index(Procedimento_categoria $c)
     {
-        $categorias = Procedimento_categoria::select('id', 'fk_empresa', 'nome', 'ativo')
-            ->where([ ['fk_empresa', '=', Auth::user()->fk_empresa], ['ativo', '=', true], ])
+        $categorias = Procedimento_categoria::select('id', 'nome', 'ativo')
+            ->where([ ['ativo', '=', true] ])
             ->orderBy('nome')
             ->get();
 
@@ -50,7 +50,6 @@ class ProcedimentoCategoriaController extends Controller
             'nome_categoria' => ['required','min: 4', 'max: 20']
         ]);
 
-        $categoria->fk_empresa = Auth::user()->fk_empresa;
         $categoria->nome       = $request->nome_categoria;
         $categoria->save();
         
@@ -103,12 +102,12 @@ class ProcedimentoCategoriaController extends Controller
     {
         $c                  = new Procedimento_categoria();
         $categoria['ativo'] = false;
-        $desativado         = $c->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($categoria);
+        $desativado         = $c->where('id', $id)->update($categoria);
 
         // Desativa todos os procedimentos vinculado a categoria 
         $p                     = new Procedimento();
         $procedimento['ativo'] = false;
-        $p->where('fk_categoria', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($procedimento);
+        $p->where('fk_categoria', $id)->update($procedimento);
 
         LogSistemaController::logSistemaTipoUpdate($id, 'id', 'procedimento_categorias', $categoria);
         LogSistemaController::logSistemaTipoUpdate($id, 'fk_categoria', 'procedimentos', $categoria);

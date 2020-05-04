@@ -28,9 +28,11 @@ class ProcedimentoController extends Controller
                 'procedimentos.nome AS nome_proc', 
                 'protetico'
             )
-            ->where([['procedimentos.fk_empresa', '=', Auth::user()->fk_empresa], ['procedimentos.ativo', '=', true]])
             ->join('especialidades', 'especialidades.id', '=', 'procedimentos.fk_especialidade')
             ->join('procedimento_categorias', 'procedimento_categorias.id', '=', 'procedimentos.fk_categoria')
+            ->where([['procedimentos.ativo', '=', true]])
+            ->where([['especialidades.ativo', '=', true]])
+            ->where([['procedimento_categorias.ativo', '=', true]])
             ->orderBy('procedimento_categorias.nome')
             ->get();
 
@@ -47,8 +49,8 @@ class ProcedimentoController extends Controller
      */
     public function create(Procedimento_categoria $c, Especialidade $p)
     {
-        $categorias = Procedimento_categoria::select('id', 'fk_empresa', 'nome', 'ativo')
-            ->where([ ['fk_empresa', '=', Auth::user()->fk_empresa], ['ativo', '=', true] ])
+        $categorias = Procedimento_categoria::select('id', 'nome', 'ativo')
+            ->where([['ativo', '=', true]])
             ->orderBy('nome')
             ->get();
 
@@ -88,7 +90,6 @@ class ProcedimentoController extends Controller
 
         if (isset($request->clinico_geral)) {
             $p                   = new Procedimento();
-            $p->fk_empresa       = Auth::user()->fk_empresa;
             $p->fk_especialidade = 1;
             $p->fk_categoria     = $request->categoria;
             $p->nome             = $request->nome_procedimento;
@@ -99,7 +100,6 @@ class ProcedimentoController extends Controller
         }
         if (isset($request->implantodontia)) {
             $p                   = new Procedimento();
-            $p->fk_empresa       = Auth::user()->fk_empresa;
             $p->fk_especialidade = 3;
             $p->fk_categoria     = $request->categoria;
             $p->nome             = $request->nome_procedimento;
@@ -110,7 +110,6 @@ class ProcedimentoController extends Controller
         }
         if (isset($request->odontopediatria)) {
             $p                   = new Procedimento();
-            $p->fk_empresa       = Auth::user()->fk_empresa;
             $p->fk_especialidade = 4;
             $p->fk_categoria     = $request->categoria;
             $p->nome             = $request->nome_procedimento;
@@ -121,7 +120,6 @@ class ProcedimentoController extends Controller
         }
         if (isset($request->orofacial)) {
             $p                   = new Procedimento();
-            $p->fk_empresa       = Auth::user()->fk_empresa;
             $p->fk_especialidade = 5;
             $p->fk_categoria     = $request->categoria;
             $p->nome             = $request->nome_procedimento;
@@ -161,9 +159,11 @@ class ProcedimentoController extends Controller
                 'procedimentos.nome AS nome_proc', 
                 'protetico'
             )
-            ->where([['procedimentos.id', '=', $procedimento->id], ['procedimentos.fk_empresa', '=', Auth::user()->fk_empresa], ['procedimentos.ativo', '=', true]])
             ->join('especialidades', 'especialidades.id', '=', 'procedimentos.fk_especialidade')
             ->join('procedimento_categorias', 'procedimento_categorias.id', '=', 'procedimentos.fk_categoria')
+            ->where([['procedimentos.id', '=', $procedimento->id], ['procedimentos.ativo', '=', true]])
+            ->where([['especialidades.ativo', '=', true]])
+            ->where([['procedimento_categorias.ativo', '=', true]])
             ->orderBy('procedimento_categorias.nome')
             ->first();
 
@@ -183,7 +183,7 @@ class ProcedimentoController extends Controller
     public function update(Request $request, $id, Procedimento $p)
     {
         // Verifica se existe este pocedimento e se é da empresa do usuario logado
-        $procedimento_existe = $p->verificaProcedimentoExisteEmpresa($id, Auth::user()->fk_empresa);
+        $procedimento_existe = $p->verificaProcedimentoExisteEmpresa($id);
 
         if (!$procedimento_existe) {
             return redirect()->back()->with('warning', 'Procedimento não encontrado');
@@ -196,7 +196,7 @@ class ProcedimentoController extends Controller
             $proc['valor_sugerido'] = Helper::currencyBrForMysql($request->valor_sugerido);
         }
 
-        $edit = $p->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($proc);
+        $edit = $p->where('id', $id)->update($proc);
         LogSistemaController::logSistemaTipoUpdate($id, 'id', 'procedimentos', $proc);
 
         if ($edit) {
@@ -214,9 +214,8 @@ class ProcedimentoController extends Controller
      */
     public function destroy(Procedimento $p, $id)
     {
-
         $procedimento['ativo'] = false;
-        $desativado            = $p->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($procedimento);
+        $desativado            = $p->where('id', $id)->update($procedimento);
 
         LogSistemaController::logSistemaTipoUpdate($id, 'id', 'procedimentos', $procedimento);
 

@@ -15,7 +15,6 @@ class CreateProcedimentosTable extends Migration
     {
         Schema::create('procedimentos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('fk_empresa');
             $table->integer('fk_especialidade');
             $table->integer('fk_categoria');
             $table->string('nome');

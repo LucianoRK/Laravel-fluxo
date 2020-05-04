@@ -55,7 +55,7 @@
 
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="inputCelularTitular">*Celular Titular <i title="ATENÇÃO: Este número será usado na cobrança, tenha certeza que o número é do titular" style="cursor:pointer" class="zmdi zmdi-help-outline zmdi-hc-fw"> </i> </label>
+                <label for="inputCelularTitular">*Celular Titular <i title="Este número será usado na cobrança, tenha certeza que o número é do titular" style="cursor:pointer" class="zmdi zmdi-help-outline zmdi-hc-fw text-danger"> </i> </label>
                 <input type="text" class="form-control celularMask" id="inputCelularTitular" name="cel_titular" value="{{$cliente->cel_titular ?? false}}">
             </div>
             <div class="form-group col-md-4">

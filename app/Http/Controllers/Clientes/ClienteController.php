@@ -139,12 +139,15 @@ class ClienteController extends Controller
             "especialidades.nome as especialidade_descricao",
             "cpf"
         )
-            ->join('tratamentos', 'tratamentos.fk_cliente', '=', 'clientes.id')
-            ->join('especialidades', 'especialidades.id', '=', 'tratamentos.fk_especialidade')
-            ->where('clientes.fk_empresa', '=', Auth::user()->fk_empresa)
-            ->where('tratamentos.fk_usuario_dentista', '=', $request->dentista)
-            ->where('clientes.nome', 'like', "%$request->nome%")
-            ->get();
+        ->join('tratamentos', 'tratamentos.fk_cliente', '=', 'clientes.id')
+        ->join('especialidades', 'especialidades.id', '=', 'tratamentos.fk_especialidade')
+        ->where('clientes.fk_empresa', '=', Auth::user()->fk_empresa)
+        ->where('tratamentos.fk_usuario_dentista', '=', $request->dentista)
+        ->where('clientes.nome', 'like', "%$request->nome%")
+        ->where('clientes.ativo', '=', true)
+        ->where('tratamentos.ativo', '=', true)
+        ->where('especialidades.ativo', '=', true)
+        ->get();
 
         return View('Agendas.load.lista_clientes_filtrado', compact('clientes'));
     }
@@ -156,10 +159,11 @@ class ClienteController extends Controller
             "clientes.nome",
             "clientes.cpf"
         )
-            ->where('clientes.fk_empresa', '=', Auth::user()->fk_empresa)
-            ->where('clientes.nome', 'like', "%$request->nome%")
-            ->limit(10)
-            ->get();
+        ->where('clientes.fk_empresa', '=', Auth::user()->fk_empresa)
+        ->where('clientes.nome', 'like', "%$request->nome%")
+        ->where('clientes.ativo', '=', true)
+        ->limit(10)
+        ->get();
 
         return View('clientes.searchNavbar.listaClientesFiltrados', compact('clientes'));
     }
@@ -176,52 +180,55 @@ class ClienteController extends Controller
             "endereco_clientes.complemento",
             "cidades.fk_estado"
         )
-            ->join('endereco_clientes', 'endereco_clientes.fk_cliente', '=', 'clientes.id')
-            ->join('cidades', 'cidades.id', '=', 'endereco_clientes.fk_cidade')
-            ->where('clientes.id', '=', $id)
-            ->where('clientes.fk_empresa', '=', Auth::user()->fk_empresa)
-            ->where('clientes.ativo', '=', true)
-            ->where('endereco_clientes.ativo', '=', true)
-            ->first();
+        ->join('endereco_clientes', 'endereco_clientes.fk_cliente', '=', 'clientes.id')
+        ->join('cidades', 'cidades.id', '=', 'endereco_clientes.fk_cidade')
+        ->where('clientes.id', '=', $id)
+        ->where('clientes.fk_empresa', '=', Auth::user()->fk_empresa)
+        ->where('clientes.ativo', '=', true)
+        ->where('endereco_clientes.ativo', '=', true)
+        ->where('cidades.ativo', '=', true)
+        ->first();
 
-        if ($cliente['sexo'] == 'masculino') {
-            $cliente['masculino'] = true;
-        } else if ($cliente['sexo'] == 'femenino') {
-            $cliente['femenino'] = true;
-        }
+        if (isset($cliente)) {
+            if ($cliente['sexo'] == 'masculino') {
+                $cliente['masculino'] = true;
+            } else if ($cliente['sexo'] == 'femenino') {
+                $cliente['femenino'] = true;
+            }
 
-        switch ($cliente['estado_civil']) {
-            case 'solteiro':
-                $cliente['solteiro'] = true;
-                break;
-            case 'casado':
-                $cliente['casado'] = true;
-                break;
-            case 'separado':
-                $cliente['separado'] = true;
-                break;
-            case 'divorciado':
-                $cliente['divorciado'] = true;
-                break;
-            case 'viuvo':
-                $cliente['viuvo'] = true;
-                break;
-        }
+            switch ($cliente['estado_civil']) {
+                case 'solteiro':
+                    $cliente['solteiro'] = true;
+                    break;
+                case 'casado':
+                    $cliente['casado'] = true;
+                    break;
+                case 'separado':
+                    $cliente['separado'] = true;
+                    break;
+                case 'divorciado':
+                    $cliente['divorciado'] = true;
+                    break;
+                case 'viuvo':
+                    $cliente['viuvo'] = true;
+                    break;
+            }
 
-        if ($cliente['renda_media']) {
-            $cliente['renda_media'] = Helper::currencyMysqlForBr($cliente['renda_media']);
-        }
+            if ($cliente['renda_media']) {
+                $cliente['renda_media'] = Helper::currencyMysqlForBr($cliente['renda_media']);
+            }
 
-        switch ($cliente['residencia']) {
-            case 'propria':
-                $cliente['propria'] = true;
-                break;
-            case 'alugada':
-                $cliente['alugada'] = true;
-                break;
-            case 'outros':
-                $cliente['outros'] = true;
-                break;
+            switch ($cliente['residencia']) {
+                case 'propria':
+                    $cliente['propria'] = true;
+                    break;
+                case 'alugada':
+                    $cliente['alugada'] = true;
+                    break;
+                case 'outros':
+                    $cliente['outros'] = true;
+                    break;
+            }
         }
 
         return $cliente;

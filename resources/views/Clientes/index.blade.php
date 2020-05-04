@@ -9,7 +9,9 @@
         <div class="card">
             <h5 class="card-header"> 
                 <span class="align-middle text-primary">
-                INFORMAÇÕES DO CLIENTE - [{{ $cliente->id }}] [{{strtoupper($cliente->nome)}}]
+                    @if (isset($cliente) && $cliente)
+                        INFORMAÇÕES DO CLIENTE - [{{ $cliente->id }}] [{{strtoupper($cliente->nome)}}]
+                    @endif
                 </span>
             </h5>
             <div class="card-body">

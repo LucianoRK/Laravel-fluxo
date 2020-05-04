@@ -139,9 +139,16 @@ class RadiologistaController extends Controller
                     ['radiologistas.id', '=', $radiologista->id], 
                     ['radiologistas.fk_empresa', '=', Auth::user()->fk_empresa], 
                     ['radiologistas.ativo', '=', true]
-                ])
+            ])
+            ->where([['empresas.ativo', '=', true]])
+            ->where('endereco_radiologistas.ativo', '=', true)
+            ->where([['cidades.ativo', '=', true]])
             ->orderBy('radiologistas.razao_social')
             ->first();
+
+        if (!isset($radiologista)) {
+            return view('Sistema.nenhumaInformacao');
+        } 
 
         // Converte o valor para BR
         $radiologista['valor_sugerido'] = Helper::currencyMysqlForBr($radiologista['valor_sugerido']);
