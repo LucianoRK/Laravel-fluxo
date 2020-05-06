@@ -31,14 +31,16 @@ class UsuarioController extends Controller
         $count = 1;
 
         $usuarios['ativos'] = Usuario::select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
-            ->where([ ['usuarios.ativo', '=', true], ['fk_empresa', '=', Auth::user()->fk_empresa], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
+            ->where([ ['usuarios.ativo', '=', true], ['fk_empresa', '=', Auth::user()->fk_empresa], ])
+            ->where([['tipo_usuarios.ativo', '=', true]])
             ->orderBy('usuarios.nome')
             ->get();
 
         $usuarios['inativos'] = Usuario::select('usuarios.*', 'tipo_usuarios.nome as tipo_usuario')
-            ->where([ ['usuarios.ativo', '=', false], ['fk_empresa', '=', Auth::user()->fk_empresa], ])
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
+            ->where([ ['usuarios.ativo', '=', false], ['fk_empresa', '=', Auth::user()->fk_empresa], ])
+            ->where([['tipo_usuarios.ativo', '=', true]])
             ->orderBy('usuarios.nome')
             ->get();
 
@@ -212,7 +214,7 @@ class UsuarioController extends Controller
         $especialidades = new Usuario_mm_especialidade();
         $array_espe[]   = false;
         $estados        = $estado->getAllEstados();
-        $especialidades = $especialidades->getEspecialidadesUsuarioEmpresa($u->id, Auth::user()->fk_empresa);
+        $especialidades = $especialidades->getEspecialidadesUsuarioEmpresa($usuario->id, Auth::user()->fk_empresa);
 
         $usuario = Usuario::select(
             "usuarios.*", 
@@ -226,14 +228,20 @@ class UsuarioController extends Controller
             "empresas.nome AS nome_empresa",
             "tipo_usuarios.nome AS nome_tipo_usuario"
             )
-            ->leftJoin('endereco_usuarios', 'endereco_usuarios.fk_usuario', '=', 'usuarios.id')
+            ->leftJoin('endereco_usuarios', function($join) {
+                $join->on('endereco_usuarios.fk_usuario', '=', 'usuarios.id')->where('endereco_usuarios.ativo', '=', true);
+            })
             ->leftJoin('cidades', 'cidades.id', '=', 'endereco_usuarios.fk_cidade')
             ->join('empresas', 'empresas.id', '=', 'usuarios.fk_empresa')
             ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
-            ->where('usuarios.id', '=', $u->id)
+            ->where('usuarios.id', '=', $usuario->id)
             ->where('usuarios.fk_empresa', '=', Auth::user()->fk_empresa)
             ->where('usuarios.ativo', '=', true)
             ->first();
+
+        if (!isset($usuario)) {
+            return view('Sistema.nenhumaInformacao');
+        } 
 
         if ($especialidades) {
             foreach ($especialidades as $especialidade) {
@@ -413,9 +421,27 @@ class UsuarioController extends Controller
         }
     }
 
-    public function minhaConta(Usuario $u)
+    public function minhaConta(Usuario $usuario)
     {
-        $dados = $u->getDadosUsuarioEmpresa(Auth::user()->id, Auth::user()->fk_empresa);  
+        $dados = Usuario::select(
+            'usuarios.*', 
+            'empresas.nome AS nome_empresa', 
+            'tipo_usuarios.nome AS nome_tipo_usuario'
+            )
+            ->join('empresas', 'empresas.id', '=', 'usuarios.fk_empresa')
+            ->join('tipo_usuarios', 'tipo_usuarios.id', '=', 'usuarios.fk_tipo_usuario')
+            ->where([ 
+                ['usuarios.id', '=', Auth::user()->id], 
+                ['usuarios.fk_empresa', '=', Auth::user()->fk_empresa], 
+                ['usuarios.ativo', '=', true], 
+                ['empresas.ativo', '=', true], 
+                ['tipo_usuarios.ativo', '=', true], 
+            ])
+            ->first();
+
+        if (!isset($dados)) {
+            return view('Sistema.nenhumaInformacao');
+        } 
 
         return view('usuarios.minhaConta.index', compact('dados'));
     }

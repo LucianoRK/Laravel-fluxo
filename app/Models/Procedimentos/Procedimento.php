@@ -33,10 +33,10 @@ class Procedimento extends Model
         
     ];
 
-    public function verificaProcedimentoExisteEmpresa($procedimento, $fk_empresa)
+    public function verificaProcedimentoExisteEmpresa($procedimento)
     {
         return Procedimento::select('id')
-            ->where([ ['id', '=', $procedimento], ['fk_empresa', '=', $fk_empresa], ['ativo', '=', true] ])
+            ->where([ ['id', '=', $procedimento], ['ativo', '=', true] ])
             ->first();
     }
 }

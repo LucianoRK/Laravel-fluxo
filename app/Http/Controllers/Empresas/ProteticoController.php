@@ -120,11 +120,18 @@ class ProteticoController extends Controller
                 'cidades.fk_estado'
             )
             ->join('empresas', 'empresas.id', '=', 'proteticos.fk_empresa')
-            ->leftJoin('endereco_proteticos', 'endereco_proteticos.fk_protetico', '=', 'proteticos.id')
-            ->leftJoin('cidades', 'cidades.id', '=', 'endereco_proteticos.fk_cidade')
+            ->join('endereco_proteticos', 'endereco_proteticos.fk_protetico', '=', 'proteticos.id')
+            ->join('cidades', 'cidades.id', '=', 'endereco_proteticos.fk_cidade')
             ->where([ ['proteticos.id', '=', $protetico->id], ['proteticos.fk_empresa', '=', Auth::user()->fk_empresa], ['proteticos.ativo', '=', true] ])
+            ->where([['empresas.ativo', '=', true]])
+            ->where('endereco_proteticos.ativo', '=', true)
+            ->where([['cidades.ativo', '=', true]])
             ->orderBy('proteticos.razao_social')
             ->first();
+
+        if (!isset($protetico)) {
+            return view('Sistema.nenhumaInformacao');
+        } 
 
         return view('empresas.proteticos.editarProtetico', compact('estados', 'protetico'));
     }

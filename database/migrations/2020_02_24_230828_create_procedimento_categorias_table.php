@@ -15,7 +15,6 @@ class CreateProcedimentoCategoriasTable extends Migration
     {
         Schema::create('procedimento_categorias', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('fk_empresa');
             $table->string('nome');
             $table->boolean('ativo')->default(true);
             $table->timestamps();
