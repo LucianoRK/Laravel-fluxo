@@ -22,8 +22,8 @@ class AgendaController extends Controller
             ->where('fk_empresa', Auth::user()->fk_empresa)
             ->where('ativo', 1)
             ->get();
-    
-        return View('Agendas.agenda',compact('dentistas'));
+
+        return View('Agendas.agenda', compact('dentistas'));
     }
 
     /**
@@ -92,23 +92,25 @@ class AgendaController extends Controller
         //
     }
 
-    public function horariosAgenda(){
+    public function horariosAgenda()
+    {
         $hora_inicial = 8;
         $hora_final = 23;
         $intervalo_min = 15;
         $horarios = [];
 
-        for ($hora = $hora_inicial; $hora < $hora_final; $hora++) { 
-            for ($min = 0; $min < 4; $min++) { 
+        for ($hora = $hora_inicial; $hora < $hora_final; $hora++) {
+            for ($min = 0; $min < 4; $min++) {
                 $formato = '%02d:%02d:00';
                 array_push($horarios, sprintf($formato, $hora, $min * $intervalo_min));
             }
         }
-    
+
         return $horarios;
     }
 
-    public function gravarAvaliacao(Request $request){
+    public function gravarAvaliacao(Request $request)
+    {
         $agenda                      = new Agenda();
         $agenda->fk_empresa          = Auth::user()->fk_empresa;
         $agenda->fk_usuario_dentista = $request->dentista;
@@ -119,12 +121,13 @@ class AgendaController extends Controller
         $agenda->save();
     }
 
-    public function gravarAgendamentoTratamento(Request $request){
+    public function gravarAgendamentoTratamento(Request $request)
+    {
         /*
         *Busco o dentista associado no tratamento,
         *para não ter a possibilidade de trocar de profissional no agendamento
         */
-        $tratamento                  = Tratamento::where('id',$request->id_tratamento)->get()->first();
+        $tratamento                  = Tratamento::where('id', $request->id_tratamento)->get()->first();
         $agenda                      = new Agenda();
         $agenda->fk_empresa          = Auth::user()->fk_empresa;
         $agenda->fk_usuario_dentista = $tratamento->fk_usuario_dentista;
@@ -136,9 +139,10 @@ class AgendaController extends Controller
         $agenda->save();
     }
 
-    public function agendaVazia($horario){
+    public function agendaVazia($horario)
+    {
         $agenda = [
-            "hora"               => substr($horario, 0 , 5),
+            "hora"               => substr($horario, 0, 5),
             "hora_agendamento"   => $horario,
             "hora_presenca"      => "",
             "id_agenda"          => "",
@@ -151,19 +155,20 @@ class AgendaController extends Controller
         return $agenda;
     }
 
-    public function getAgendados(Request $request){
+    public function getAgendados(Request $request)
+    {
         $agenda_lista = [];
 
         $agendas = Agenda::select(
-                'agendas.hora_agendamento',
-                'agendas.hora_presenca',
-                'agendas.id as id_agenda',
-                'agendas.nome as nome_agenda', 
-                'clientes.nome as nome_cliente',
-                'agendas.fk_tratamento',
-                'agendas.status',
-                'especialidades.nome as nome_especialidade'
-            )
+            'agendas.hora_agendamento',
+            'agendas.hora_presenca',
+            'agendas.id as id_agenda',
+            'agendas.nome as nome_agenda',
+            'clientes.nome as nome_cliente',
+            'agendas.fk_tratamento',
+            'agendas.status',
+            'especialidades.nome as nome_especialidade'
+        )
             ->leftJoin('clientes', 'clientes.id', '=', 'agendas.fk_cliente')
             ->leftJoin('tratamentos', 'tratamentos.id', '=', 'agendas.fk_tratamento')
             ->leftjoin('especialidades', 'especialidades.id', '=', 'tratamentos.fk_especialidade')
@@ -171,21 +176,21 @@ class AgendaController extends Controller
             ->where('agendas.fk_empresa', Auth::user()->fk_empresa)
             ->where('agendas.data_agendamento', $request->data)
             ->get();
-        
+
         $horarios = $this->horariosAgenda();
 
-        foreach($horarios as $horario){
-            if(count($agendas) > 0){
+        foreach ($horarios as $horario) {
+            if (count($agendas) > 0) {
                 $agenda_item = [];
-                foreach($agendas as $agenda){
-                    if($agenda->hora_agendamento == $horario){
-                        if($agenda->fk_tratamento){
-                            $nome_apresentar = $agenda->nome_cliente.' - '.$agenda->nome_especialidade.' - ['.$agenda->fk_tratamento.']';
-                        }else{
+                foreach ($agendas as $agenda) {
+                    if ($agenda->hora_agendamento == $horario) {
+                        if ($agenda->fk_tratamento) {
+                            $nome_apresentar = $agenda->nome_cliente . ' - ' . $agenda->nome_especialidade . ' - [' . $agenda->fk_tratamento . ']';
+                        } else {
                             $nome_apresentar = $agenda->nome_agenda;
                         }
                         $agenda_item = [
-                            "hora"               => substr($horario, 0 , 5),
+                            "hora"               => substr($horario, 0, 5),
                             "hora_agendamento"   => $horario,
                             "hora_presenca"      => $agenda->hora_presenca,
                             "id_agenda"          => $agenda->id_agenda,
@@ -196,20 +201,25 @@ class AgendaController extends Controller
                         ];
                     }
                 }
-                if(count($agenda_item) > 0){
+                if (count($agenda_item) > 0) {
                     array_push($agenda_lista, $agenda_item);
-                }else{
+                } else {
                     array_push($agenda_lista, $this->agendaVazia($horario));
                 }
-            }else{
+            } else {
                 array_push($agenda_lista, $this->agendaVazia($horario));
             }
         }
-        
-        if($request->agenda_dentista == 'true'){
-            return View('Agendas.load.agenda_dentista_load',compact('agenda_lista'));
-        }else{
-            return View('Agendas.load.agenda_load',compact('agenda_lista'));
+
+        if ($request->agenda_dentista == 'true') {
+            return View('Agendas.load.agenda_dentista_load', compact('agenda_lista'));
+        } else {
+            return View('Agendas.load.agenda_load', compact('agenda_lista'));
         }
+    }
+
+    public function presenca(Request $request, Agenda $agenda)
+    {
+        $agenda->where('id', $request->id_agenda)->update(['status' => 2]);
     }
 }

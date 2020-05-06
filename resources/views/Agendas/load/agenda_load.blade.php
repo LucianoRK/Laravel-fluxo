@@ -13,9 +13,9 @@
         <button class="btn btn-danger  agenda_btn_cancelar" title="Cancelar agendamento"><i class="la la-close text-white"></i></button>
     </div>
     @if ($agenda['id_agenda'])
-    <div class="col-md-4">
-        <button class="btn btn-info agenda_btn_presenca" agenda_id='{{ $agenda['id_agenda'] }}' title="Presença"><i class="la la-check-square text-white"></i></button>
-    </div>
+        <div class="col-md-4">
+            <button class="btn btn-info agenda_btn_presenca" agenda_id="{{ $agenda['id_agenda'] }}" title="Presença"><i class="la la-check-square text-white"></i></button>
+        </div>
     @endif
     <input type="hidden" class="horario" value="{{ $agenda['hora_agendamento'] }}">
     <input type="hidden" class="tratamento" value="{{ $agenda['fk_tratamento'] }}">
@@ -88,7 +88,6 @@
                 let texto = '[ AVALIAÇÃO ] ' + nome + ' - ' + telefone;
 
                 $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_mostrar_nome').text(texto);
-                console.log(dentista);
                 $.post("gravar-avaliacao", {
                     _token: "{{ csrf_token() }}",
                     dentista: dentista,
@@ -115,10 +114,12 @@
                 cancelButtonText: 'Não'
                 }).then((result) => {
                 if (result.value) {
+                    let agenda_id = $(this).attr('agenda_id')
                     $.post("presenca", {
                         _token: "{{ csrf_token() }}",
                         id_agenda: agenda_id
                     }, function() {
+                        
                         getAgenda();
                     });
                 }
