@@ -17,7 +17,6 @@
             <div class="card-body">
                 <ul class="nav nav-pills nav-pills-primary nav-fill mb-3" id="pills-demo-4" role="tablist">
                     <li class="nav-item" role="presentation"><a href="#cliente" class="nav-link active show" data-toggle="tab" aria-expanded="true">Cliente</a></li>
-                    <li class="nav-item" role="presentation"><a href="#cliente-conjuge" class="nav-link" data-toggle="tab" aria-expanded="true">Cônjuge</a></li>
                     <li class="nav-item" role="presentation"><a href="#cliente-dependentes" class="nav-link" data-toggle="tab" aria-expanded="true">Dependente(s)</a></li>
                     <li class="nav-item" role="presentation"><a href="#cliente-tratamentos" class="nav-link" data-toggle="tab" aria-expanded="true">Tratamento(s)</a></li>
                     <li class="nav-item" role="presentation"><a href="#cliente-financeiro" class="nav-link" data-toggle="tab" aria-expanded="true">Financeiro</a></li>
@@ -34,37 +33,30 @@
                         <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
                     @endif
                 </div>
-                <div class="tab-pane fadeIn" id="cliente-conjuge">
-                    @if (isset($conjuge) && $conjuge)
-                        @include('clientes.informacoesCliente.cliente')
-                    @else 
-                        <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
-                    @endif
-                </div>
                 <div class="tab-pane fadeIn" id="cliente-dependentes">
                     @if (isset($dependentes) && $dependentes)
-                        @include('clientes.informacoesCliente.cliente')
+                        @include('clientes.informacoesCliente.dependentes')
                     @else 
                         <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
                     @endif
                 </div>
                 <div class="tab-pane fadeIn" id="cliente-tratamentos">
                     @if (isset($tratamentos) && $tratamentos)
-                        @include('clientes.informacoesCliente.cliente')
+                        @include('clientes.informacoesCliente.tratamentos')
                     @else 
                         <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
                     @endif
                 </div>
                 <div class="tab-pane fadeIn" id="cliente-financeiro">
                     @if (isset($financeiro) && $financeiro)
-                        @include('clientes.informacoesCliente.cliente')
+                        @include('clientes.informacoesCliente.financeiro')
                     @else 
                         <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
                     @endif
                 </div>
                 <div class="tab-pane fadeIn" id="cliente-agenda">
                     @if (isset($agenda) && $agenda)
-                        @include('clientes.informacoesCliente.cliente')
+                        @include('clientes.informacoesCliente.agenda')
                     @else 
                         <h4 class="text-center"> Nenhuma informação para mostrar.</h4>
                     @endif

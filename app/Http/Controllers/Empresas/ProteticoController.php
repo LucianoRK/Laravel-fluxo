@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Logs\LogSistemaController;
 use App\Http\Requests\SalvarProteticoRequest;
 use App\Models\Empresas\Empresa;
@@ -63,7 +64,7 @@ class ProteticoController extends Controller
         $protetico->fk_empresa        = Auth::user()->fk_empresa;
         $protetico->razao_social      = $request->razao_social;
         $protetico->nome_fantasia     = $request->nome_fantasia;
-        $protetico->cnpj              = preg_replace('/[^0-9]/is', '', $request->cnpj);
+        $protetico->cnpj              = Helper::deixaApenasNumeros($request->cnpj);
         $protetico->email             = $request->email;
         $protetico->telefone          = $request->telefone;
         $protetico->celular           = $request->celular;
@@ -156,7 +157,7 @@ class ProteticoController extends Controller
 
         $usuario['razao_social']  = $request->razao_social;
         $usuario['nome_fantasia'] = $request->nome_fantasia;
-        $usuario['cnpj']          = preg_replace('/[^0-9]/is', '', $request->cnpj);
+        $usuario['cnpj']          = Helper::deixaApenasNumeros($request->cnpj);
         $usuario['email']         = $request->email;
         $usuario['telefone']      = $request->telefone;
         $usuario['celular']       = $request->celular;

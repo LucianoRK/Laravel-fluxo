@@ -12,7 +12,7 @@ class Dependente extends Model
      * @var array
      */
     protected $fillable = [
-        
+        "id","fk_empresa","fk_cliente","fk_dependente_tipo","nome","cpf","rg","data_nascimento","sexo","nacionalidade","cel_dependente","email","email","ativo"
     ];
 
     /**

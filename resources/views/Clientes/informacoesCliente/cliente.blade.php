@@ -6,12 +6,12 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputNome">*Nome</label>
-            <input type="text" class="form-control" id="inputNome" name="nome" value="{{$cliente->nome ?? old('nome')}}" disabled>
+                <input type="text" class="form-control" id="inputNome" name="nome" value="{{$cliente->nome ?? old('nome')}}">
             </div>
        
             <div class="form-group col-md-3">
                 <label for="inputCpf">*CPF</label>
-                <input type="text" class="form-control cpfMask" id="inputCpf" name="cpf" value="{{$cliente->cpf ?? old('cpf')}}" disabled>
+                <input type="text" class="form-control cpfMask" id="inputCpf" name="cpf" value="{{$cliente->cpf ?? old('cpf')}}">
             </div>
             <div class="form-group col-md-3">
                 <label for="inputRg">RG</label>
@@ -22,7 +22,7 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="inputDataNascimento">*Data Nascimento</label>
-                <input type="date" class="form-control" id="inputDataNascimento" name="data_nascimento" value="{{$cliente->data_nascimento ?? false}}" disabled>
+                <input type="date" class="form-control" id="inputDataNascimento" name="data_nascimento" value="{{$cliente->data_nascimento ?? false}}">
             </div>
             <div class="form-group col-md-3">
                 <label for="inputSexo">*Sexo</label>
@@ -43,7 +43,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="inputNacionalidade">*Nacionalidade</label>
-                <select id="inputNacionalidade" class="form-control" name="nacionalidade" disabled>
+                <select id="inputNacionalidade" class="form-control" name="nacionalidade">
                     @if ($cliente->nacionalidade == 'brasileiro')
                         <option value="brasileiro"> Brasileiro(a) </option>
                     @elseif ($cliente->nacionalidade == 'estrangeiro'))
@@ -55,7 +55,7 @@
 
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="inputCelularTitular">*Celular Titular <i title="Este número será usado na cobrança, tenha certeza que o número é do titular" style="cursor:pointer" class="zmdi zmdi-help-outline zmdi-hc-fw text-danger"> </i> </label>
+                <label for="inputCelularTitular">*Celular Titular <i title="Este número será usado na cobrança, tenha certeza que o número é do titular" style="cursor:help" class="zmdi zmdi-help-outline zmdi-hc-fw text-danger"> </i> </label>
                 <input type="text" class="form-control celularMask" id="inputCelularTitular" name="cel_titular" value="{{$cliente->cel_titular ?? false}}">
             </div>
             <div class="form-group col-md-4">
@@ -102,7 +102,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputNomeMae">Nome da Mãe</label>
-                <input type="text" class="form-control" id="inputNomeMae" name="nome_mae" value="{{$cliente->nome_mae ?? false}}" disabled>
+                <input type="text" class="form-control" id="inputNomeMae" name="nome_mae" value="{{$cliente->nome_mae ?? false}}">
             </div>
         </div>
         
@@ -126,7 +126,7 @@
             <div class="form-group col-md-4">
                 <label>*Cidade</label>
                 <div id="comboCidades">
-                    <input disabled value="Selecione um estado antes" type="text" class="form-control">
+                    <input value="Selecione um estado antes" type="text" class="form-control">
                 </div>
             </div>
             

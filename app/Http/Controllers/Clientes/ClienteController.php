@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Http\Controllers\Logs\LogSistemaController;
 use App\Models\Clientes\Cliente;
+use App\Models\Clientes\Dependente;
 use App\Models\Enderecos\Endereco_cliente;
 use App\Models\Enderecos\Estado;
 use Illuminate\Http\Request;
@@ -86,18 +87,22 @@ class ClienteController extends Controller
             return redirect()->back()->with('warning', 'Cliente não encontrado');
         }
 
-        $dados_cliente['rg']            = preg_replace('/[^0-9]/is', '', $request->rg);
-        $dados_cliente['sexo']          = $request->sexo;
-        $dados_cliente['estado_civil']  = $request->estado_civil;
-        $dados_cliente['cel_titular']   = $request->cel_titular;
-        $dados_cliente['cel_recado']    = $request->cel_recado;
-        $dados_cliente['email']         = $request->email;
-        $dados_cliente['profissao']     = $request->profissao;
-        $dados_cliente['trabalho']      = $request->trabalho;
-        $dados_cliente['fone_trabalho'] = $request->fone_trabalho;
-        $dados_cliente['renda_media']   = Helper::currencyBrForMysql($request->renda_media);
-        $dados_cliente['residencia']    = $request->residencia;
-        $dados_cliente['obs_cadastro']  = $request->obs_cadastro;
+        $dados_cliente['nome']              = $request->nome;
+        $dados_cliente['cpf']               = Helper::deixaApenasNumeros($request->cpf);
+        $dados_cliente['rg']                = Helper::deixaApenasNumeros($request->rg);
+        $dados_cliente['data_nascimento']   = $request->data_nascimento;
+        $dados_cliente['sexo']              = $request->sexo;
+        $dados_cliente['estado_civil']      = $request->estado_civil;
+        $dados_cliente['nacionalidade']     = $request->nacionalidade;
+        $dados_cliente['cel_titular']       = $request->cel_titular;
+        $dados_cliente['cel_recado']        = $request->cel_recado;
+        $dados_cliente['email']             = $request->email;
+        $dados_cliente['profissao']         = $request->profissao;
+        $dados_cliente['trabalho']          = $request->trabalho;
+        $dados_cliente['fone_trabalho']     = $request->fone_trabalho;
+        $dados_cliente['renda_media']       = Helper::currencyBrForMysql($request->renda_media);
+        $dados_cliente['residencia']        = $request->residencia;
+        $dados_cliente['obs_cadastro']      = $request->obs_cadastro;
         $cliente->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($dados_cliente);
         LogSistemaController::logSistemaTipoUpdate($id,'id', 'clientes', $dados_cliente);
 
@@ -234,11 +239,28 @@ class ClienteController extends Controller
         return $cliente;
     }
 
+    public function getDadosDependente($id)
+    {
+        $dependentes = Dependente::select(
+            "dependentes.*",
+            "dependentes_tipo.tipo_dependente"
+        )
+        ->join('dependentes_tipo', 'dependentes_tipo.id', '=', 'dependentes.fk_dependente_tipo')
+        ->where('dependentes.fk_empresa', '=', Auth::user()->fk_empresa)
+        ->where('dependentes.fk_cliente', '=', $id)
+        ->where('dependentes.ativo', '=', true)
+        ->where('dependentes_tipo.ativo', '=', true)
+        ->get();
+
+        return $dependentes;
+    }
+
     public function mostraTodosDadosCliente($id, Estado $estado)
     {
-        $cliente = self::getDadosCliente($id);
-        $estados = $estado->getAllEstados();
+        $estados     = $estado->getAllEstados();
+        $cliente     = self::getDadosCliente($id);
+        $dependentes = self::getDadosDependente($id);
 
-        return view('clientes.index', compact('cliente', 'estados'));
+        return view('clientes.index', compact('cliente', 'dependentes', 'estados'));
     }
 }

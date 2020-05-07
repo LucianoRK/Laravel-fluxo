@@ -32,9 +32,4 @@ class Cliente extends Model
     protected $casts = [
         
     ];
-
-    public function getAllDadosClienteEmpresa($empresa, $cliente)
-    {
-        
-    }
 }

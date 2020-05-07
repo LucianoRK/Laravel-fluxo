@@ -32,4 +32,9 @@ class Helper
     {
         return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $cpf);
     }
+
+    public static function deixaApenasNumeros($string)
+    {
+        return preg_replace('/[^0-9]/is', '', $string);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Logs\LogSistemaController;
 use App\Http\Requests\SalvarEdicaoUsuarioRequest;
 use App\Http\Requests\SalvarUsuarioRequest;
@@ -85,7 +86,7 @@ class UsuarioController extends Controller
         $usuario->fk_empresa        = Auth::user()->fk_empresa;
         $usuario->fk_tipo_usuario   = $request->fk_tipo_usuario;
         $usuario->nome              = $request->nome;
-        $usuario->cpf               = preg_replace('/[^0-9]/is', '', $request->cpf);
+        $usuario->cpf               = Helper::deixaApenasNumeros($request->cpf);
         $usuario->data_nascimento   = $request->data_nascimento;
         $usuario->email             = $request->email;
         $usuario->celular           = $request->celular;
@@ -286,7 +287,7 @@ class UsuarioController extends Controller
         }
 
         $usuario['nome']              = $request->nome;
-        $usuario['cpf']               = preg_replace('/[^0-9]/is', '', $request->cpf);
+        $usuario['cpf']               = Helper::deixaApenasNumeros($request->cpf);
         $usuario['data_nascimento']   = $request->data_nascimento;
         $usuario['email']             = $request->email;
         $usuario['celular']           = $request->celular;

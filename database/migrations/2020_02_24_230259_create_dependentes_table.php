@@ -17,12 +17,16 @@ class CreateDependentesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('fk_empresa');
             $table->integer('fk_cliente');
+            $table->integer('fk_dependente_tipo');
             $table->string('nome', 100);
-            $table->string('parentesco', 100)->nullable();
             $table->string('cpf', 15)->nullable();
             $table->string('rg', 15)->nullable();
             $table->date('data_nascimento')->nullable();
             $table->string('sexo', 20)->nullable();
+            $table->string('nacionalidade', 50);
+            $table->string('cel_dependente', 100);
+            $table->string('email', 100)->nullable();
+            $table->longText('obs_cadastro')->nullable();
             $table->boolean('ativo')->default(true);
             $table->timestamps();
         });

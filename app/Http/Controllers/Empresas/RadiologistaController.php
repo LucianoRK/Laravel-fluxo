@@ -71,7 +71,7 @@ class RadiologistaController extends Controller
         $radiologista->fk_empresa        = Auth::user()->fk_empresa;
         $radiologista->razao_social      = $request->razao_social;
         $radiologista->nome_fantasia     = $request->nome_fantasia;
-        $radiologista->cnpj              = preg_replace('/[^0-9]/is', '', $request->cnpj);
+        $radiologista->cnpj              = Helper::deixaApenasNumeros($request->cnpj);
         $radiologista->email             = $request->email;
         $radiologista->telefone          = $request->telefone;
         $radiologista->celular           = $request->celular;
@@ -182,7 +182,7 @@ class RadiologistaController extends Controller
 
         $radiologista['razao_social']   = $request->razao_social;
         $radiologista['nome_fantasia']  = $request->nome_fantasia;
-        $radiologista['cnpj']           = preg_replace('/[^0-9]/is', '', $request->cnpj);
+        $radiologista['cnpj']           = Helper::deixaApenasNumeros($request->cnpj);
         $radiologista['email']          = $request->email;
         $radiologista['telefone']       = $request->telefone;
         $radiologista['celular']        = $request->celular;

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
+use App\Http\Controllers\Logs\LogSistemaController;
 use App\Models\Clientes\Dependente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DependenteController extends Controller
 {
@@ -67,9 +70,32 @@ class DependenteController extends Controller
      * @param  \App\Models\Clientes\Dependente  $dependente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dependente $dependente)
+    public function update(Request $request, $id)
     {
-        //
+        $dependente = new Dependente(); 
+
+        // Verifica se existe e se é da empresa do usuario logado
+        $dependente_existe = Dependente::select('id')
+            ->where([ ['id', '=', $id], ['fk_empresa', '=', Auth::user()->fk_empresa], ['ativo', '=', true] ])
+            ->first();
+
+        if (!$dependente_existe) {
+            return redirect()->back()->with('warning', 'Dependente não encontrado');
+        }
+
+        $dados_dependente['nome']              = $request->nome;
+        $dados_dependente['cpf']               = Helper::deixaApenasNumeros($request->cpf);
+        $dados_dependente['rg']                = Helper::deixaApenasNumeros($request->rg);
+        $dados_dependente['data_nascimento']   = $request->data_nascimento;
+        $dados_dependente['sexo']              = $request->sexo;
+        $dados_dependente['nacionalidade']     = $request->nacionalidade;
+        $dados_dependente['cel_dependente']    = $request->cel_dependente;
+        $dados_dependente['email']             = $request->email;
+        $dados_dependente['obs_cadastro']      = $request->obs_cadastro;
+        $dependente->where('id', $id)->where('fk_empresa', Auth::user()->fk_empresa)->update($dados_dependente);
+        LogSistemaController::logSistemaTipoUpdate($id,'id', 'clientes', $dados_dependente);
+
+        return redirect()->back()->with('success', 'Sucesso!');
     }
 
     /**
