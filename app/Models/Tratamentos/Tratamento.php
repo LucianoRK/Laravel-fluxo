@@ -12,7 +12,19 @@ class Tratamento extends Model
      * @var array
      */
     protected $fillable = [
-        
+        'id', 
+        'fk_empresa', 
+        'fk_usuario_dentista', 
+        'fk_cliente', 
+        'fk_dependente', 
+        'fk_especialidade', 
+        'status', 
+        'data_efetivacao',
+        'data_conclusao', 
+        'data_cancelamento', 
+        'valor_contratado',
+        'valor_atual', 
+        'ativo'
     ];
 
     /**

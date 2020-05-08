@@ -8,6 +8,7 @@ use App\Models\Clientes\Cliente;
 use App\Models\Clientes\Dependente;
 use App\Models\Enderecos\Endereco_cliente;
 use App\Models\Enderecos\Estado;
+use App\Models\Tratamentos\Tratamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -255,12 +256,34 @@ class ClienteController extends Controller
         return $dependentes;
     }
 
+    public function getAllTratamentoCliente($id)
+    {
+        $tratamentos = Tratamento::select(
+            "tratamentos.*",
+            "usuarios.nome as nome_profissional",
+            "clientes.nome as nome_paciente",
+            "dependentes.nome as nome_dependente",
+            "especialidades.nome as nome_especialidade"
+        )
+        ->join('usuarios', 'usuarios.id', '=', 'tratamentos.fk_usuario_dentista')
+        ->join('clientes', 'clientes.id', '=', 'tratamentos.fk_cliente')
+        ->join('especialidades', 'especialidades.id', '=', 'tratamentos.fk_especialidade')
+        ->leftjoin('dependentes', 'dependentes.id', '=', 'tratamentos.fk_especialidade')
+        ->where('tratamentos.fk_empresa', '=', Auth::user()->fk_empresa)
+        ->where('tratamentos.fk_cliente', '=', $id)
+        ->where('tratamentos.ativo', '=', true)
+        ->get();
+
+        return $tratamentos;
+    }
+
     public function mostraTodosDadosCliente($id, Estado $estado)
     {
         $estados     = $estado->getAllEstados();
         $cliente     = self::getDadosCliente($id);
         $dependentes = self::getDadosDependente($id);
+        $tratamentos = self::getAllTratamentoCliente($id);
 
-        return view('clientes.index', compact('cliente', 'dependentes', 'estados'));
+        return view('clientes.index', compact('cliente', 'dependentes', 'tratamentos', 'estados'));
     }
 }
