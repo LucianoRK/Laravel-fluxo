@@ -5,8 +5,3 @@
         </option>
     @endforeach
 </select>
-<script>
-$(document).ready(function(){
-   
-});
-</script>

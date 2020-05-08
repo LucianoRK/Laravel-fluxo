@@ -1,7 +1,7 @@
 @foreach ($agenda_lista as $agenda)
 <div class="row mb-2 agenda_linha">
     <div class="input-group col-md-8 agenda_campos">
-        <span class="input-group-text text-white bg-primary horario_width"><strong>{{ $agenda['hora'] }}</strong></span>
+        <span class="input-group-text text-white {{ $agenda['cor_horario'] }} horario_width" ><strong>{{ $agenda['hora'] }}</strong></span>
         <div class="form-control select_cliente_busca"></div>
         <button type="button" class="form-control text-left agenda_mostrar agenda_mostrar_nome bg-white" agenda_id='{{ $agenda['id_agenda'] }}'>{{ $agenda['nome'] }} </button>
         <input type="text" class="form-control agenda_adicionar agenda_adicionar_nome bg-white" placeholder="Nome" aria-describedby="horario">
@@ -13,9 +13,12 @@
         <button class="btn btn-danger  agenda_btn_cancelar" title="Cancelar agendamento"><i class="la la-close text-white"></i></button>
     </div>
     @if ($agenda['id_agenda'])
-        <div class="col-md-4">
-            <button class="btn btn-info agenda_btn_presenca" agenda_id="{{ $agenda['id_agenda'] }}" title="Presença"><i class="la la-check-square text-white"></i></button>
-        </div>
+        @if ($agenda['status'] == 1)
+            <!-- Agendado -->
+            <div class="col-md-4">
+                <button class="btn btn-info agenda_btn_presenca" agenda_id="{{ $agenda['id_agenda'] }}" title="Presença"><i class="la la-check-square text-white"></i></button>
+            </div>
+        @endif
     @endif
     <input type="hidden" class="horario" value="{{ $agenda['hora_agendamento'] }}">
     <input type="hidden" class="tratamento" value="{{ $agenda['fk_tratamento'] }}">
@@ -69,7 +72,7 @@
 
             if ($(this).parents('.agenda_linha').find('.select_clientes').val() > 0) {
 
-                let texto = $(this).parents('.agenda_linha').find('.select_clientes').text();
+                let texto = $(this).parents('.agenda_linha').find('.select_clientes').find(":selected").text();
                 let id_tratamento = $(this).parents('.agenda_linha').find('.select_clientes').val();
 
                 $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_mostrar_nome').text(texto);
@@ -114,12 +117,12 @@
                 cancelButtonText: 'Não'
                 }).then((result) => {
                 if (result.value) {
+                    $(this).hide();
                     let agenda_id = $(this).attr('agenda_id')
                     $.post("presenca", {
                         _token: "{{ csrf_token() }}",
                         id_agenda: agenda_id
                     }, function() {
-                        
                         getAgenda();
                     });
                 }

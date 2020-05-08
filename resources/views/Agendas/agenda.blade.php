@@ -9,6 +9,11 @@
         .horario_width {
             width: var(--largura_horario);
         }
+        .vcenter {
+            display: inline-block;
+            vertical-align: middle;
+            float: none;
+        }
     </style>
     <div class="row mb-3">
         <div class="input-group col-md-8">
@@ -20,10 +25,21 @@
                 @endforeach
             </select>
         </div>
+        <div class="col-md-4 vcenter">
+            <div class="preloader pl-xxs pls-primary loader_agenda">
+                <svg class="pl-circular" viewBox="25 25 50 50">
+                    <circle class="plc-path" cx="50" cy="50" r="20"/>
+                </svg>
+            </div>
+        </div>
     </div>
-    <div class="agenda_lista"></div>
+    <div class="agenda_lista"> </div>
     <script>
         function getAgenda(){
+            resetarCampos();
+            $('.agenda_mostrar').attr("disabled", true);
+            $('.loader_agenda').show();
+            
             let data                = $('.data_agenda').val();
             let dentista            = $('.dentista_agenda').val();
             let agenda_dentista     = false;
@@ -34,12 +50,13 @@
                 dentista = '{{Auth::user()->id}}';
                 $('.dentista_agenda').hide();
             }
-       
             $( ".agenda_lista" ).load( "agenda-lista" ,{
                 _token: "{{ csrf_token() }}",
                 data: data, 
                 dentista: dentista,
                 agenda_dentista: agenda_dentista
+            }, function(){
+                $('.loader_agenda').hide();
             });        
         }
 
@@ -61,6 +78,11 @@
         $(document).ready(function(){
             infosChange();
             getAgenda();
+            setInterval(
+                function(){ 
+                    getAgenda();
+                }, 
+            300000); //5 min 300000
         });
     </script>
 @endsection

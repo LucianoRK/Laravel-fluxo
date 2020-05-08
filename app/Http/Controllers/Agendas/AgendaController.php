@@ -149,7 +149,7 @@ class AgendaController extends Controller
             "nome"               => "",
             "fk_tratamento"      => "",
             "status"             => "",
-            "status"             => "",
+            "cor_horario"        => "bg-primary",
             "nome_especialidade" => "",
         ];
         return $agenda;
@@ -160,6 +160,7 @@ class AgendaController extends Controller
         $agenda_lista = [];
 
         $agendas = Agenda::select(
+            'agendas.data_agendamento',
             'agendas.hora_agendamento',
             'agendas.hora_presenca',
             'agendas.id as id_agenda',
@@ -175,6 +176,7 @@ class AgendaController extends Controller
             ->where('agendas.fk_usuario_dentista', $request->dentista)
             ->where('agendas.fk_empresa', Auth::user()->fk_empresa)
             ->where('agendas.data_agendamento', $request->data)
+            ->where('agendas.status', '<' , '3')
             ->get();
 
         $horarios = $this->horariosAgenda();
@@ -189,6 +191,7 @@ class AgendaController extends Controller
                         } else {
                             $nome_apresentar = $agenda->nome_agenda;
                         }
+                  
                         $agenda_item = [
                             "hora"               => substr($horario, 0, 5),
                             "hora_agendamento"   => $horario,
@@ -197,6 +200,7 @@ class AgendaController extends Controller
                             "nome"               => $nome_apresentar,
                             "fk_tratamento"      => $agenda->fk_tratamento,
                             "status"             => $agenda->status,
+                            "cor_horario"        => $this->corHorario($agenda->status, $agenda->data_agendamento, $agenda->hora_agendamento),
                             "nome_especialidade" => $agenda->nome_especialidade
                         ];
                     }
@@ -215,6 +219,28 @@ class AgendaController extends Controller
             return View('Agendas.load.agenda_dentista_load', compact('agenda_lista'));
         } else {
             return View('Agendas.load.agenda_load', compact('agenda_lista'));
+        }
+    }
+
+    private function corHorario($status, $data_agendamento, $horario_agendamento)
+    {
+        $data_hoje = date('Y-m-d');
+        $agora = strtotime(date('H:i:s'));
+        $horario_agendamento_str = strtotime($horario_agendamento);
+
+        if($data_agendamento < $data_hoje && $status != 2){
+            return 'bg-danger';
+        }
+        if($data_agendamento == $data_hoje && $horario_agendamento_str < $agora && $status != 2){
+            return 'bg-danger';
+        }
+        switch ($status) {
+            case 1:
+                return 'bg-primary';
+            case 2:
+                return 'bg-success';
+            default:
+                return 'bg-primary';
         }
     }
 

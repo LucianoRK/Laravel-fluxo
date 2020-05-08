@@ -1,0 +1,33 @@
+
+#Parcela_forma_pag
+forma_pag
+1-dinheiro
+2-cartao
+3-cheque (não vai ter)
+
+----------------------------
+
+#Caixa
+tipo
+1 - saida de valor
+2 - entrada de valor
+
+-----------------------------
+
+#tratamento
+status
+1-Avaliado
+2-Pendente de efetivação
+3-Efetivado
+4-Não efetivado
+5-Concluido
+6-Cancelado
+
+-----------------------------
+
+#Agenda
+status
+1 - Agendado
+2 - Presença
+3 - Cancelado
+4 - recusado pelo dentista
