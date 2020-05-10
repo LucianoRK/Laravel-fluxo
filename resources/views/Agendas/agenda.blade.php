@@ -19,7 +19,6 @@
         <div class="input-group col-md-8">
             <input type="date" class="btn btn-primary data_agenda" required>
             <select class="form-control dentista_agenda">
-                <option value="0" selected='selected'>Agenda de Avaliações</option>
                 @foreach ($dentistas as $dentista)
                     <option value="{{ $dentista->id }}">{{ $dentista->nome }}</option>
                 @endforeach
@@ -37,27 +36,30 @@
     <script>
         function getAgenda(){
             resetarCampos();
-            $('.agenda_mostrar').attr("disabled", true);
-            $('.loader_agenda').show();
             
             let data                = $('.data_agenda').val();
             let dentista            = $('.dentista_agenda').val();
-            let agenda_dentista     = false;
-            let tipo_usuario_logado = '{{Auth::user()->fk_tipo_usuario}}';
-            
-            if(tipo_usuario_logado == 3){
-                agenda_dentista = true;
-                dentista = '{{Auth::user()->id}}';
-                $('.dentista_agenda').hide();
-            }
-            $( ".agenda_lista" ).load( "agenda-lista" ,{
-                _token: "{{ csrf_token() }}",
-                data: data, 
-                dentista: dentista,
-                agenda_dentista: agenda_dentista
-            }, function(){
-                $('.loader_agenda').hide();
-            });        
+
+            if(data && dentista){
+                $('.loader_agenda').show();
+                $('.agenda_mostrar').attr("disabled", true);
+                let agenda_dentista     = false;
+                let tipo_usuario_logado = '{{Auth::user()->fk_tipo_usuario}}';
+
+                if(tipo_usuario_logado == 3){
+                    agenda_dentista = true;
+                    dentista = '{{Auth::user()->id}}';
+                    $('.dentista_agenda').hide();
+                }
+                $( ".agenda_lista" ).load( "agenda-lista" ,{
+                    _token: "{{ csrf_token() }}",
+                    data: data, 
+                    dentista: dentista,
+                    agenda_dentista: agenda_dentista
+                }, function(){
+                    $('.loader_agenda').hide();
+                });    
+            }               
         }
 
         function infosChange(){
@@ -76,6 +78,7 @@
         }
 
         $(document).ready(function(){
+            $('.loader_agenda').hide();
             infosChange();
             getAgenda();
             setInterval(

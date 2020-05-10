@@ -13,7 +13,7 @@
         <button class="btn btn-danger  agenda_btn_cancelar" title="Cancelar agendamento"><i class="la la-close text-white"></i></button>
     </div>
     @if ($agenda['id_agenda'])
-        @if ($agenda['status'] == 1)
+        @if ($agenda['status'] == 1 && $agenda['data_agendamento'] == date('Y-m-d')) 
             <!-- Agendado -->
             <div class="col-md-4">
                 <button class="btn btn-info agenda_btn_presenca" agenda_id="{{ $agenda['id_agenda'] }}" title="Presença"><i class="la la-check-square text-white"></i></button>
@@ -46,8 +46,9 @@
 
     function abrirCamposParaAdicionar() {
         $('.agenda_mostrar_nome').on('click', function() {
+            let data_agendamento = $('.data_agenda').val();
             resetarCampos();
-            if (!$(this).attr("agenda_id")) {
+            if (!$(this).attr("agenda_id") && liberarAgendamento(data_agendamento)) {
                 let nome;
                 let telefone;
                 $(this).hide();
@@ -61,6 +62,14 @@
                 }
             }
         });
+    }
+
+    function liberarAgendamento(data) {
+        let hoje  = new Date();
+        let parts = data.split('-')
+        data      = new Date(parts[0], parts[1] - 1, parts[2], 23, 59, 59) // ex: 2020-05-10 23:59:59    
+
+        return data >= hoje ? true : false
     }
 
     function salvarAgendamento() {
