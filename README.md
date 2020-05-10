@@ -5,7 +5,6 @@
 - SGBD (Navicat)
 - Editor de código (Vs code)
 - Composer 
-- Node ( para ter acesso ao npm )
 
 ---
 # Instalação
@@ -28,22 +27,7 @@ ou
 - Executar as migrate para criar as tabelas no banco ( o .env tem que estar configurado ! ), --seed para colocar uma pre configuração
 `php artisan migrate --seed`
 
-- Instalar as dependências js no projeto
-`npm install`
-
-- Build da aplicação
-`npm run dev`
-
 - Iniciar a aplicação Laravel
 -`php artisan serve`
-
----
-# Outros comandos
-
-- Build modo desenvolvedor `npm run dev`
-- Build modo Produção `npm run prod`
-- Build modo desenvolvedor com atualização automatica (recomendado para desenvolvimento) `npm run watch`
-
----
 
 # Commites apenas no galho dev !
