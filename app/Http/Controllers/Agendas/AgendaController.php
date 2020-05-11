@@ -250,4 +250,9 @@ class AgendaController extends Controller
     {
         $agenda->where('id', $request->id_agenda)->update(['status' => 2]);
     }
+
+    public function cancelarAgendamento(Request $request, Agenda $agenda)
+    {
+        $agenda->where('id', $request->id_agenda)->update(['status' => 3]);
+    }
 }

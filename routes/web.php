@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('gravar-avaliacao', 'AgendaController@gravarAvaliacao');
     Route::post('gravar-agendamento-tratamento', 'AgendaController@gravarAgendamentoTratamento');
     Route::post('presenca', 'AgendaController@presenca');
+    Route::post('cancelar-agendamento', 'AgendaController@cancelarAgendamento');
     
     /* CLIENTES */
     Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');

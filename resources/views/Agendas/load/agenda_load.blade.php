@@ -19,6 +19,11 @@
                 <button class="btn btn-info agenda_btn_presenca" agenda_id="{{ $agenda['id_agenda'] }}" title="Presença"><i class="la la-check-square text-white"></i></button>
             </div>
         @endif
+        @if ($agenda['status'] == 1 && $agenda['data_agendamento'] >= date('Y-m-d')) 
+            <div class="col-md-4">
+                <button class="btn btn-danger agenda_btn_cancelar" agenda_id="{{ $agenda['id_agenda'] }}" title="Cancelar agendamento"><i class="la la-close text-white"></i></button>
+            </div>
+        @endif
     @endif
     <input type="hidden" class="horario" value="{{ $agenda['hora_agendamento'] }}">
     <input type="hidden" class="tratamento" value="{{ $agenda['fk_tratamento'] }}">
@@ -141,8 +146,31 @@
 
     function cancelarAgendamento() {
         $('.agenda_btn_cancelar').on('click', function() {
-            resetarCampos();
-            $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_mostrar_nome').text('');
+            let agenda_id = $(this).attr('agenda_id');
+            if(agenda_id){
+                Swal.fire({
+                title: 'Deseja cancelar esse agendamento ?',
+                showCancelButton: true,
+                confirmButtonColor: '#2cb396',
+                cancelButtonColor: '#ff4d68',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+                }).then((result) => {
+                if (result.value) {
+                    $(this).hide();
+                    let agenda_id = $(this).attr('agenda_id')
+                    $.post("cancelar-agendamento", {
+                        _token: "{{ csrf_token() }}",
+                        id_agenda: agenda_id
+                    }, function() {
+                        getAgenda();
+                    });
+                }
+            })
+            }else{
+                resetarCampos();
+                $(this).parents('.agenda_linha').find('.agenda_campos').find('.agenda_mostrar_nome').text('');
+            }
         });
     }
 
