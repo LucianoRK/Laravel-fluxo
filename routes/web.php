@@ -18,15 +18,18 @@ Route::group(['middleware' => ['auth']], function () {
         return redirect()->route('login');
     });
 
-    /* CRUD USUARIOS */
-    Route::resource('usuarios', 'UsuarioController');
-    Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
-    Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
-    Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
-    Route::get('/minhaConta', 'UsuarioController@minhaConta');
-    Route::get('/minhaConta', 'UsuarioController@minhaConta');
-    Route::get('/minhaConta', 'UsuarioController@minhaConta');
-    Route::post('/alterarSenha', 'UsuarioController@alterarSenha')->name('alterarSenha');
+    /* CLIENTES */
+    Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
+    Route::post('/listaClientesFiltradoNavbar', 'ClienteController@listaClientesFiltradoNavbar');
+    Route::get('/informacoesCliente/{id}', 'ClienteController@mostraTodosDadosCliente')->name('dadosCliente');
+    /* CLIENTES */
+    Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
+    Route::post('/listaClientesFiltradoNavbar', 'ClienteController@listaClientesFiltradoNavbar');
+    Route::get('/informacoesCliente/{id}', 'ClienteController@mostraTodosDadosCliente')->name('dadosCliente');
+    /* CLIENTES */
+    Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
+    Route::post('/listaClientesFiltradoNavbar', 'ClienteController@listaClientesFiltradoNavbar');
+    Route::get('/informacoesCliente/{id}', 'ClienteController@mostraTodosDadosCliente')->name('dadosCliente');
 
     /* HOME */
     Route::get('/home', 'HomeController@index')->name('home');
