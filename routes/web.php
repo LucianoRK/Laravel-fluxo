@@ -18,7 +18,11 @@ Route::group(['middleware' => ['auth']], function () {
         return redirect()->route('login');
     });
 
-    /* CRUD USUARIOS */
+    /* CLIENTES */
+    Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
+    Route::post('/listaClientesFiltradoNavbar', 'ClienteController@listaClientesFiltradoNavbar');
+    Route::get('/informacoesCliente/{id}', 'ClienteController@mostraTodosDadosCliente')->name('dadosCliente');
+
     Route::resource('usuarios', 'UsuarioController');
     Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
     Route::get('/minhaConta', 'UsuarioController@minhaConta');
@@ -32,6 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::post('/alterarSenha', 'UsuarioController@alterarSenha')->name('alterarSenha');
+
 
     /* HOME */
     Route::get('/home', 'HomeController@index')->name('home');
