@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('clientes', 'ClienteController');
 
     /* DEPENDENTE */
+    
     Route::resource('dependentes', 'DependenteController');
 
     /* TRATAMENTOS */
