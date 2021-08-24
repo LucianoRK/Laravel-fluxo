@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+//Esta  atualização
+//Esta  atualização
+//Esta  atualização
+//Esta  atualização
+//Esta  atualização
+//Esta  atualização
+
 /* PUBLICO - LOGIN */
 
 Route::get('/login', 'Auth\LoginController@index')->name('login');
