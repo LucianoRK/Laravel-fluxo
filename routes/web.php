@@ -94,3 +94,9 @@ Route::group(['middleware' => ['auth']], function () {
     /* TRATAMENTOS */
     Route::resource('tratamentos', 'TratamentoController');
 });
+//Esta  atualização
+//Esta  atualização
+//Esta  atualização
+//Esta  atualização
+//Esta  atualização
+//Esta  atualização
