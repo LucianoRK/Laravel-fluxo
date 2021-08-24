@@ -20,6 +20,10 @@ Route::group(['middleware' => ['auth']], function () {
     /* CRUD USUARIOS */
     Route::resource('usuarios', 'UsuarioController');
     Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
+    Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
+    Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
+    Route::get('/minhaConta', 'UsuarioController@minhaConta');
+    Route::get('/minhaConta', 'UsuarioController@minhaConta');
     Route::get('/minhaConta', 'UsuarioController@minhaConta');
     Route::post('/alterarSenha', 'UsuarioController@alterarSenha')->name('alterarSenha');
 
