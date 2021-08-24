@@ -21,11 +21,16 @@ Route::group(['middleware' => ['auth']], function () {
     /* CRUD USUARIOS */
     Route::resource('usuarios', 'UsuarioController');
     Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
+    Route::get('/minhaConta', 'UsuarioController@minhaConta');
     Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
     Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
-    Route::get('/minhaConta', 'UsuarioController@minhaConta');
-    Route::get('/minhaConta', 'UsuarioController@minhaConta');
-    Route::get('/minhaConta', 'UsuarioController@minhaConta');
+    /* HOME */
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
+    /* HOME */
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
+
     Route::post('/alterarSenha', 'UsuarioController@alterarSenha')->name('alterarSenha');
 
     /* HOME */
