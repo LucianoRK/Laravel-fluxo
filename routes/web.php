@@ -22,14 +22,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
     Route::post('/listaClientesFiltradoNavbar', 'ClienteController@listaClientesFiltradoNavbar');
     Route::get('/informacoesCliente/{id}', 'ClienteController@mostraTodosDadosCliente')->name('dadosCliente');
-    /* CLIENTES */
-    Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
-    Route::post('/listaClientesFiltradoNavbar', 'ClienteController@listaClientesFiltradoNavbar');
-    Route::get('/informacoesCliente/{id}', 'ClienteController@mostraTodosDadosCliente')->name('dadosCliente');
-    /* CLIENTES */
-    Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
-    Route::post('/listaClientesFiltradoNavbar', 'ClienteController@listaClientesFiltradoNavbar');
-    Route::get('/informacoesCliente/{id}', 'ClienteController@mostraTodosDadosCliente')->name('dadosCliente');
+
+    Route::resource('usuarios', 'UsuarioController');
+    Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
+    Route::get('/minhaConta', 'UsuarioController@minhaConta');
+    Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
+    Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
+    /* HOME */
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
+    /* HOME */
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
+
+    Route::post('/alterarSenha', 'UsuarioController@alterarSenha')->name('alterarSenha');
+
 
     /* HOME */
     Route::get('/home', 'HomeController@index')->name('home');
