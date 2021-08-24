@@ -17,15 +17,15 @@ Route::group(['middleware' => ['auth']], function () {
         return redirect()->route('login');
     });
 
-    /* HOME */
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/', 'HomeController@index')->name('home');
-
     /* CRUD USUARIOS */
     Route::resource('usuarios', 'UsuarioController');
     Route::put('/usuarios/ativar/{id}', 'UsuarioController@ativar');
     Route::get('/minhaConta', 'UsuarioController@minhaConta');
     Route::post('/alterarSenha', 'UsuarioController@alterarSenha')->name('alterarSenha');
+
+    /* HOME */
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
 
     /* CLIENTES */
     Route::post('/lista-clientes-filtrado', 'ClienteController@listaClientesFiltrado');
@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('clientes', 'ClienteController');
 
     /* DEPENDENTE */
-    
+
     Route::resource('dependentes', 'DependenteController');
 
     /* TRATAMENTOS */
